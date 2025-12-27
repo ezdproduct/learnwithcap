@@ -29,6 +29,34 @@ gsap.registerPlugin(ScrollTrigger);
 
 const LearnWithCapClone = () => {
   const mainRef = useRef(null);
+  const clientCarouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollPrev = () => {
+    if (clientCarouselRef.current) {
+      const container = clientCarouselRef.current;
+      const itemWidth = container.offsetWidth / 2;
+
+      if (container.scrollLeft <= 5) {
+        container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
+      } else {
+        container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+      }
+    }
+  };
+
+  const scrollNext = () => {
+    if (clientCarouselRef.current) {
+      const container = clientCarouselRef.current;
+      const itemWidth = container.offsetWidth / 2;
+
+      // Check if we are at the end (with small tolerance)
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
+        container.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        container.scrollBy({ left: itemWidth, behavior: 'smooth' });
+      }
+    }
+  };
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -70,6 +98,22 @@ const LearnWithCapClone = () => {
           opacity: 0,
           duration: 0.8,
           stagger: 0.15,
+          ease: "power2.out"
+        });
+      });
+
+      // 4. Scale Staggered reveal (Left to Right, Small to Large)
+      const scaleStaggeredContainers = gsap.utils.toArray('.reveal-scale-staggered');
+      scaleStaggeredContainers.forEach((container: any) => {
+        gsap.from(container.children, {
+          scrollTrigger: {
+            trigger: container,
+            start: "top 85%", // Trigger a bit earlier/later as needed
+          },
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
           ease: "power2.out"
         });
       });
@@ -268,7 +312,7 @@ const LearnWithCapClone = () => {
       </header>
 
       {/* 2. Hero Section - Updated Design */}
-      <section className="pt-4 pb-4 container mx-auto px-4 md:px-8">
+      <section className="pt-0 pb-4 container mx-auto px-4 md:px-8">
         <div className="relative h-[600px] rounded-[32px] overflow-hidden group">
           {/* Background Image */}
           <div className="absolute inset-0">
@@ -336,39 +380,51 @@ const LearnWithCapClone = () => {
       </section >
 
       {/* 5. Section: Giải Pháp (Solution) */}
-      < section className="bg-[#0b2b4d] py-16 text-white relative overflow-hidden" >
-        <div className="absolute right-0 top-0 h-full w-1/3 opacity-20 hidden lg:block bg-contain bg-right bg-no-repeat z-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4I6KueNMbkpUA8FQLObgtNUciqZR4LfxiqUSPDlvqbqEYbGSkxZLYEuWO5ipTPbxuNn5NelyY9eE7wjl-7YFH95K9p_-8EctfUnb-y_A5lxsT1b0qdtzrRjrTN0AIIJog88IMWAbstyXhZKgggQdAgbc7a_MeAxY7F346mw9FLG7YFpzd2Yx71v2tjGiVv5mTe3mB-iWIUWetoTnXXODUwNrIaDrpejIlGn747hb7cJAGE1VbZzqV1IBW2daPq94aDkMvs04lDHk')", mixBlendMode: 'overlay' }}></div>
-
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-12">
-            <div className="lg:w-1/2">
-              <div className="mb-8 section-header">
-                <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase">GIẢI PHÁP</span>
-                <h2 className="text-4xl font-bold mt-3 mb-10">CAP thiết kế cho bạn</h2>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 reveal-staggered">
-                {solutions.map((item, idx) => (
-                  <div key={idx} className="flex flex-col gap-3">
-                    <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center">
-                      {item.icon}
-                    </div>
-                    <p className="text-xs text-white/80 leading-relaxed">{item.text}</p>
-                  </div>
-                ))}
-              </div>
+      {/* 5. Section: Giải Pháp (Solution) */}
+      <section id="solutions" className="bg-[#002A4C] text-white pt-16 pb-8">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16 items-center">
+            {/* Left: Title Block */}
+            <div className="flex flex-col gap-6 items-start text-left">
+              <span className="inline-block bg-[#59B4E9]/10 text-[#59B4E9] border border-[#59B4E9]/20 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide">
+                GIẢI PHÁP
+              </span>
+              <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+                Giải pháp của CAP <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#59B4E9] to-white">dành cho bạn</span>
+              </h2>
+              <p className="text-lg text-gray-400 max-w-lg leading-relaxed">
+                Chúng tôi cung cấp lộ trình học tập được cá nhân hóa, giúp bạn làm chủ tiếng Anh và tự tin trong môi trường làm việc quốc tế.
+              </p>
             </div>
-            <div className="lg:w-1/2 flex items-center justify-center">
-              <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border-4 border-white/10">
+
+            {/* Right: Image Block */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 w-full max-w-2xl">
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#671D9D]/20 to-transparent z-10 mix-blend-overlay pointer-events-none"></div>
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbdmKKDIn16lt7hT34vHfGPep73DhmWu_M_d_nR5QodX7vVybTSxWElOruGFrKDSPzGX0OphPkcCXKYPvR-b8QPztrWauE48DUjCrzo1-uuDBUUaVBPF-D1gKSlA2QAFvnMeYKgLxjC-XkR9HGL5NYWouPpMgTumSM5j8FBd4vGfufTeZjYg8ZudDMKTrxR4AvbXxwj7MjR1auODAsPrKE6TvzXgfhd7Tcl4PY3dMRzr77QE-k25hEm5FbOltqLTwoWxNRiHJzVfU"
-                  alt="Solution"
-                  className="w-full h-full object-cover"
+                  src="https://course.learnwithcap.com/wp-content/uploads/2025/10/danist-soh-8Gg2Ne_uTcM-unsplash-scaled-1.webp"
+                  alt="Team collaboration"
+                  className="w-full h-auto object-cover"
                 />
               </div>
             </div>
           </div>
+
+          {/* Bottom Section: Feature Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {solutions.map((item, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-[#0a3253] border border-white/10 hover:border-white/20 transition-colors duration-300 h-full flex flex-col items-start text-left group">
+                <div className="flex-shrink-0 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors overflow-hidden text-[#59B4E9]">
+                    {item.icon}
+                  </div>
+                </div>
+                <p className="text-base text-gray-200 flex-grow leading-relaxed font-light">{item.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </section >
+      </section>
 
       {/* 6, 7, 8. Courses Loop */}
       {
@@ -423,26 +479,33 @@ const LearnWithCapClone = () => {
       }
 
       {/* 9. Section: Khách hàng (Clients) - Updated with Horizontal Scroll */}
-      <section className="bg-[#0b2b4d] py-20 text-white">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row gap-8">
-            <div className="md:w-1/4 flex-shrink-0 section-header">
+      {/* 9. Section: Khách hàng (Clients) - Updated with Horizontal Scroll */}
+      <section className="bg-[#001e3d] h-screen flex flex-col justify-center text-white overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
+          <div className="flex flex-col md:flex-row gap-8 items-start h-full">
+            <div className="md:w-[30%] flex-shrink-0 section-header z-10 pt-10">
               <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">CASE STUDIES</span>
               <h2 className="text-4xl font-bold text-white leading-tight">Khách hàng của CAP</h2>
               <div className="mt-8 flex gap-4">
-                <button className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all">
+                <button
+                  onClick={scrollPrev}
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all">
                   <ArrowLeft size={20} />
                 </button>
-                <button className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all">
+                <button
+                  onClick={scrollNext}
+                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all">
                   <ArrowRight size={20} />
                 </button>
               </div>
             </div>
 
             {/* CHANGED: removed flex-col for mobile to ensure scroll behavior on all screens */}
-            <div className="md:w-3/4 flex gap-6 overflow-x-auto scrollbar-hide pb-4 flex-nowrap snap-x reveal-staggered">
+            <div
+              ref={clientCarouselRef}
+              className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide flex-nowrap snap-x snap-mandatory reveal-scale-staggered items-center h-full">
               {clients.map((client, idx) => (
-                <div key={idx} className="min-w-[300px] md:min-w-[400px] bg-cover bg-center rounded-xl overflow-hidden relative aspect-[3/4] flex-shrink-0 snap-center" style={{ backgroundImage: `url('${client.img}')` }}>
+                <div key={idx} className="min-w-[300px] md:w-[50%] h-full bg-cover bg-center overflow-hidden relative flex-shrink-0 snap-start" style={{ backgroundImage: `url('${client.img}')` }}>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 p-6 text-white">
                     <div className="w-12 h-12 bg-white rounded mb-4 flex items-center justify-center text-black font-bold text-xs">{client.logo}</div>

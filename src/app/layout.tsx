@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="vi">
       <body className={`${beVietnamPro.className} antialiased bg-white`}>
         {children}
+        <Toaster position="top-center" />
       </body>
     </html>
   );
