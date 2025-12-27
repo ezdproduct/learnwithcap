@@ -33,7 +33,7 @@ export default function Footer() {
                     <div className="flex flex-col items-start gap-4">
                         <Link href="/" className="flex items-center gap-2">
                             <img
-                                src="https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"
+                                src={settings?.logo_url || "https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"}
                                 alt="CAP English"
                                 className="brightness-0 invert object-contain h-10 w-auto"
                             />
@@ -61,12 +61,12 @@ export default function Footer() {
                     </div>
 
                     {/* Dynamic Columns */}
-                    {columns.length > 0 ? (
+                    {Array.isArray(columns) && columns.length > 0 ? (
                         columns.map((section: any, idx: number) => (
                             <div key={idx} className="flex flex-col gap-4">
-                                <h4 className="font-bold text-white text-lg capitalize">{section.section_id.replace('_', ' ')}</h4>
+                                <h4 className="font-bold text-white text-lg capitalize">{section.section_id?.replace('_', ' ')}</h4>
                                 <ul className="flex flex-col gap-3">
-                                    {section.items.map((item: any, itemIdx: number) => (
+                                    {Array.isArray(section.items) && section.items.map((item: any, itemIdx: number) => (
                                         <li key={itemIdx}>
                                             {item.link_url ? (
                                                 <Link href={item.link_url} className="text-gray-300 hover:text-white transition-colors font-light">
@@ -108,7 +108,7 @@ export default function Footer() {
                         <div className="flex bg-[#163a63] rounded-lg overflow-hidden p-1">
                             <input
                                 type="email"
-                                placeholder="Vui lòng nhập email"
+                                placeholder={settings?.newsletter_placeholder || "Vui lòng nhập email"}
                                 className="bg-transparent text-white text-sm w-full px-3 py-2 focus:outline-none placeholder-gray-400"
                             />
                             <button type="button" className="p-2 bg-[#3da9fc] text-white rounded hover:bg-blue-400 transition-colors">

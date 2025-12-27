@@ -28,16 +28,25 @@ const getIcon = (name: string, props: any = {}) => {
   return IconComponent ? <IconComponent {...props} /> : null;
 };
 
-const FeatureCard = ({ icon, text, bg, textColor = "text-[#0b2b4d]", iconColor = "text-[#0b2b4d]", height = "h-full" }: any) => (
-  <div className={`${bg} ${textColor} p-6 rounded-xl ${height} min-h-[180px] flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:z-10`}>
-    <div className={`w-12 h-12 rounded-full bg-white/10 flex items-center justify-center ${iconColor} mb-4`}>
-      <div className="opacity-80 group-hover:opacity-100 transition-opacity">
-        {icon}
+const FeatureCard = ({ icon, text, bg, textColor = "text-[#0b2b4d]", iconColor = "text-[#0b2b4d]", height = "h-full" }: any) => {
+  const isHex = bg?.startsWith('bg-[#');
+  const style = isHex ? { backgroundColor: bg.match(/\[(.*?)\]/)?.[1] } : {};
+  const bgClass = isHex ? '' : bg;
+
+  return (
+    <div
+      className={`${bgClass} ${textColor} p-6 rounded-xl ${height} min-h-[180px] flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:z-10`}
+      style={style}
+    >
+      <div className={`w-12 h-12 rounded-full bg-white/10 flex items-center justify-center ${iconColor} mb-4`}>
+        <div className="opacity-80 group-hover:opacity-100 transition-opacity">
+          {icon}
+        </div>
       </div>
+      <p className="text-[15px] font-medium leading-relaxed">{text}</p>
     </div>
-    <p className="text-[15px] font-medium leading-relaxed">{text}</p>
-  </div>
-);
+  );
+};
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,6 +112,7 @@ const LearnWithCapClone = () => {
       // 3. Card/Item Staggered reveal
       const staggeredContainers = gsap.utils.toArray('.reveal-staggered');
       staggeredContainers.forEach((container: any) => {
+        if (!container || container.children.length === 0) return;
         gsap.from(container.children, {
           scrollTrigger: {
             trigger: container,
@@ -119,6 +129,7 @@ const LearnWithCapClone = () => {
       // 4. Scale Staggered reveal (Left to Right, Small to Large)
       const scaleStaggeredContainers = gsap.utils.toArray('.reveal-scale-staggered');
       scaleStaggeredContainers.forEach((container: any) => {
+        if (!container || container.children.length === 0) return;
         gsap.from(container.children, {
           scrollTrigger: {
             trigger: container,
@@ -144,9 +155,12 @@ const LearnWithCapClone = () => {
   // State for dynamic content
   const [courses, setCourses] = useState<any[]>([]);
   const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [testimonialsHeader, setTestimonialsHeader] = useState<any>(null);
   const [solutions, setSolutions] = useState<any[]>([]);
   const [serviceItems, setServiceItems] = useState<any[]>([]);
   const [servicesHeader, setServicesHeader] = useState<any>(null);
+  const [clients, setClients] = useState<any[]>([]);
+  const [clientsHeader, setClientsHeader] = useState<any>(null);
   const [hero, setHero] = useState<any>(null);
   const [navbar, setNavbar] = useState<any>(null);
   const [solutionsHeader, setSolutionsHeader] = useState<any>(null);
@@ -162,19 +176,25 @@ const LearnWithCapClone = () => {
 
       if (sectionsData) {
         sectionsData.forEach((section: any) => {
-          if (section.section_key === 'courses') setCourses(section.data);
-          if (section.section_key === 'testimonials') setTestimonials(section.data);
-          if (section.section_key === 'services') {
-            setServiceItems(section.data.items);
+          if (section.section_key === 'courses' && Array.isArray(section.data)) setCourses(section.data);
+          if (section.section_key === 'testimonials' && section.data) {
+            setTestimonials(section.data.items || []);
+            setTestimonialsHeader(section.data.header);
+          }
+          if (section.section_key === 'services' && section.data) {
+            setServiceItems(section.data.items || []);
             setServicesHeader(section.data.header);
           }
-          if (section.section_key === 'clients') setClients(section.data);
+          if (section.section_key === 'clients' && section.data) {
+            setClients(section.data.items || []);
+            setClientsHeader(section.data.header);
+          }
           if (section.section_key === 'hero') setHero(section.data);
           if (section.section_key === 'navbar') setNavbar(section.data);
           if (section.section_key === 'solutions_header') setSolutionsHeader(section.data);
           if (section.section_key === 'wants_header') setWantsHeader(section.data);
           if (section.section_key === 'difficulties_header') setDifficultiesHeader(section.data);
-          if (section.section_key === 'solutions') {
+          if (section.section_key === 'solutions' && Array.isArray(section.data)) {
             // Map icons for solutions
             const mappedSolutions = section.data.map((item: any) => ({
               ...item,
@@ -188,11 +208,6 @@ const LearnWithCapClone = () => {
 
     fetchPageContent();
   }, []);
-
-  const [clients, setClients] = useState<any[]>([]);
-
-
-
 
 
   const [wants, setWants] = useState<any[]>([]);
@@ -252,7 +267,7 @@ const LearnWithCapClone = () => {
           </div>
 
           <nav className="hidden md:flex items-center space-x-1 bg-gray-100 p-1 rounded-full group">
-            {(navbar?.links || [
+            {Array.isArray(navbar?.links || []) && (navbar?.links || [
               { label: "Khóa học", href: "/shop" },
               { label: "Giải Pháp", href: "#solutions" }
             ]).map((link: any, lIdx: number) => (
@@ -270,11 +285,6 @@ const LearnWithCapClone = () => {
             <div className="hidden md:block">
               <button className="bg-[#0b2b4d] hover:bg-[#671D9D] text-white rounded-md transition-all text-base px-6 py-2 font-medium shadow-sm">
                 {navbar?.login_label || "Đăng nhập"}
-              </button>
-            </div>
-            <div className="hidden md:block">
-              <button className="bg-[#3da9fc] hover:bg-blue-400 text-white rounded-md transition-all text-base px-6 py-2 font-medium shadow-sm">
-                {navbar?.cta_label || "Liên hệ tư vấn"}
               </button>
             </div>
 
@@ -336,7 +346,7 @@ const LearnWithCapClone = () => {
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {wants.map((item, idx) => (
+              {Array.isArray(wants) && wants.map((item, idx) => (
                 <FeatureCard key={idx} {...item} />
               ))}
             </div>
@@ -352,7 +362,7 @@ const LearnWithCapClone = () => {
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {difficulties.map((item, idx) => (
+              {Array.isArray(difficulties) && difficulties.map((item, idx) => (
                 <FeatureCard
                   key={idx}
                   {...item}
@@ -400,7 +410,7 @@ const LearnWithCapClone = () => {
 
           {/* Bottom Section: Feature Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {solutions.map((item, idx) => (
+            {Array.isArray(solutions) && solutions.map((item, idx) => (
               <div key={idx} className="p-6 rounded-2xl bg-[#0a3253] border border-white/10 hover:border-white/20 transition-colors duration-300 h-full flex flex-col items-start text-left group">
                 <div className="flex-shrink-0 mb-4">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors overflow-hidden text-[#59B4E9]">
@@ -416,7 +426,7 @@ const LearnWithCapClone = () => {
 
       {/* 6, 7, 8. Courses Loop */}
       {
-        courses.map((course, idx) => (
+        Array.isArray(courses) && courses.map((course, idx) => (
           <section key={idx} className={`${idx === 1 ? 'bg-[#001e3d]' : (idx === 2 ? 'bg-[#0f2d4a]' : 'bg-[#0b2b4d]')} py-20 text-white`}>
             <div className="container mx-auto px-4 md:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -426,12 +436,12 @@ const LearnWithCapClone = () => {
 
                   <div className="flex gap-12 mt-6 mb-8 border-b border-white/10 pb-6">
                     <div>
-                      <span className="text-3xl font-bold block">{course.stats.left}</span>
-                      <span className="text-xs text-white/60 uppercase">{course.stats.leftLabel}</span>
+                      <span className="text-3xl font-bold block">{course.stats?.left}</span>
+                      <span className="text-xs text-white/60 uppercase">{course.stats?.leftLabel}</span>
                     </div>
                     <div>
-                      <span className="text-3xl font-bold block">{course.stats.right}</span>
-                      <span className="text-xs text-white/60 uppercase">{course.stats.rightLabel}</span>
+                      <span className="text-3xl font-bold block">{course.stats?.right}</span>
+                      <span className="text-xs text-white/60 uppercase">{course.stats?.rightLabel}</span>
                     </div>
                   </div>
 
@@ -452,7 +462,7 @@ const LearnWithCapClone = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 reveal-staggered">
-                {course.modules.map((mod: any, mIdx: number) => (
+                {Array.isArray(course.modules) && course.modules.map((mod: any, mIdx: number) => (
                   <div key={mIdx} className="group cursor-pointer">
                     <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden relative mb-3">
                       <img src={mod.img} alt={mod.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -472,8 +482,12 @@ const LearnWithCapClone = () => {
         <div className="w-full h-full flex flex-col justify-center pl-4 md:pl-16">
           <div className="flex flex-col md:flex-row gap-8 items-start h-full">
             <div className="md:w-[25%] flex-shrink-0 section-header z-10 pt-10">
-              <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">CASE STUDIES</span>
-              <h2 className="text-4xl font-bold text-white leading-tight">Khách hàng của CAP</h2>
+              <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">
+                {clientsHeader?.badge || "CASE STUDIES"}
+              </span>
+              <h2 className="text-4xl font-bold text-white leading-tight">
+                {clientsHeader?.title || "Khách hàng của CAP"}
+              </h2>
               <div className="mt-8 flex gap-4">
                 <button
                   onClick={scrollPrev}
@@ -492,7 +506,7 @@ const LearnWithCapClone = () => {
             <div
               ref={clientCarouselRef}
               className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide flex-nowrap snap-x snap-mandatory reveal-scale-staggered items-center h-full">
-              {clients.map((client, idx) => (
+              {Array.isArray(clients) && clients.map((client, idx) => (
                 <div key={idx} className="min-w-[300px] md:w-[50%] h-full bg-cover bg-center overflow-hidden relative flex-shrink-0 snap-start" style={{ backgroundImage: `url('${client.img}')` }}>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 p-6 text-white">
@@ -512,22 +526,25 @@ const LearnWithCapClone = () => {
       <section className="bg-white py-20 border-b border-gray-100">
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-12 section-header">
-            <h2 className="text-3xl font-bold text-[#0b2b4d] mb-2">Lắng nghe học viên nói về CAP</h2>
+            <h2 className="text-3xl font-bold text-[#0b2b4d] mb-2">
+              {testimonialsHeader?.title || "Lắng nghe học viên nói về CAP"}
+            </h2>
             <div className="flex justify-center gap-16 mt-6">
-              <div>
-                <span className="text-4xl font-bold text-[#3da9fc]">4+</span>
-                <p className="text-xs uppercase font-bold text-gray-500 mt-1">Năm Kinh Nghiệm</p>
-              </div>
-              <div>
-                <span className="text-4xl font-bold text-[#3da9fc]">18k+</span>
-                <p className="text-xs uppercase font-bold text-gray-500 mt-1">Học Viên Đã Học</p>
-              </div>
+              {(testimonialsHeader?.stats || [
+                { value: "4+", label: "Năm Kinh Nghiệm" },
+                { value: "18k+", label: "Học Viên Đã Học" }
+              ]).map((stat: any, sIdx: number) => (
+                <div key={sIdx}>
+                  <span className="text-4xl font-bold text-[#3da9fc]">{stat.value}</span>
+                  <p className="text-xs uppercase font-bold text-gray-500 mt-1">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* CHANGED: Horizontal scroll on mobile, Grid on desktop */}
           <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible scrollbar-hide pb-4 snap-x reveal-staggered">
-            {testimonials.map((item, i) => (
+            {Array.isArray(testimonials) && testimonials.map((item, i) => (
               <div key={i} className={`min-w-[300px] md:min-w-0 flex-shrink-0 md:flex-shrink bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm snap-center ${i === 2 ? 'md:row-span-2' : ''}`}>
                 <p className="text-xs text-gray-600 mb-4 leading-relaxed">"{item.text}"</p>
                 <div className="flex items-center gap-3">

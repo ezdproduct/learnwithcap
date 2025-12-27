@@ -38,8 +38,9 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
 
     // Initial Animation
     useEffect(() => {
-        if (!cardsContainerRef.current) return;
+        if (!cardsContainerRef.current || !items || items.length === 0) return;
         const cards = cardsContainerRef.current.children;
+        if (cards.length === 0) return;
 
         gsap.fromTo(cards,
             { y: 40, opacity: 0 },
@@ -56,7 +57,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                 }
             }
         );
-    }, []);
+    }, [items]);
 
     // Handle steps calculation
     useEffect(() => {
@@ -129,7 +130,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                         className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide snap-x snap-mandatory px-4 md:px-0"
                     >
                         <div ref={cardsContainerRef} className="flex gap-3 w-full">
-                            {items.map((item, index) => (
+                            {Array.isArray(items) && items.map((item, index) => (
                                 <ServiceCard
                                     key={index}
                                     title={item.title}
