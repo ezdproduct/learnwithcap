@@ -20,13 +20,15 @@ interface ServiceCarouselProps {
     subtitle?: string;
     titlePrefix?: string;
     titleSuffix?: string;
+    description?: string;
 }
 
 const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     items,
     subtitle = "BẠN LÀ",
     titlePrefix = "Cá nhân",
-    titleSuffix = "Doanh nghiệp"
+    titleSuffix = "Doanh nghiệp",
+    description = "Hoạt động trong lĩnh vực"
 }) => {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -116,7 +118,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                     <h2 className="text-4xl md:text-5xl font-bold text-[#0b2b4d] mb-2">
                         {titlePrefix} <span className="text-gray-200 font-light mx-2">|</span> {titleSuffix}
                     </h2>
-                    <p className="text-gray-400 text-lg font-medium">Hoạt động trong lĩnh vực</p>
+                    <p className="text-gray-400 text-lg font-medium">{description}</p>
                 </div>
 
                 {/* Carousel Container */}

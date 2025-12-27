@@ -28,7 +28,7 @@ export default function Footer() {
     return (
         <footer className="bg-[#002147] text-white pt-16 pb-8 border-t border-[#002147]">
             <div className="container mx-auto px-4 md:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {/* Brand Column */}
                     <div className="flex flex-col items-start gap-4">
                         <Link href="/" className="flex items-center gap-2">
@@ -116,6 +116,12 @@ export default function Footer() {
                             </button>
                         </div>
                         <ul className="mt-4 space-y-2 text-sm text-gray-300">
+                            {settings?.contact_address && (
+                                <li className="flex items-start gap-3 font-light">
+                                    <span className="mt-1"><div className="w-4 h-4 bg-[#3da9fc] rounded-full flex items-center justify-center text-[10px] text-white">A</div></span>
+                                    <span>{settings.contact_address}</span>
+                                </li>
+                            )}
                             <li className="flex items-center gap-3 font-light"><Mail size={16} className="text-[#3da9fc]" /> {settings?.contact_email || "info@learnwithcap.com"}</li>
                             <li className="flex items-center gap-3 font-light"><Phone size={16} className="text-[#3da9fc]" /> {settings?.contact_phone || "0328859540"}</li>
                         </ul>

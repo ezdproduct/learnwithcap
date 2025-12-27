@@ -146,6 +146,12 @@ const LearnWithCapClone = () => {
   const [testimonials, setTestimonials] = useState<any[]>([]);
   const [solutions, setSolutions] = useState<any[]>([]);
   const [serviceItems, setServiceItems] = useState<any[]>([]);
+  const [servicesHeader, setServicesHeader] = useState<any>(null);
+  const [hero, setHero] = useState<any>(null);
+  const [navbar, setNavbar] = useState<any>(null);
+  const [solutionsHeader, setSolutionsHeader] = useState<any>(null);
+  const [wantsHeader, setWantsHeader] = useState<any>(null);
+  const [difficultiesHeader, setDifficultiesHeader] = useState<any>(null);
 
   useEffect(() => {
     const fetchPageContent = async () => {
@@ -158,7 +164,16 @@ const LearnWithCapClone = () => {
         sectionsData.forEach((section: any) => {
           if (section.section_key === 'courses') setCourses(section.data);
           if (section.section_key === 'testimonials') setTestimonials(section.data);
-          if (section.section_key === 'services') setServiceItems(section.data);
+          if (section.section_key === 'services') {
+            setServiceItems(section.data.items);
+            setServicesHeader(section.data.header);
+          }
+          if (section.section_key === 'clients') setClients(section.data);
+          if (section.section_key === 'hero') setHero(section.data);
+          if (section.section_key === 'navbar') setNavbar(section.data);
+          if (section.section_key === 'solutions_header') setSolutionsHeader(section.data);
+          if (section.section_key === 'wants_header') setWantsHeader(section.data);
+          if (section.section_key === 'difficulties_header') setDifficultiesHeader(section.data);
           if (section.section_key === 'solutions') {
             // Map icons for solutions
             const mappedSolutions = section.data.map((item: any) => ({
@@ -176,29 +191,7 @@ const LearnWithCapClone = () => {
 
   const [clients, setClients] = useState<any[]>([]);
 
-  useEffect(() => {
-    const fetchClients = async () => {
-      const { data, error } = await supabase
-        .from('homepage_clients')
-        .select('*')
-        .order('display_order', { ascending: true });
 
-      if (error) {
-        console.error('Error fetching clients:', error);
-      } else if (data) {
-        const sensitiveData = data.map(item => ({
-          ...item,
-          img: item.image_url,
-          logo: item.logo_text,
-          sub: item.subtitle,
-          desc: item.description
-        }));
-        setClients(sensitiveData);
-      }
-    };
-
-    fetchClients();
-  }, []);
 
 
 
@@ -249,26 +242,39 @@ const LearnWithCapClone = () => {
       <header className="w-full bg-white transition-all duration-300">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
           <div className="flex items-center space-x-2 cursor-pointer">
-            <img
-              src="https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"
-              alt="CAP Logo"
-              className="h-8 w-auto object-contain"
-            />
+            <Link href="/">
+              <img
+                src={navbar?.logo_url || "https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"}
+                alt="CAP Logo"
+                className="h-8 w-auto object-contain"
+              />
+            </Link>
           </div>
 
           <nav className="hidden md:flex items-center space-x-1 bg-gray-100 p-1 rounded-full group">
-            <a href="/shop" className="rounded-full px-4 py-1.5 text-base font-medium transition-colors text-[#0b2b4d] group-hover:text-gray-400 hover:!text-[#0b2b4d]">
-              Khóa học
-            </a>
-            <a href="#solutions" className="rounded-full px-4 py-1.5 text-base font-medium transition-colors text-[#0b2b4d] group-hover:text-gray-400 hover:!text-[#0b2b4d]">
-              Giải Pháp
-            </a>
+            {(navbar?.links || [
+              { label: "Khóa học", href: "/shop" },
+              { label: "Giải Pháp", href: "#solutions" }
+            ]).map((link: any, lIdx: number) => (
+              <a
+                key={lIdx}
+                href={link.href}
+                className="rounded-full px-4 py-1.5 text-base font-medium transition-colors text-[#0b2b4d] group-hover:text-gray-400 hover:!text-[#0b2b4d]"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <div className="flex items-center space-x-4">
             <div className="hidden md:block">
-              <button className="bg-[#002A4C] hover:bg-[#671D9D] text-white rounded-md transition-all text-base px-6 py-2 font-medium shadow-sm">
-                Đăng nhập
+              <button className="bg-[#0b2b4d] hover:bg-[#671D9D] text-white rounded-md transition-all text-base px-6 py-2 font-medium shadow-sm">
+                {navbar?.login_label || "Đăng nhập"}
+              </button>
+            </div>
+            <div className="hidden md:block">
+              <button className="bg-[#3da9fc] hover:bg-blue-400 text-white rounded-md transition-all text-base px-6 py-2 font-medium shadow-sm">
+                {navbar?.cta_label || "Liên hệ tư vấn"}
               </button>
             </div>
 
@@ -285,7 +291,7 @@ const LearnWithCapClone = () => {
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMURFziLh10NsWXUt3sXvUYRGfh_KHSFU73tSwFcIvuQVNnjTHINIPoDWk9ofMQ8fp6baSiIKloW36RFirhd-RCQyk-qoblC3fASM1tJ24HbxhU8fqMQEIvchHUVNUV5FqHG2IjAhTjAaji5dp5cXJ1Nr00xriHPGr9v5YVwp20okgv_GsW2nmoB-b_V7FNia7I20iNtSJDqqspuRTKiMMhajHG6doETgiaQJuV6mdA5tVH5vQWCqLnltNMnnQTznBpP-RjIMMVXg"
+              src={hero?.bg_image || "https://lh3.googleusercontent.com/aida-public/AB6AXuCMURFziLh10NsWXUt3sXvUYRGfh_KHSFU73tSwFcIvuQVNnjTHINIPoDWk9ofMQ8fp6baSiIKloW36RFirhd-RCQyk-qoblC3fASM1tJ24HbxhU8fqMQEIvchHUVNUV5FqHG2IjAhTjAaji5dp5cXJ1Nr00xriHPGr9v5YVwp20okgv_GsW2nmoB-b_V7FNia7I20iNtSJDqqspuRTKiMMhajHG6doETgiaQJuV6mdA5tVH5vQWCqLnltNMnnQTznBpP-RjIMMVXg"}
               alt="Cityscape"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -296,13 +302,12 @@ const LearnWithCapClone = () => {
           </div>
 
           {/* Content Content - Bottom Left */}
-          <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-16 max-w-4xl hero-content">
+          <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-16 max-w-4xl hero-content text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6 drop-shadow-lg tracking-tight">
-              Tiếng Anh giao tiếp <br />
-              chuyên ngành xây dựng
+              {hero?.title || <>Tiếng Anh giao tiếp <br /> chuyên ngành xây dựng</>}
             </h1>
             <p className="text-white/90 text-lg md:text-xl font-medium max-w-2xl mb-8 leading-relaxed">
-              Nâng tầm sự nghiệp với khóa học được thiết kế chuyên biệt cho Kỹ sư, Kiến trúc sư và Quản lý dự án.
+              {hero?.subtitle || "Nâng tầm sự nghiệp với khóa học được thiết kế chuyên biệt cho Kỹ sư, Kiến trúc sư và Quản lý dự án."}
             </p>
           </div>
 
@@ -310,15 +315,25 @@ const LearnWithCapClone = () => {
       </section >
 
       {/* 3. Section: "Bạn là..." (Who are you) - Replaced with new Carousel */}
-      <ServiceCarousel items={serviceItems} />
+      <ServiceCarousel
+        items={serviceItems}
+        subtitle={servicesHeader?.subtitle}
+        titlePrefix={servicesHeader?.titlePrefix}
+        titleSuffix={servicesHeader?.titleSuffix}
+        description={servicesHeader?.description}
+      />
 
       <section className="bg-[#f4faff] py-16 overflow-hidden">
         <div className="container mx-auto px-4 md:px-8">
 
           <div className="mb-12 reveal-staggered">
-            <div className="mb-8">
-              <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">BẠN MUỐN</span>
-              <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">Mong muốn của bạn</h2>
+            <div className="mb-8 items-start text-left">
+              <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">
+                {wantsHeader?.badge || "BẠN MUỐN"}
+              </span>
+              <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">
+                {wantsHeader?.title || "Mong muốn của bạn"}
+              </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {wants.map((item, idx) => (
@@ -328,9 +343,13 @@ const LearnWithCapClone = () => {
           </div>
 
           <div className="reveal-staggered">
-            <div className="mb-8">
-              <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">BẠN ĐANG</span>
-              <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">Gặp những khó khăn</h2>
+            <div className="mb-8 items-start text-left">
+              <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">
+                {difficultiesHeader?.badge || "BẠN ĐANG"}
+              </span>
+              <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">
+                {difficultiesHeader?.title || "Gặp những khó khăn"}
+              </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {difficulties.map((item, idx) => (
@@ -354,14 +373,15 @@ const LearnWithCapClone = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16 items-center">
             {/* Left: Title Block */}
             <div className="flex flex-col gap-6 items-start text-left">
-              <span className="inline-block bg-[#59B4E9]/10 text-[#59B4E9] border border-[#59B4E9]/20 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide">
-                GIẢI PHÁP
+              <span className="inline-block bg-[#59B4E9]/10 text-[#59B4E9] border border-[#59B4E9]/20 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide uppercase">
+                {solutionsHeader?.badge || "GIẢI PHÁP"}
               </span>
-              <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-                Giải pháp của CAP <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#59B4E9] to-white">dành cho bạn</span>
-              </h2>
+              <h2
+                className="text-3xl md:text-5xl font-bold leading-tight"
+                dangerouslySetInnerHTML={{ __html: solutionsHeader?.title || 'Giải pháp của CAP <br /> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#59B4E9] to-white">dành cho bạn</span>' }}
+              />
               <p className="text-lg text-gray-400 max-w-lg leading-relaxed">
-                Chúng tôi cung cấp lộ trình học tập được cá nhân hóa, giúp bạn làm chủ tiếng Anh và tự tin trong môi trường làm việc quốc tế.
+                {solutionsHeader?.description || "Chúng tôi cung cấp lộ trình học tập được cá nhân hóa, giúp bạn làm chủ tiếng Anh và tự tin trong môi trường làm việc quốc tế."}
               </p>
             </div>
 
@@ -370,7 +390,7 @@ const LearnWithCapClone = () => {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 w-full max-w-2xl">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#671D9D]/20 to-transparent z-10 mix-blend-overlay pointer-events-none"></div>
                 <img
-                  src="https://course.learnwithcap.com/wp-content/uploads/2025/10/danist-soh-8Gg2Ne_uTcM-unsplash-scaled-1.webp"
+                  src={solutionsHeader?.image || "https://course.learnwithcap.com/wp-content/uploads/2025/10/danist-soh-8Gg2Ne_uTcM-unsplash-scaled-1.webp"}
                   alt="Team collaboration"
                   className="w-full h-auto object-cover"
                 />
@@ -417,10 +437,10 @@ const LearnWithCapClone = () => {
 
                   <div className="flex gap-4 mb-8">
                     <button className="px-6 py-2 bg-white text-[#0b2b4d] font-bold rounded text-sm hover:bg-gray-100 transition">
-                      Tư Vấn Ngay
+                      {course.cta1_label || "Tư Vấn Ngay"}
                     </button>
                     <button className="px-6 py-2 border border-white text-white font-bold rounded text-sm hover:bg-white/10 transition">
-                      Xem Chi Tiết
+                      {course.cta2_label || "Xem Chi Tiết"}
                     </button>
                   </div>
                 </div>
@@ -432,7 +452,7 @@ const LearnWithCapClone = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 reveal-staggered">
-                {course.modules.map((mod, mIdx) => (
+                {course.modules.map((mod: any, mIdx: number) => (
                   <div key={mIdx} className="group cursor-pointer">
                     <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden relative mb-3">
                       <img src={mod.img} alt={mod.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -449,9 +469,9 @@ const LearnWithCapClone = () => {
       {/* 9. Section: Khách hàng (Clients) - Updated with Horizontal Scroll */}
       {/* 9. Section: Khách hàng (Clients) - Updated with Horizontal Scroll */}
       <section className="bg-[#001e3d] h-screen flex flex-col justify-center text-white overflow-hidden">
-        <div className="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
+        <div className="w-full h-full flex flex-col justify-center pl-4 md:pl-16">
           <div className="flex flex-col md:flex-row gap-8 items-start h-full">
-            <div className="md:w-[30%] flex-shrink-0 section-header z-10 pt-10">
+            <div className="md:w-[25%] flex-shrink-0 section-header z-10 pt-10">
               <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">CASE STUDIES</span>
               <h2 className="text-4xl font-bold text-white leading-tight">Khách hàng của CAP</h2>
               <div className="mt-8 flex gap-4">
