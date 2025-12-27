@@ -1,34 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Youtube, Send, Mail, Phone, Instagram, Twitter } from "lucide-react";
+import { Facebook, Youtube, Send, Mail, Phone, Instagram } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getFooterItems, getFooterSettings } from "@/lib/api";
-import { FooterItem, FooterSettings } from "@/lib/types";
-
-// Standard column grouping helper
-const groupItemsBySection = (items: FooterItem[]) => {
-    const groups: Record<string, FooterItem[]> = {};
-    items.forEach(item => {
-        if (!groups[item.section_id]) groups[item.section_id] = [];
-        groups[item.section_id].push(item);
-    });
-    return groups;
-};
+import { supabase } from "@/lib/supabase";
 
 export default function Footer() {
-    const [footerItems, setFooterItems] = useState<FooterItem[]>([]);
-    const [settings, setSettings] = useState<FooterSettings | null>(null);
+    const [footerData, setFooterData] = useState<any>(null);
 
     useEffect(() => {
-        getFooterItems().then(setFooterItems);
-        getFooterSettings().then(setSettings);
+        const fetchFooterData = async () => {
+            const { data, error } = await supabase
+                .from('homepage_footer')
+                .select('*')
+                .single();
+
+            if (data) {
+                setFooterData(data);
+            }
+        };
+        fetchFooterData();
     }, []);
 
-    const columns = groupItemsBySection(footerItems);
-
-    // Default fallbacks if no data
-    const showDefault = Object.keys(columns).length === 0;
+    const settings = footerData;
+    const columns = footerData?.links || [];
 
     return (
         <footer className="bg-[#002147] text-white pt-16 pb-8 border-t border-[#002147]">
@@ -66,13 +61,13 @@ export default function Footer() {
                     </div>
 
                     {/* Dynamic Columns */}
-                    {!showDefault ? (
-                        Object.entries(columns).map(([sectionId, items]) => (
-                            <div key={sectionId} className="flex flex-col gap-4">
-                                <h4 className="font-bold text-white text-lg capitalize">{sectionId.replace('_', ' ')}</h4>
+                    {columns.length > 0 ? (
+                        columns.map((section: any, idx: number) => (
+                            <div key={idx} className="flex flex-col gap-4">
+                                <h4 className="font-bold text-white text-lg capitalize">{section.section_id.replace('_', ' ')}</h4>
                                 <ul className="flex flex-col gap-3">
-                                    {items.map(item => (
-                                        <li key={item.id}>
+                                    {section.items.map((item: any, itemIdx: number) => (
+                                        <li key={itemIdx}>
                                             {item.link_url ? (
                                                 <Link href={item.link_url} className="text-gray-300 hover:text-white transition-colors font-light">
                                                     {item.title}
@@ -86,8 +81,8 @@ export default function Footer() {
                             </div>
                         ))
                     ) : (
+                        // Fallback static columns if no data
                         <>
-                            {/* Default Static Columns (Fallback) */}
                             <div className="flex flex-col gap-4">
                                 <h4 className="font-bold text-white text-lg">HỮU ÍCH</h4>
                                 <ul className="flex flex-col gap-3">
