@@ -1,13 +1,7 @@
 "use client";
 import React, { useRef, useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ServiceCard from './ServiceCard';
-
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-}
 
 interface ServiceItem {
     title: string;
@@ -33,31 +27,6 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     const scrollRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [totalPaginationSteps, setTotalPaginationSteps] = useState(1);
-    const sectionRef = useRef<HTMLElement>(null);
-    const cardsContainerRef = useRef<HTMLDivElement>(null);
-
-    // Initial Animation
-    useEffect(() => {
-        if (!cardsContainerRef.current || !items || items.length === 0) return;
-        const cards = cardsContainerRef.current.children;
-        if (cards.length === 0) return;
-
-        gsap.fromTo(cards,
-            { y: 40, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 85%",
-                    toggleActions: "play none none none"
-                }
-            }
-        );
-    }, [items]);
 
     // Handle steps calculation
     useEffect(() => {
@@ -107,7 +76,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     };
 
     return (
-        <section ref={sectionRef} className="bg-white py-12 overflow-hidden flex flex-col justify-center min-h-[700px]">
+        <section className="bg-white py-12 overflow-hidden flex flex-col justify-center min-h-[700px]">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
                 <div className="section-header mb-6">
@@ -129,7 +98,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                         onScroll={handleScroll}
                         className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide snap-x snap-mandatory px-4 md:px-0"
                     >
-                        <div ref={cardsContainerRef} className="flex gap-3 w-full">
+                        <div className="flex gap-3 w-full">
                             {Array.isArray(items) && items.map((item, index) => (
                                 <ServiceCard
                                     key={index}

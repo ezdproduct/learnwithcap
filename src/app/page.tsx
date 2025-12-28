@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useLayoutEffect, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 import ScrollToTop from '@/components/ScrollToTop';
 import {
   ArrowRight, ArrowLeft, Mail, Phone, MessageSquare,
@@ -11,8 +12,6 @@ import {
   Clock, Ear, Rocket, Menu, Facebook, Youtube, Send,
   CircleArrowDown, Package, CircleDot
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ServiceCarousel from '@/components/ServiceCarousel';
 
 // Helper to map icon string names to components
@@ -48,7 +47,7 @@ const FeatureCard = ({ icon, text, bg, textColor = "text-[#0b2b4d]", iconColor =
   );
 };
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 const LearnWithCapClone = () => {
   const mainRef = useRef(null);
@@ -81,72 +80,6 @@ const LearnWithCapClone = () => {
     }
   };
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Hero Entrance
-      gsap.from(".hero-content > *", {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
-        delay: 0.5
-      });
-
-      // 2. Section Headers Reveal
-      const headers = gsap.utils.toArray('.section-header');
-      headers.forEach((header: any) => {
-        gsap.from(header, {
-          scrollTrigger: {
-            trigger: header,
-            start: "top 85%",
-            toggleActions: "play none none none"
-          },
-          y: 40,
-          opacity: 0,
-          duration: 1,
-          ease: "power2.out"
-        });
-      });
-
-      // 3. Card/Item Staggered reveal
-      const staggeredContainers = gsap.utils.toArray('.reveal-staggered');
-      staggeredContainers.forEach((container: any) => {
-        if (!container || container.children.length === 0) return;
-        gsap.from(container.children, {
-          scrollTrigger: {
-            trigger: container,
-            start: "top 80%",
-          },
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power2.out"
-        });
-      });
-
-      // 4. Scale Staggered reveal (Left to Right, Small to Large)
-      const scaleStaggeredContainers = gsap.utils.toArray('.reveal-scale-staggered');
-      scaleStaggeredContainers.forEach((container: any) => {
-        if (!container || container.children.length === 0) return;
-        gsap.from(container.children, {
-          scrollTrigger: {
-            trigger: container,
-            start: "top 85%", // Trigger a bit earlier/later as needed
-          },
-          scale: 0.8,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power2.out"
-        });
-      });
-
-    }, mainRef);
-
-    return () => ctx.revert();
-  }, []);
   // --- Colors based on provided HTML ---
   // primary: "#002855"
   // secondary: "#3da9fc"
@@ -253,57 +186,18 @@ const LearnWithCapClone = () => {
 
   return (
     <div ref={mainRef} className="text-[#0b2b4d] bg-white">
-      {/* 1. Header / Navbar - Updated to match cap FE */}
-      <header className="w-full bg-white transition-all duration-300">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
-          <div className="flex items-center space-x-2 cursor-pointer">
-            <Link href="/">
-              <img
-                src={navbar?.logo_url || "https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"}
-                alt="CAP Logo"
-                className="h-8 w-auto object-contain"
-              />
-            </Link>
-          </div>
-
-          <nav className="hidden md:flex items-center space-x-1 bg-gray-100 p-1 rounded-full group">
-            {Array.isArray(navbar?.links || []) && (navbar?.links || [
-              { label: "Khóa học", href: "/shop" },
-              { label: "Giải Pháp", href: "#solutions" }
-            ]).map((link: any, lIdx: number) => (
-              <a
-                key={lIdx}
-                href={link.href}
-                className="rounded-full px-4 py-1.5 text-base font-medium transition-colors text-[#0b2b4d] group-hover:text-gray-400 hover:!text-[#0b2b4d]"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:block">
-              <button className="bg-[#0b2b4d] hover:bg-[#671D9D] text-white rounded-md transition-all text-base px-6 py-2 font-medium shadow-sm">
-                {navbar?.login_label || "Đăng nhập"}
-              </button>
-            </div>
-
-            <button className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-              <Menu className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
-      </header>
+      {/* 1. Header / Navbar - Extracted to Header component */}
+      <Header />
 
       {/* 2. Hero Section - Updated Design */}
-      <section className="pt-0 pb-4 container mx-auto px-4 md:px-8">
-        <div className="relative h-[600px] rounded-[32px] overflow-hidden group">
+      <section className="pt-2 pb-10 container mx-auto px-4 md:px-8">
+        <div className="relative h-[600px] rounded-[32px] overflow-hidden group hero-container">
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
               src={hero?.bg_image || "https://lh3.googleusercontent.com/aida-public/AB6AXuCMURFziLh10NsWXUt3sXvUYRGfh_KHSFU73tSwFcIvuQVNnjTHINIPoDWk9ofMQ8fp6baSiIKloW36RFirhd-RCQyk-qoblC3fASM1tJ24HbxhU8fqMQEIvchHUVNUV5FqHG2IjAhTjAaji5dp5cXJ1Nr00xriHPGr9v5YVwp20okgv_GsW2nmoB-b_V7FNia7I20iNtSJDqqspuRTKiMMhajHG6doETgiaQJuV6mdA5tVH5vQWCqLnltNMnnQTznBpP-RjIMMVXg"}
               alt="Cityscape"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover"
             />
 
             {/* Gradient Overlays */}
@@ -311,7 +205,6 @@ const LearnWithCapClone = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0b2b4d]/80 via-transparent to-transparent"></div>
           </div>
 
-          {/* Content Content - Bottom Left */}
           <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-16 max-w-4xl hero-content text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6 drop-shadow-lg tracking-tight">
               {hero?.title || <>Tiếng Anh giao tiếp <br /> chuyên ngành xây dựng</>}
@@ -336,7 +229,7 @@ const LearnWithCapClone = () => {
       <section className="bg-[#f4faff] py-16 overflow-hidden">
         <div className="container mx-auto px-4 md:px-8">
 
-          <div className="mb-12 reveal-staggered">
+          <div className="reveal-piano">
             <div className="mb-8 items-start text-left">
               <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">
                 {wantsHeader?.badge || "BẠN MUỐN"}
@@ -347,12 +240,14 @@ const LearnWithCapClone = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {Array.isArray(wants) && wants.map((item, idx) => (
-                <FeatureCard key={idx} {...item} />
+                <div key={idx} className="piano-item">
+                  <FeatureCard {...item} />
+                </div>
               ))}
             </div>
           </div>
 
-          <div className="reveal-staggered">
+          <div className="reveal-piano mt-20">
             <div className="mb-8 items-start text-left">
               <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">
                 {difficultiesHeader?.badge || "BẠN ĐANG"}
@@ -363,13 +258,14 @@ const LearnWithCapClone = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {Array.isArray(difficulties) && difficulties.map((item, idx) => (
-                <FeatureCard
-                  key={idx}
-                  {...item}
-                  bg="bg-[#0b2b4d]"
-                  textColor="text-white"
-                  iconColor="text-white"
-                />
+                <div key={idx} className="piano-item">
+                  <FeatureCard
+                    {...item}
+                    bg="bg-[#0b2b4d]"
+                    textColor="text-white"
+                    iconColor="text-white"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -409,9 +305,9 @@ const LearnWithCapClone = () => {
           </div>
 
           {/* Bottom Section: Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 reveal-piano">
             {Array.isArray(solutions) && solutions.map((item, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-[#0a3253] border border-white/10 hover:border-white/20 transition-colors duration-300 h-full flex flex-col items-start text-left group">
+              <div key={idx} className="piano-item p-6 rounded-2xl bg-[#0a3253] border border-white/10 hover:border-white/20 transition-colors duration-300 h-full flex flex-col items-start text-left group">
                 <div className="flex-shrink-0 mb-4">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors overflow-hidden text-[#59B4E9]">
                     {item.iconComponent}
@@ -449,9 +345,9 @@ const LearnWithCapClone = () => {
                     <button className="px-6 py-2 bg-white text-[#0b2b4d] font-bold rounded text-sm hover:bg-gray-100 transition">
                       {course.cta1_label || "Tư Vấn Ngay"}
                     </button>
-                    <button className="px-6 py-2 border border-white text-white font-bold rounded text-sm hover:bg-white/10 transition">
+                    <Link href="/course-detail" className="px-6 py-2 border border-white text-white font-bold rounded text-sm hover:bg-white/10 transition block">
                       {course.cta2_label || "Xem Chi Tiết"}
-                    </button>
+                    </Link>
                   </div>
                 </div>
 
@@ -461,9 +357,9 @@ const LearnWithCapClone = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 reveal-staggered">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 reveal-piano">
                 {Array.isArray(course.modules) && course.modules.map((mod: any, mIdx: number) => (
-                  <div key={mIdx} className="group cursor-pointer">
+                  <div key={mIdx} className="group cursor-pointer piano-item">
                     <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden relative mb-3">
                       <img src={mod.img} alt={mod.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     </div>
@@ -485,7 +381,7 @@ const LearnWithCapClone = () => {
               <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">
                 {clientsHeader?.badge || "CASE STUDIES"}
               </span>
-              <h2 className="text-4xl font-bold text-white leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight split-heading">
                 {clientsHeader?.title || "Khách hàng của CAP"}
               </h2>
               <div className="mt-8 flex gap-4">
@@ -508,7 +404,7 @@ const LearnWithCapClone = () => {
               className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide flex-nowrap snap-x snap-mandatory reveal-scale-staggered items-center h-full">
               {Array.isArray(clients) && clients.map((client, idx) => (
                 <div key={idx} className="min-w-[300px] md:w-[50%] h-full bg-cover bg-center overflow-hidden relative flex-shrink-0 snap-start" style={{ backgroundImage: `url('${client.img}')` }}>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b2b4d]/90 via-[#0b2b4d]/20 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 p-6 text-white">
                     <div className="w-12 h-12 bg-white rounded mb-4 flex items-center justify-center text-black font-bold text-xs">{client.logo}</div>
                     <h3 className="font-bold text-xl mb-2">{client.name}</h3>

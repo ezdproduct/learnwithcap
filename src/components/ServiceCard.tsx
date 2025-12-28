@@ -51,8 +51,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 />
             </div>
 
-            {/* Layered Gradient Overlay for Depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#000d1a]/90 via-[#000d1a]/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
+            {/* Layered Gradient Overlay for Depth - Updated to Blue */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b2b4d]/95 via-[#0b2b4d]/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
 
             {/* Title Content - Positioned Bottom Left */}

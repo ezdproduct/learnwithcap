@@ -5,7 +5,7 @@ import { Facebook, Youtube, Send, Mail, Phone, Instagram } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-export default function Footer() {
+const Footer = () => {
     const [footerData, setFooterData] = useState<any>(null);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function Footer() {
             <div className="container mx-auto px-4 md:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {/* Brand Column */}
-                    <div className="flex flex-col items-start gap-4">
+                    <div className="flex flex-col items-start gap-4 space-y-6">
                         <Link href="/" className="flex items-center gap-2">
                             <img
                                 src={settings?.logo_url || "https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"}
@@ -63,7 +63,7 @@ export default function Footer() {
                     {/* Dynamic Columns */}
                     {Array.isArray(columns) && columns.length > 0 ? (
                         columns.map((section: any, idx: number) => (
-                            <div key={idx} className="flex flex-col gap-4">
+                            <div key={idx} className="footer-col flex flex-col gap-4">
                                 <h4 className="font-bold text-white text-lg capitalize">{section.section_id?.replace('_', ' ')}</h4>
                                 <ul className="flex flex-col gap-3">
                                     {Array.isArray(section.items) && section.items.map((item: any, itemIdx: number) => (
@@ -83,7 +83,7 @@ export default function Footer() {
                     ) : (
                         // Fallback static columns if no data
                         <>
-                            <div className="flex flex-col gap-4">
+                            <div className="footer-col flex flex-col gap-4">
                                 <h4 className="font-bold text-white text-lg">HỮU ÍCH</h4>
                                 <ul className="flex flex-col gap-3">
                                     <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors font-light">Về Chúng Tôi</Link></li>
@@ -91,7 +91,7 @@ export default function Footer() {
                                     <li><Link href="/privacy" className="text-gray-300 hover:text-white transition-colors font-light">Điều Khoản Riêng Tư</Link></li>
                                 </ul>
                             </div>
-                            <div className="flex flex-col gap-4">
+                            <div className="footer-col flex flex-col gap-4">
                                 <h4 className="font-bold text-white text-lg">LIÊN KẾT</h4>
                                 <ul className="flex flex-col gap-3">
                                     <li><Link href="/shop" className="text-gray-300 hover:text-white transition-colors font-light">Khóa học</Link></li>
@@ -128,7 +128,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-white/10 pt-8 text-center bg-[#002147]">
+                <div className="footer-bottom border-t border-white/10 pt-8 text-center bg-[#002147]">
                     <p className="text-gray-400 font-light text-sm">
                         © {new Date().getFullYear()} {settings?.copyright_text || "CAP English Training. All rights reserved."}
                     </p>
@@ -137,3 +137,5 @@ export default function Footer() {
         </footer>
     );
 }
+
+export default Footer;
