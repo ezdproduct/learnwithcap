@@ -23,14 +23,14 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="w-full bg-white transition-all duration-300">
+        <header className="w-full bg-white transition-all duration-300 py-2">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
                 <div className="flex items-center space-x-2 cursor-pointer">
                     <Link href="/">
                         <img
                             src={navbar?.logo_url || "https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"}
                             alt="CAP Logo"
-                            className="h-8 w-auto object-contain"
+                            className="h-12 w-auto object-contain"
                         />
                     </Link>
                 </div>
