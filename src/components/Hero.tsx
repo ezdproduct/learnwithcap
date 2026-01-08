@@ -22,7 +22,7 @@ const Hero = ({ hero }: HeroProps) => {
 
     return (
         <section className="pt-0 pb-0 container mx-auto px-4 md:px-8">
-            <div className="relative h-[600px] rounded-[32px] overflow-hidden group hero-container">
+            <div className="relative h-[550px] rounded-[32px] overflow-hidden group hero-container">
                 {heroImages.map((image: string, index: number) => (
                     <div
                         key={index}

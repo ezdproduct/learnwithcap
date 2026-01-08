@@ -33,7 +33,7 @@ const Courses = ({ courses }: CoursesProps) => {
                     className={`${idx === 0 ? "bg-[#0b2b4d]" : idx % 2 !== 0 ? "bg-[#001e3d]" : "bg-[#0f2d4a]"
                         } py-20 text-white`}
                 >
-                    <div className="container mx-auto px-4 md:px-8">
+                    <div className="container mx-auto px-5 md:px-8">
                         <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-16 items-start">
                             <div className="section-header reveal-staggered">
                                 <span className="bg-[#3da9fc] text-white text-[10px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em] mb-4 inline-block">
@@ -68,7 +68,7 @@ const Courses = ({ courses }: CoursesProps) => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="text-sm text-white/80 space-y-4">
+                            <div className="text-sm text-white/80 space-y-4 max-w-2xl mx-auto">
                                 <p dangerouslySetInnerHTML={{ __html: course.desc1 }} />
                                 <p dangerouslySetInnerHTML={{ __html: course.desc2 }} />
                                 <button className="mt-4 px-6 py-2 bg-[#3da9fc] text-white font-bold rounded text-sm hover:bg-[#2b8ac6] transition">

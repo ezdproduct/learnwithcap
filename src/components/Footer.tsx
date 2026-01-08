@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
     const columns = footerData?.links || [];
 
     return (
-        <footer className="bg-[#002147] text-white pt-16 pb-8 border-t border-[#002147]">
+        <footer className="bg-[#002A4C] text-white pt-16 pb-8 border-t border-[#002A4C]">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {/* Brand Column */}
@@ -91,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                     <div className="flex flex-col gap-4">
                         <h4 className="font-bold text-white text-lg uppercase tracking-wider">{settings?.newsletter_title || "LIÊN HỆ TƯ VẤN"}</h4>
                         <p className="text-gray-300 font-light text-sm mb-2">{settings?.newsletter_description || "Đăng ký để nhận tư vấn khóa học phù hợp và ưu đãi mới nhất từ CAP."}</p>
-                        <div className="flex bg-[#163a63] rounded-lg overflow-hidden p-1">
+                        <div className="flex bg-[#001e38] rounded-lg overflow-hidden p-1">
                             <input
                                 type="email"
                                 placeholder={settings?.newsletter_placeholder || "Vui lòng nhập email"}
@@ -114,7 +114,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                     </div>
                 </div>
 
-                <div className="footer-bottom border-t border-white/10 pt-8 text-center bg-[#002147]">
+                <div className="footer-bottom border-t border-white/10 pt-8 text-center bg-[#002A4C]">
                     <p className="text-gray-400 font-light text-sm">
                         © {new Date().getFullYear()} {settings?.copyright_text || "CAP English Training. All rights reserved."}
                     </p>

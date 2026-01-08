@@ -15,7 +15,7 @@ const CTASection = ({
     videoUrl = "https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4"
 }: CTASectionProps) => {
     return (
-        <section className="relative h-[400px] md:h-[500px] lg:h-[300px] overflow-hidden">
+        <section className="relative h-[380px] md:h-[450px] lg:h-[320px] overflow-hidden">
             {/* Video Background */}
             <video
                 autoPlay
