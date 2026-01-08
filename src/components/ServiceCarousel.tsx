@@ -98,7 +98,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     };
 
     return (
-        <section className="bg-white py-12 overflow-hidden">
+        <section className="bg-white pt-12 pb-0 overflow-hidden">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
                 <div className="section-header mb-5">
@@ -136,44 +136,20 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                     </div>
 
                     {/* Numeric Pagination */}
-                    <div className="mt-1 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-[#5c5c96] font-bold text-xl">
-                            <div className="w-8 h-8 overflow-hidden relative flex justify-center items-center">
-                                <div
-                                    className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
-                                    style={{ transform: `translateY(-${currentIndex * 32}px)` }}
-                                >
-                                    {Array.from({ length: items.length }).map((_, i) => (
-                                        <span key={i} className="h-8 flex items-center justify-center">
-                                            {i + 1}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="w-10 h-[1.5px] bg-gray-100 relative overflow-hidden rounded-full">
-                                <div
-                                    className="absolute left-0 top-0 h-full bg-[#5c5c96] transition-all duration-500 rounded-full"
-                                    style={{ width: `${((currentIndex + 1) / (items.length || 1)) * 100}%` }}
-                                />
-                            </div>
-
-                            <span className="text-gray-300">{items.length}</span>
-                        </div>
-
+                    <div className="mt-2 flex items-center justify-between">
                         {/* Navigation */}
-                        <div className="flex gap-2">
+                        <div className="flex gap-4 ml-auto">
                             <button
                                 onClick={() => scroll('left')}
-                                className="w-11 h-11 rounded-full border border-gray-100 flex items-center justify-center text-[#0b2b4d] hover:bg-[#0b2b4d] hover:text-white transition-all duration-300"
+                                className="w-12 h-12 rounded-full border border-[#7c3aed] flex items-center justify-center text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300"
                             >
-                                <ArrowLeft size={18} />
+                                <ArrowLeft size={24} strokeWidth={1.5} />
                             </button>
                             <button
                                 onClick={() => scroll('right')}
-                                className="w-11 h-11 rounded-full border border-gray-100 flex items-center justify-center text-[#0b2b4d] hover:bg-[#0b2b4d] hover:text-white transition-all duration-300"
+                                className="w-12 h-12 rounded-full border border-[#7c3aed] flex items-center justify-center text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300"
                             >
-                                <ArrowRight size={18} />
+                                <ArrowRight size={24} strokeWidth={1.5} />
                             </button>
                         </div>
                     </div>

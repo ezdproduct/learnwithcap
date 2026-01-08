@@ -27,7 +27,7 @@ const FeatureCard = ({
             style={style}
         >
             <div
-                className={`w-12 h-12 rounded-full bg-white/10 flex items-center justify-center ${iconColor} mb-4`}
+                className={`w-12 h-12 rounded-full flex items-center justify-center ${iconColor} mb-4`}
             >
                 <div className="opacity-80 group-hover:opacity-100 transition-opacity">
                     {icon}
