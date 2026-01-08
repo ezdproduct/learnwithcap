@@ -51,7 +51,39 @@ export const MOCK_COURSES = [
         type: "Trực tiếp tại \n Doanh Nghiệp",
         stats: { left: "3", leftLabel: "Modules", right: "36", rightLabel: "Bài học" },
         desc1: "Khóa học tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất được <span class='text-[#3da9fc] font-bold'>thiết kế riêng cho đội ngũ nhân viên của Quý doanh nghiệp</span>, nhằm nâng cao kỹ năng giao tiếp thông qua việc bổ sung từ vựng chuyên ngành và mẫu câu giao tiếp thông dụng trong tình huống công việc thực tế.",
-        desc2: "Với lộ trình học tập bài bản, học viên sẽ được đánh giá năng lực đầu vào, <span class='text-[#3da9fc] font-bold'>xây dựng tư duy đúng về việc học ngoại ngữ</span>, được <span class='text-[#3da9fc] font-bold'>“bắt đúng bệnh”</span> và <span class='text-[#3da9fc] font-bold'>tư vấn phương pháp tự học phù hợp với từng cá nhân</span>. Sau khoảng thời gian 6-9 tháng, học viên có thể bắt đầu tự tin giao tiếp và sử dụng tiếng Anh hiệu quả trong công việc.",
+        desc2: "Với lộ trình học tập bài bản, học viên sẽ được đánh giá năng lực đầu vào, <span class='text-[#3da9fc] font-bold'>xây dựng tư duy đúng về việc học ngoại ngữ</span>, được <span class='text-[#3da9fc] font-bold'>\"bắt đúng bệnh\"</span> và <span class='text-[#3da9fc] font-bold'>tư vấn phương pháp tự học phù hợp với từng cá nhân</span>. Sau khoảng thời gian 6-9 tháng, học viên có thể bắt đầu tự tin giao tiếp và sử dụng tiếng Anh hiệu quả trong công việc.",
+        modules: [
+            { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
+            { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
+            { title: "Module 03", img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80" },
+            { title: "Material", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" },
+            { title: "Contract", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80" },
+            { title: "Design", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" },
+            { title: "Survey", img: "https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=400&q=80" },
+            { title: "Renovation", img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" },
+        ]
+    },
+    {
+        type: "Online 1:1",
+        stats: { left: "3", leftLabel: "Modules", right: "36", rightLabel: "Bài học" },
+        desc1: "Khóa học tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất được <span class='text-[#3da9fc] font-bold'>thiết kế riêng cho cá nhân</span>, nhằm nâng cao kỹ năng giao tiếp thông qua việc bổ sung từ vựng chuyên ngành và mẫu câu giao tiếp thông dụng trong tình huống công việc thực tế.",
+        desc2: "Với lộ trình học tập bài bản, học viên sẽ được đánh giá năng lực đầu vào, <span class='text-[#3da9fc] font-bold'>xây dựng tư duy đúng về việc học ngoại ngữ</span>, được <span class='text-[#3da9fc] font-bold'>\"bắt đúng bệnh\"</span> và <span class='text-[#3da9fc] font-bold'>tư vấn phương pháp tự học phù hợp với từng cá nhân</span>. Sau khoảng thời gian 6-9 tháng, học viên có thể bắt đầu tự tin giao tiếp và sử dụng tiếng Anh hiệu quả trong công việc.",
+        modules: [
+            { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
+            { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
+            { title: "Module 03", img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80" },
+            { title: "Material", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" },
+            { title: "Contract", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80" },
+            { title: "Design", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" },
+            { title: "Survey", img: "https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=400&q=80" },
+            { title: "Renovation", img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" },
+        ]
+    },
+    {
+        type: "Online 1:1",
+        stats: { left: "3", leftLabel: "Modules", right: "36", rightLabel: "Bài học" },
+        desc1: "Khóa học tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất được <span class='text-[#3da9fc] font-bold'>thiết kế riêng cho cá nhân</span>, nhằm nâng cao kỹ năng giao tiếp thông qua việc bổ sung từ vựng chuyên ngành và mẫu câu giao tiếp thông dụng trong tình huống công việc thực tế.",
+        desc2: "Với lộ trình học tập bài bản, học viên sẽ được đánh giá năng lực đầu vào, <span class='text-[#3da9fc] font-bold'>xây dựng tư duy đúng về việc học ngoại ngữ</span>, được <span class='text-[#3da9fc] font-bold'>\"bắt đúng bệnh\"</span> và <span class='text-[#3da9fc] font-bold'>tư vấn phương pháp tự học phù hợp với từng cá nhân</span>. Sau khoảng thời gian 6-9 tháng, học viên có thể bắt đầu tự tin giao tiếp và sử dụng tiếng Anh hiệu quả trong công việc.",
         modules: [
             { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
             { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },

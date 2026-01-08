@@ -76,7 +76,7 @@ const Courses = ({ courses }: CoursesProps) => {
                                 </button>
                             </div>
                         </div>
-                        <div className="flex overflow-x-auto gap-8 mt-12 reveal-piano pb-8 scrollbar-hide snap-x pr-4">
+                        <div className="flex overflow-x-auto gap-8 mt-6 reveal-piano pb-8 scrollbar-hide snap-x pr-4">
                             {course.modules?.map((mod: any, mIdx: number) => (
                                 <div key={mIdx} className="group cursor-pointer piano-item min-w-[85vw] md:min-w-0 md:w-[calc((100%-4rem)/3)] snap-start flex-shrink-0">
                                     <div className="aspect-[5/3] bg-gray-800 rounded-2xl overflow-hidden relative shadow-lg">

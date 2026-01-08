@@ -19,7 +19,7 @@ const Testimonials = ({ testimonials, testimonialsHeader }: TestimonialsProps) =
                             { value: "18k+", label: "Học Viên Đã Học" },
                         ]).map((stat: any, sIdx: number) => (
                             <div key={sIdx}>
-                                <span className="text-4xl font-bold text-[#3da9fc]">{stat.value}</span>
+                                <span className="text-4xl font-bold text-[#7c3aed]">{stat.value}</span>
                                 <p className="text-xs uppercase font-bold text-gray-500 mt-1">
                                     {stat.label}
                                 </p>

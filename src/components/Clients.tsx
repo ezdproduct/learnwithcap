@@ -12,7 +12,7 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
     const scrollPrev = () => {
         if (clientCarouselRef.current) {
             const container = clientCarouselRef.current;
-            const itemWidth = container.offsetWidth / 2;
+            const itemWidth = container.offsetWidth * 0.5; // Scroll by 50% (one company)
 
             if (container.scrollLeft <= 5) {
                 container.scrollTo({ left: container.scrollWidth, behavior: "smooth" });
@@ -25,7 +25,7 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
     const scrollNext = () => {
         if (clientCarouselRef.current) {
             const container = clientCarouselRef.current;
-            const itemWidth = container.offsetWidth / 2;
+            const itemWidth = container.offsetWidth * 0.5; // Scroll by 50% (one company)
 
             if (
                 container.scrollLeft + container.clientWidth >=
@@ -39,53 +39,72 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
     };
 
     return (
-        <section className="bg-[#001e3d] h-screen flex flex-col justify-center text-white overflow-hidden">
-            <div className="w-full h-full flex flex-col justify-center pl-4 md:pl-16">
-                <div className="flex flex-col md:flex-row gap-8 items-start h-full">
-                    <div className="md:w-[25%] flex-shrink-0 section-header z-10 pt-10">
-                        <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">
-                            {clientsHeader?.badge || "CASE STUDIES"}
-                        </span>
-                        <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight split-heading">
-                            {clientsHeader?.title || "Khách hàng của CAP"}
-                        </h2>
-                        <div className="mt-8 flex gap-4">
-                            <button
-                                onClick={scrollPrev}
-                                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all"
-                            >
-                                <ArrowLeft size={20} />
-                            </button>
-                            <button
-                                onClick={scrollNext}
-                                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all"
-                            >
-                                <ArrowRight size={20} />
-                            </button>
-                        </div>
+        <section className="bg-[#001e3d] h-screen flex items-center text-white overflow-hidden">
+            <div className="w-full h-full flex flex-col md:flex-row">
+                {/* Left Section - Text Content */}
+                <div className="md:w-[40%] lg:w-[35%] flex flex-col justify-center px-8 md:px-12 lg:px-16 py-12 md:py-0">
+                    <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase mb-6 inline-block w-fit">
+                        {clientsHeader?.badge || "CASE STUDIES"}
+                    </span>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-12">
+                        {clientsHeader?.title || "Khách hàng của CAP"}
+                    </h2>
+                    <div className="flex gap-4">
+                        <button
+                            onClick={scrollPrev}
+                            className="w-12 h-12 rounded-full border border-[#7c3aed] flex items-center justify-center text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300"
+                            aria-label="Previous client"
+                        >
+                            <ArrowLeft size={24} strokeWidth={1.5} />
+                        </button>
+                        <button
+                            onClick={scrollNext}
+                            className="w-12 h-12 rounded-full border border-[#7c3aed] flex items-center justify-center text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300"
+                            aria-label="Next client"
+                        >
+                            <ArrowRight size={24} strokeWidth={1.5} />
+                        </button>
                     </div>
-                    <div
-                        ref={clientCarouselRef}
-                        className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide flex-nowrap snap-x snap-mandatory reveal-scale-staggered items-center h-full"
-                    >
-                        {clients.map((client, idx) => (
-                            <div
-                                key={idx}
-                                className="min-w-[300px] md:w-[50%] h-full bg-cover bg-center overflow-hidden relative flex-shrink-0 snap-start"
-                                style={{ backgroundImage: `url('${client.img}')` }}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0b2b4d]/90 via-[#0b2b4d]/20 to-transparent"></div>
-                                <div className="absolute bottom-0 left-0 p-6 text-white">
-                                    <div className="w-12 h-12 bg-white rounded mb-4 flex items-center justify-center text-black font-bold text-xs">
+                </div>
+
+                {/* Right Section - Image Carousel */}
+                <div
+                    ref={clientCarouselRef}
+                    className="flex-1 flex overflow-x-auto scrollbar-hide snap-x snap-mandatory h-full"
+                >
+                    {clients.map((client, idx) => (
+                        <div
+                            key={idx}
+                            className="min-w-[50%] h-full bg-cover bg-center relative flex-shrink-0 snap-start"
+                            style={{ backgroundImage: `url('${client.img}')` }}
+                        >
+                            {/* Dark overlay gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#001e3d]/95 via-[#001e3d]/40 to-transparent"></div>
+
+                            {/* Logo badge at top-left */}
+                            <div className="absolute top-8 left-8 md:top-12 md:left-12">
+                                <div className="bg-white px-4 py-2 rounded shadow-lg">
+                                    <span className="text-[#001e3d] font-bold text-sm uppercase tracking-wide">
                                         {client.logo}
-                                    </div>
-                                    <h3 className="font-bold text-xl mb-2">{client.name}</h3>
-                                    <p className="font-bold text-lg mb-4 text-[#3da9fc]">{client.sub}</p>
-                                    <p className="text-xs line-clamp-4 opacity-80">{client.desc}</p>
+                                    </span>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+
+                            {/* Content at bottom */}
+                            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+                                <h3 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-3 text-white">
+                                    {client.name}
+                                </h3>
+                                <p className="font-semibold text-lg md:text-xl mb-6 text-white">
+                                    {client.sub}
+                                </p>
+                                <div
+                                    className="text-sm md:text-base leading-relaxed max-w-3xl text-white/90 client-description"
+                                    dangerouslySetInnerHTML={{ __html: client.desc }}
+                                />
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

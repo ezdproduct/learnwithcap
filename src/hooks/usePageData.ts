@@ -39,7 +39,12 @@ export const usePageData = () => {
                 const { data: sectionsData } = await supabase.from("page_sections").select("*");
                 if (sectionsData) {
                     sectionsData.forEach((section: any) => {
-                        if (section.section_key === "courses" && section.data?.length > 0) setCourses(section.data);
+                        if (section.section_key === "courses") {
+                            if (section.data?.length > 0) {
+                                setCourses(section.data);
+                            }
+                            // If no data from Supabase, MOCK_COURSES (3 courses) will be used
+                        }
                         if (section.section_key === "testimonials" && section.data?.items?.length > 0) {
                             setTestimonials(section.data.items);
                             setTestimonialsHeader(section.data.header);

@@ -116,3 +116,18 @@ h1 {
 .in-view .piano-item:nth-child(10) {
   animation-delay: 950ms;
 }
+
+/* Client Description Styling */
+.client-description .highlight {
+  color: #3da9fc;
+}
+
+.client-description a {
+  color: #3da9fc;
+  text-decoration: underline;
+  transition: opacity 0.2s;
+}
+
+.client-description a:hover {
+  opacity: 0.8;
+}

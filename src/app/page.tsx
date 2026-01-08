@@ -10,6 +10,7 @@ import Solutions from "@/components/Solutions";
 import Courses from "@/components/Courses";
 import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
+import CTASection from "@/components/CTASection";
 import { usePageData } from "@/hooks/usePageData";
 
 const LearnWithCapClone = () => {
@@ -70,6 +71,8 @@ const LearnWithCapClone = () => {
         testimonials={testimonials}
         testimonialsHeader={testimonialsHeader}
       />
+
+      <CTASection />
 
       <ScrollToTop />
       <Footer footerData={footer} />
