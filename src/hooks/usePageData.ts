@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import { getIcon } from "@/components/ui/IconHelper";
 import {
     MOCK_HERO,
     MOCK_SERVICES,
@@ -14,107 +12,124 @@ import {
     MOCK_VISION_MISSION,
     MOCK_RESOURCES,
 } from "@/lib/mock-data";
+import {
+    fetchPageSections,
+    fetchFooterData,
+    fetchInsights,
+    fetchTeam,
+    fetchVisionMission,
+    fetchResources,
+    processPageSections,
+    processInsights,
+} from "@/lib/api";
+import { DEFAULT_NAVBAR_LINKS } from "@/lib/constants";
 
 export const usePageData = () => {
-    const [courses, setCourses] = useState<any[]>(MOCK_COURSES);
-    const [testimonials, setTestimonials] = useState<any[]>(MOCK_TESTIMONIALS);
+    // State initialized with empty values - mock data only used as fallback
+    const [courses, setCourses] = useState<any[]>([]);
+    const [testimonials, setTestimonials] = useState<any[]>([]);
     const [testimonialsHeader, setTestimonialsHeader] = useState<any>(null);
-    const [solutions, setSolutions] = useState<any[]>(MOCK_SOLUTIONS);
-    const [serviceItems, setServiceItems] = useState<any[]>(MOCK_SERVICES);
+    const [solutions, setSolutions] = useState<any[]>([]);
+    const [serviceItems, setServiceItems] = useState<any[]>([]);
     const [servicesHeader, setServicesHeader] = useState<any>(null);
-    const [clients, setClients] = useState<any[]>(MOCK_CLIENTS);
+    const [clients, setClients] = useState<any[]>([]);
     const [clientsHeader, setClientsHeader] = useState<any>(null);
-    const [hero, setHero] = useState<any>(MOCK_HERO);
+    const [hero, setHero] = useState<any>(null);
     const [navbar, setNavbar] = useState<any>(null);
     const [footer, setFooter] = useState<any>(null);
     const [solutionsHeader, setSolutionsHeader] = useState<any>(null);
     const [wantsHeader, setWantsHeader] = useState<any>(null);
     const [difficultiesHeader, setDifficultiesHeader] = useState<any>(null);
-    const [wants, setWants] = useState<any[]>(MOCK_WANTS);
-    const [difficulties, setDifficulties] = useState<any[]>(MOCK_DIFFICULTIES);
-    const [team, setTeam] = useState<any[]>(MOCK_TEAM);
-    const [visionMission, setVisionMission] = useState<any>(MOCK_VISION_MISSION);
-    const [resources, setResources] = useState<any[]>(MOCK_RESOURCES);
+    const [wants, setWants] = useState<any[]>([]);
+    const [difficulties, setDifficulties] = useState<any[]>([]);
+    const [team, setTeam] = useState<any[]>([]);
+    const [visionMission, setVisionMission] = useState<any>(null);
+    const [resources, setResources] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchAllData = async () => {
             setLoading(true);
             try {
-                // Fetch page_sections
-                const { data: sectionsData } = await supabase.from("page_sections").select("*");
+                // Fetch all data in parallel for better performance
+                const [
+                    sectionsData,
+                    footerData,
+                    insightsData,
+                    teamData,
+                    visionMissionData,
+                    resourcesData
+                ] = await Promise.all([
+                    fetchPageSections(),
+                    fetchFooterData(),
+                    fetchInsights(),
+                    fetchTeam(),
+                    fetchVisionMission(),
+                    fetchResources()
+                ]);
+
+                // Process page sections
                 if (sectionsData) {
-                    sectionsData.forEach((section: any) => {
-                        if (section.section_key === "courses") {
-                            if (section.data?.length > 0) {
-                                setCourses(section.data);
-                            }
-                            // If no data from Supabase, MOCK_COURSES (3 courses) will be used
-                        }
-                        if (section.section_key === "testimonials" && section.data?.items?.length > 0) {
-                            setTestimonials(section.data.items);
-                            setTestimonialsHeader(section.data.header);
-                        }
-                        if (section.section_key === "services" && section.data?.items?.length > 0) {
-                            setServiceItems(section.data.items);
-                            setServicesHeader(section.data.header);
-                        }
-                        if (section.section_key === "clients" && section.data?.items?.length > 0) {
-                            setClients(section.data.items);
-                            setClientsHeader(section.data.header);
-                        }
-                        if (section.section_key === "hero" && section.data) setHero(section.data);
-                        if (section.section_key === "navbar" && section.data) {
-                            const navbarData = section.data;
-                            // Enforce the specific links requested: Khóa Học - Tài Nguyên - Về Chúng Tôi
-                            navbarData.links = [
-                                { label: "Khóa Học", href: "/shop" },
-                                { label: "Tài Nguyên", href: "/resources" },
-                                { label: "Về Chúng Tôi", href: "/about" }
-                            ];
-                            setNavbar(navbarData);
-                        }
-                        if (section.section_key === "solutions_header") setSolutionsHeader(section.data);
-                        if (section.section_key === "wants_header") setWantsHeader(section.data);
-                        if (section.section_key === "difficulties_header") setDifficultiesHeader(section.data);
-                        if (section.section_key === "solutions" && section.data?.length > 0) {
-                            setSolutions(section.data);
-                        }
-                    });
+                    const processed = processPageSections(sectionsData);
+
+                    setCourses(processed.courses || MOCK_COURSES);
+                    setTestimonials(processed.testimonials || MOCK_TESTIMONIALS);
+                    setTestimonialsHeader(processed.testimonialsHeader);
+                    setServiceItems(processed.serviceItems || MOCK_SERVICES);
+                    setServicesHeader(processed.servicesHeader);
+                    setClients(processed.clients || MOCK_CLIENTS);
+                    setClientsHeader(processed.clientsHeader);
+                    setHero(processed.hero || MOCK_HERO);
+                    setSolutionsHeader(processed.solutionsHeader);
+                    setWantsHeader(processed.wantsHeader);
+                    setDifficultiesHeader(processed.difficultiesHeader);
+                    setSolutions(processed.solutions || MOCK_SOLUTIONS);
+
+                    // Process navbar with enforced links
+                    if (processed.navbar) {
+                        const navbarData = processed.navbar;
+                        navbarData.links = DEFAULT_NAVBAR_LINKS;
+                        setNavbar(navbarData);
+                    }
+                } else {
+                    // Fallback to all mock data if sectionsData is null
+                    setCourses(MOCK_COURSES);
+                    setTestimonials(MOCK_TESTIMONIALS);
+                    setServiceItems(MOCK_SERVICES);
+                    setClients(MOCK_CLIENTS);
+                    setHero(MOCK_HERO);
+                    setSolutions(MOCK_SOLUTIONS);
                 }
 
-                // Fetch footer
-                const { data: footerData } = await supabase
-                    .from('homepage_footer')
-                    .select('*')
-                    .single();
-                if (footerData) setFooter(footerData);
+                // Process footer
+                if (footerData) {
+                    setFooter(footerData);
+                }
 
-                // Fetch homepage_insights
-                const { data: insightsData } = await supabase
-                    .from("homepage_insights")
-                    .select("*")
-                    .order("display_order", { ascending: true });
+                // Process insights
+                const { wants: wantsData, difficulties: difficultiesData } = processInsights(insightsData);
+                setWants(wantsData || MOCK_WANTS);
+                setDifficulties(difficultiesData || MOCK_DIFFICULTIES);
 
-                if (insightsData && insightsData.length > 0) {
-                    const wantsData = insightsData
-                        .filter((item: any) => item.section === "wants")
-                        .map((item: any) => ({
-                            icon: item.icon_name,
-                            text: item.text,
-                            bg: item.bg_color,
-                        }));
+                // Process team
+                if (teamData && teamData.length > 0) {
+                    setTeam(teamData);
+                } else {
+                    setTeam(MOCK_TEAM);
+                }
 
-                    const difficultiesData = insightsData
-                        .filter((item: any) => item.section === "difficulties")
-                        .map((item: any) => ({
-                            icon: item.icon_name,
-                            text: item.text,
-                            highlight: item.is_highlighted,
-                        }));
+                // Process vision & mission
+                if (visionMissionData) {
+                    setVisionMission(visionMissionData);
+                } else {
+                    setVisionMission(MOCK_VISION_MISSION);
+                }
 
-                    if (wantsData.length > 0) setWants(wantsData);
-                    if (difficultiesData.length > 0) setDifficulties(difficultiesData);
+                // Process resources
+                if (resourcesData && resourcesData.length > 0) {
+                    setResources(resourcesData);
+                } else {
+                    setResources(MOCK_RESOURCES);
                 }
             } catch (error) {
                 console.error("Error fetching page data:", error);

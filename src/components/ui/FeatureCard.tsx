@@ -33,7 +33,7 @@ const FeatureCard = ({
                     {icon}
                 </div>
             </div>
-            <p className="text-[15px] font-medium leading-relaxed">{text}</p>
+            <p className="text-[16px] font-medium leading-relaxed">{text}</p>
         </div>
     );
 };

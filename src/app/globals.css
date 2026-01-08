@@ -119,11 +119,11 @@ h1 {
 
 /* Client Description Styling */
 .client-description .highlight {
-  color: #3da9fc;
+  color: #59B4E9;
 }
 
 .client-description a {
-  color: #3da9fc;
+  color: #59B4E9;
   text-decoration: underline;
   transition: opacity 0.2s;
 }

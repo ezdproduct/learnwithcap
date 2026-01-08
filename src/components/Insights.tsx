@@ -48,7 +48,7 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
             <div className="container mx-auto px-4 md:px-8">
                 <div ref={wantsRef} className="reveal-piano">
                     <div className="mb-8 items-start text-left">
-                        <span className="bg-[#58b2f6] text-white text-[10px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
+                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
                             {wantsHeader?.badge || "BẠN MUỐN"}
                         </span>
                         <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">
@@ -69,7 +69,7 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
 
                 <div ref={diffRef} className="reveal-piano mt-10">
                     <div className="mb-8 items-start text-left">
-                        <span className="bg-[#58b2f6] text-white text-[10px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
+                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
                             {difficultiesHeader?.badge || "BẠN ĐANG"}
                         </span>
                         <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">

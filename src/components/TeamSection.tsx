@@ -44,7 +44,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ team }) => {
                                     <h3 className="text-xl font-bold text-[#002855]">
                                         {member.name}
                                     </h3>
-                                    <p className="text-[#3da9fc] font-medium text-sm">
+                                    <p className="text-[#59B4E9] font-medium text-sm">
                                         {member.englishName}
                                     </p>
                                 </div>

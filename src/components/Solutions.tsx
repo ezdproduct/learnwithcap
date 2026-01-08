@@ -34,7 +34,7 @@ const Solutions = ({ solutions, solutionsHeader }: SolutionsProps) => {
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
                     <div className="lg:col-span-2 flex flex-col gap-6 items-start text-left">
-                        <span className="bg-[#58b2f6] text-white text-[10px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
+                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
                             {solutionsHeader?.badge || "GIẢI PHÁP"}
                         </span>
                         <h2

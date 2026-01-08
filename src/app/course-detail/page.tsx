@@ -17,7 +17,7 @@ export default function CourseDetailPage() {
                 <div className="container mx-auto px-4 md:px-8">
                     <div className="flex flex-col lg:flex-row items-center py-12 lg:py-20 gap-12">
                         <div className="lg:w-1/2 space-y-8 hero-text">
-                            <span className="bg-[#3da9fc] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <span className="bg-[#59B4E9] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                 CHƯƠNG TRÌNH
                             </span>
                             <h1 className="text-[40px] font-bold leading-tight">
@@ -67,12 +67,12 @@ export default function CourseDetailPage() {
                                     alt="Office"
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-tr from-[#3da9fc]/20 to-transparent"></div>
+                                <div className="absolute inset-0 bg-gradient-to-tr from-[#59B4E9]/20 to-transparent"></div>
                             </div>
                         </div>
 
                         <div className="lg:w-1/2 space-y-10 features-container">
-                            <p className="text-[#0b2b4d]/70 italic leading-relaxed text-lg border-l-4 border-[#3da9fc] pl-6">
+                            <p className="text-[#0b2b4d]/70 italic leading-relaxed text-lg border-l-4 border-[#59B4E9] pl-6">
                                 "Opt for us and experience the highest standard of dedication and quality.
                                 Our specialized team is committed to excellence, ensuring your specific needs are met."
                             </p>
@@ -82,26 +82,26 @@ export default function CourseDetailPage() {
                                     {
                                         title: "SỬ DỤNG HÌNH ẢNH, ÂM THANH, GAME / QUIZ",
                                         desc: "CAP offers customized courses to improve your English skill",
-                                        icon: <PlayCircle className="text-[#3da9fc]" size={32} />
+                                        icon: <PlayCircle className="text-[#59B4E9]" size={32} />
                                     },
                                     {
                                         title: "ÔN TẬP VÀ KIỂM TRA MỖI MODULE (MINI - FINAL TEST)",
                                         desc: "CAP offers customized courses to improve your English skill",
-                                        icon: <CheckCircle2 className="text-[#3da9fc]" size={32} />
+                                        icon: <CheckCircle2 className="text-[#59B4E9]" size={32} />
                                     },
                                     {
                                         title: "CÁC TỪ VỰNG ĐƯỢC LẶP LẠI Ở CÁC BÀI HỌC",
                                         desc: "CAP offers customized courses to improve your English skill",
-                                        icon: <Layers className="text-[#3da9fc]" size={32} />
+                                        icon: <Layers className="text-[#59B4E9]" size={32} />
                                     },
                                     {
                                         title: "ROLE PLAY (ĐÓNG VAI TÌNH HUỐNG)",
                                         desc: "CAP offers customized courses to improve your English skill",
-                                        icon: <MessageSquare className="text-[#3da9fc]" size={32} />
+                                        icon: <MessageSquare className="text-[#59B4E9]" size={32} />
                                     },
                                 ].map((feature, i) => (
                                     <div key={i} className="flex gap-6 items-start group feature-item">
-                                        <div className="bg-[#f0f9ff] p-4 rounded-2xl group-hover:bg-[#3da9fc] group-hover:text-white transition-all duration-300">
+                                        <div className="bg-[#f0f9ff] p-4 rounded-2xl group-hover:bg-[#59B4E9] group-hover:text-white transition-all duration-300">
                                             {feature.icon}
                                         </div>
                                         <div>
@@ -125,7 +125,7 @@ export default function CourseDetailPage() {
                         {[1, 2, 3].map((num) => (
                             <div key={num} className="bg-white p-10 rounded-[32px] shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col items-center structure-card">
                                 <h3 className="text-2xl font-bold text-[#0b2b4d] mb-2">Module 0{num}</h3>
-                                <p className="text-[#3da9fc] font-medium text-sm mb-8 uppercase">Tiếng anh xây dựng chuyên sâu</p>
+                                <p className="text-[#59B4E9] font-medium text-sm mb-8 uppercase">Tiếng anh xây dựng chuyên sâu</p>
 
                                 <ul className="space-y-4 mb-10 text-left w-full text-gray-600">
                                     <li className="flex items-center gap-3">
@@ -193,11 +193,11 @@ export default function CourseDetailPage() {
 
                         <ul className="space-y-6">
                             <li className="flex items-center gap-4">
-                                <div className="w-2 h-2 rounded-full bg-[#3da9fc]"></div>
+                                <div className="w-2 h-2 rounded-full bg-[#59B4E9]"></div>
                                 <span className="text-lg font-medium">ĐÁNH GIÁ ĐẦU VÀO</span>
                             </li>
                             <li className="flex items-center gap-4">
-                                <div className="w-2 h-2 rounded-full bg-[#3da9fc]"></div>
+                                <div className="w-2 h-2 rounded-full bg-[#59B4E9]"></div>
                                 <span className="text-lg font-medium uppercase">Đánh giá trong quá trình học</span>
                             </li>
                         </ul>

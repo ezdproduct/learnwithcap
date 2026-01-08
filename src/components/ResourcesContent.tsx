@@ -56,7 +56,7 @@ const ResourcesContent: React.FC<ResourcesContentProps> = ({ resources }) => {
                                 </div>
                                 <div className="flex flex-col flex-1">
                                     <span className="text-xs text-gray-400 mb-2 font-medium">{item.readTime}</span>
-                                    <h3 className="text-xl font-bold text-[#0b2b4d] group-hover:text-[#3da9fc] transition-colors leading-snug line-clamp-2">
+                                    <h3 className="text-xl font-bold text-[#0b2b4d] group-hover:text-[#59B4E9] transition-colors leading-snug line-clamp-2">
                                         {item.title}
                                     </h3>
                                 </div>

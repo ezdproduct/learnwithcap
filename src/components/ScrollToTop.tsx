@@ -43,10 +43,10 @@ export default function ScrollToTop() {
             className={`fixed top-1/2 -translate-y-1/2 right-6 z-50 flex flex-col items-center space-y-2 focus:outline-none transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
             aria-label="Scroll to top"
         >
-            <ArrowUp className="h-5 w-5 text-[#3da9fc]" />
+            <ArrowUp className="h-5 w-5 text-[#59B4E9]" />
             <div className="relative h-16 w-0.5 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                    className="absolute bottom-0 w-full bg-[#3da9fc] transition-all duration-100 ease-out"
+                    className="absolute bottom-0 w-full bg-[#59B4E9] transition-all duration-100 ease-out"
                     style={{ height: `${scrollProgress}%` }}
                 ></div>
             </div>

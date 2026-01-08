@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { TABLES } from '@/lib/constants';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -13,7 +14,7 @@ export default function ShopPage() {
     useEffect(() => {
         const fetchContent = async () => {
             const { data: sectionsData } = await supabase
-                .from('page_sections')
+                .from(TABLES.PAGE_SECTIONS)
                 .select('*');
 
             if (sectionsData) {
@@ -53,7 +54,7 @@ export default function ShopPage() {
                                         <div className="text-white/20 text-6xl font-black">CAP</div>
                                     )}
                                     <div className="absolute top-4 left-4">
-                                        <span className="bg-[#3da9fc] text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                                        <span className="bg-[#59B4E9] text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">
                                             ONLINE / OFFLINE
                                         </span>
                                     </div>

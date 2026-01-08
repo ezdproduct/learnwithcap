@@ -32,7 +32,7 @@ const VisionMissionSection: React.FC<VisionMissionProps> = ({ data }) => {
                     <div className="flex flex-col">
                         <h2 className="text-3xl md:text-4xl font-bold mb-6 relative inline-block">
                             {data.vision.title}
-                            <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#3da9fc]"></span>
+                            <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#59B4E9]"></span>
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed text-gray-200">
                             {data.vision.content}
@@ -43,7 +43,7 @@ const VisionMissionSection: React.FC<VisionMissionProps> = ({ data }) => {
                     <div className="flex flex-col">
                         <h2 className="text-3xl md:text-4xl font-bold mb-6 relative inline-block">
                             {data.mission.title}
-                            <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#3da9fc]"></span>
+                            <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#59B4E9]"></span>
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed text-gray-200">
                             {data.mission.content}
