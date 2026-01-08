@@ -25,54 +25,76 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     description = "Hoạt động trong lĩnh vực"
 }) => {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const isScrollingRef = useRef(false);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [totalPaginationSteps, setTotalPaginationSteps] = useState(1);
-
-    // Handle steps calculation
-    useEffect(() => {
-        const calculateSteps = () => {
-            if (!scrollRef.current) return;
-            const clientWidth = scrollRef.current.clientWidth;
-            let visibleCount = 1;
-            if (clientWidth >= 1024) visibleCount = 3;
-            else if (clientWidth >= 768) visibleCount = 2;
-
-            // Total steps = Total items - initial visible items + 1
-            const steps = Math.max(1, items.length - visibleCount + 1);
-            setTotalPaginationSteps(steps);
-        };
-
-        calculateSteps();
-        window.addEventListener('resize', calculateSteps);
-        return () => window.removeEventListener('resize', calculateSteps);
-    }, [items.length]);
 
     const handleScroll = () => {
-        if (!scrollRef.current) return;
-        const { scrollLeft, scrollWidth } = scrollRef.current;
-        const cardWidth = scrollWidth / items.length;
+        if (!scrollRef.current || isScrollingRef.current) return;
+        const container = scrollRef.current;
+        const { scrollLeft } = container;
+
+        const cards = container.querySelectorAll('.snap-start');
+        if (cards.length === 0) return;
+
+        // Calculate card width from actual DOM positions for maximum accuracy
+        const firstCard = cards[0] as HTMLElement;
+        const secondCard = cards[1] as HTMLElement;
+        const cardWidth = secondCard
+            ? secondCard.offsetLeft - firstCard.offsetLeft
+            : firstCard.offsetWidth + 12;
+
+        // Calculate index based on how many card widths we have scrolled
+        // We use Math.round to switch to the next index when we've scrolled 50% of the way to it
         const index = Math.round(scrollLeft / cardWidth);
-        const cappedIndex = Math.min(index, totalPaginationSteps - 1);
+        const cappedIndex = Math.max(0, Math.min(index, items.length - 1));
+
         if (cappedIndex !== currentIndex) {
-            setCurrentIndex(Math.max(0, cappedIndex));
+            setCurrentIndex(cappedIndex);
         }
     };
 
+    // Add useEffect to handle initial state and resize
+    useEffect(() => {
+        const timer = setTimeout(() => handleScroll(), 100);
+        window.addEventListener('resize', handleScroll);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('resize', handleScroll);
+        };
+    }, [items.length]);
+
     const scroll = (direction: 'left' | 'right') => {
         if (!scrollRef.current) return;
-        const { scrollWidth } = scrollRef.current;
-        const cardWidth = scrollWidth / items.length;
+        const container = scrollRef.current;
+
+        const cards = container.querySelectorAll('.snap-start');
+        if (cards.length === 0) return;
+
+        const firstCard = cards[0] as HTMLElement;
+        const secondCard = cards[1] as HTMLElement;
+        const cardWidth = secondCard
+            ? secondCard.offsetLeft - firstCard.offsetLeft
+            : firstCard.offsetWidth + 12;
 
         let newIndex = direction === 'left' ? currentIndex - 1 : currentIndex + 1;
 
         // Loop behavior
-        if (newIndex < 0) newIndex = totalPaginationSteps - 1;
-        if (newIndex >= totalPaginationSteps) newIndex = 0;
+        if (newIndex < 0) newIndex = items.length - 1;
+        if (newIndex >= items.length) newIndex = 0;
 
-        scrollRef.current.scrollTo({
+        // Update state immediately for snapier UI
+        setCurrentIndex(newIndex);
+        isScrollingRef.current = true;
+
+        container.scrollTo({
             left: newIndex * cardWidth,
             behavior: 'smooth'
         });
+
+        // Reset the scroll flag after the transition is roughly finished
+        setTimeout(() => {
+            isScrollingRef.current = false;
+        }, 600);
     };
 
     return (
@@ -108,6 +130,8 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                                     className="snap-start"
                                 />
                             ))}
+                            {/* Universal Spacer: Ensures the last card can always reach the left edge for accurate counter */}
+                            <div className="flex-none w-[calc(100vw-120px)] md:w-[calc(100%-320px)] lg:w-[66.666%]" />
                         </div>
                     </div>
 
@@ -119,7 +143,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                                     className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                                     style={{ transform: `translateY(-${currentIndex * 32}px)` }}
                                 >
-                                    {Array.from({ length: totalPaginationSteps }).map((_, i) => (
+                                    {Array.from({ length: items.length }).map((_, i) => (
                                         <span key={i} className="h-8 flex items-center justify-center">
                                             {i + 1}
                                         </span>
@@ -130,11 +154,11 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                             <div className="w-10 h-[1.5px] bg-gray-100 relative overflow-hidden rounded-full">
                                 <div
                                     className="absolute left-0 top-0 h-full bg-[#5c5c96] transition-all duration-500 rounded-full"
-                                    style={{ width: `${((currentIndex + 1) / totalPaginationSteps) * 100}%` }}
+                                    style={{ width: `${((currentIndex + 1) / (items.length || 1)) * 100}%` }}
                                 />
                             </div>
 
-                            <span className="text-gray-300">{totalPaginationSteps}</span>
+                            <span className="text-gray-300">{items.length}</span>
                         </div>
 
                         {/* Navigation */}
