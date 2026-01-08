@@ -9,7 +9,7 @@ export default function PrivacyPage() {
             <Header />
 
             <div className="container mx-auto px-4 md:px-8 py-16 max-w-4xl">
-                <h1 className="text-3xl md:text-4xl font-bold text-[#0b2b4d] mb-8 pb-4 border-b border-gray-100">Chính Sách Bảo Mật</h1>
+                <h1 className="text-[40px] font-bold text-[#0b2b4d] mb-8 pb-4 border-b border-gray-100">Chính Sách Bảo Mật</h1>
 
                 <div className="prose prose-lg text-gray-600">
                     <p className="mb-4">

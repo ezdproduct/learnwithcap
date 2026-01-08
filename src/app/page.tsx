@@ -1,326 +1,44 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import Link from "next/link";
+import React, { useRef } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
-import {
-  ArrowRight,
-  ArrowLeft,
-  Mail,
-  Phone,
-  MessageSquare,
-  Plus,
-  Briefcase,
-  RefreshCcw,
-  Globe,
-  Frown,
-  Mic,
-  CheckCircle,
-  MicOff,
-  GraduationCap,
-  Hammer,
-  Ruler,
-  Clock,
-  Ear,
-  Rocket,
-  Menu,
-  Facebook,
-  Youtube,
-  Send,
-  CircleArrowDown,
-  Package,
-  CircleDot,
-} from "lucide-react";
 import ServiceCarousel from "@/components/ServiceCarousel";
-
-// Helper to map icon string names to components
-const getIcon = (name: string, props: any = {}) => {
-  const icons: any = {
-    ArrowRight,
-    ArrowLeft,
-    Mail,
-    Phone,
-    MessageSquare,
-    Plus,
-    Briefcase,
-    RefreshCcw,
-    Globe,
-    Frown,
-    Mic,
-    CheckCircle,
-    MicOff,
-    GraduationCap,
-    Hammer,
-    Ruler,
-    Clock,
-    Ear,
-    Rocket,
-    Menu,
-    Facebook,
-    Youtube,
-    Send,
-    CircleArrowDown,
-    Package,
-    CircleDot,
-  };
-  const IconComponent = icons[name];
-  return IconComponent ? <IconComponent {...props} /> : null;
-};
-
-const FeatureCard = ({
-  icon,
-  text,
-  bg,
-  textColor = "text-[#0b2b4d]",
-  iconColor = "text-[#0b2b4d]",
-  height = "h-full",
-}: any) => {
-  const isHex = bg?.startsWith("bg-[#");
-  const style = isHex ? { backgroundColor: bg.match(/\[(.*?)\]/)?.[1] } : {};
-  const bgClass = isHex ? "" : bg;
-
-  return (
-    <div
-      className={`${bgClass} ${textColor} p-6 rounded-xl ${height} min-h-[180px] flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:z-10`}
-      style={style}
-    >
-      <div
-        className={`w-12 h-12 rounded-full bg-white/10 flex items-center justify-center ${iconColor} mb-4`}
-      >
-        <div className="opacity-80 group-hover:opacity-100 transition-opacity">
-          {icon}
-        </div>
-      </div>
-      <p className="text-[15px] font-medium leading-relaxed">{text}</p>
-    </div>
-  );
-};
+import Hero from "@/components/Hero";
+import Insights from "@/components/Insights";
+import Solutions from "@/components/Solutions";
+import Courses from "@/components/Courses";
+import Clients from "@/components/Clients";
+import Testimonials from "@/components/Testimonials";
+import { usePageData } from "@/hooks/usePageData";
 
 const LearnWithCapClone = () => {
   const mainRef = useRef(null);
-  const clientCarouselRef = useRef<HTMLDivElement>(null);
-
-  const scrollPrev = () => {
-    if (clientCarouselRef.current) {
-      const container = clientCarouselRef.current;
-      const itemWidth = container.offsetWidth / 2;
-
-      if (container.scrollLeft <= 5) {
-        container.scrollTo({ left: container.scrollWidth, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: -itemWidth, behavior: "smooth" });
-      }
-    }
-  };
-
-  const scrollNext = () => {
-    if (clientCarouselRef.current) {
-      const container = clientCarouselRef.current;
-      const itemWidth = container.offsetWidth / 2;
-
-      // Check if we are at the end (with small tolerance)
-      if (
-        container.scrollLeft + container.clientWidth >=
-        container.scrollWidth - 5
-      ) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: itemWidth, behavior: "smooth" });
-      }
-    }
-  };
-
-  // --- Colors based on provided HTML ---
-  // primary: "#002855"
-  // secondary: "#3da9fc"
-  // accent: "#90b4ce"
-
-  // State for dynamic content
-  const [courses, setCourses] = useState<any[]>([]);
-  const [testimonials, setTestimonials] = useState<any[]>([]);
-  const [testimonialsHeader, setTestimonialsHeader] = useState<any>(null);
-  const [solutions, setSolutions] = useState<any[]>([]);
-  const [serviceItems, setServiceItems] = useState<any[]>([]);
-  const [servicesHeader, setServicesHeader] = useState<any>(null);
-  const [clients, setClients] = useState<any[]>([]);
-  const [clientsHeader, setClientsHeader] = useState<any>(null);
-  const [hero, setHero] = useState<any>(null);
-  const [navbar, setNavbar] = useState<any>(null);
-  const [solutionsHeader, setSolutionsHeader] = useState<any>(null);
-  const [wantsHeader, setWantsHeader] = useState<any>(null);
-  const [difficultiesHeader, setDifficultiesHeader] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchPageContent = async () => {
-      // Fetch sections from 'page_sections' (courses, testimonials, solutions, services)
-      const { data: sectionsData, error: sectionsError } = await supabase
-        .from("page_sections")
-        .select("*");
-
-      if (sectionsData) {
-        sectionsData.forEach((section: any) => {
-          if (section.section_key === "courses" && Array.isArray(section.data))
-            setCourses(section.data);
-          if (section.section_key === "testimonials" && section.data) {
-            setTestimonials(section.data.items || []);
-            setTestimonialsHeader(section.data.header);
-          }
-          if (section.section_key === "services" && section.data) {
-            setServiceItems(section.data.items || []);
-            setServicesHeader(section.data.header);
-          }
-          if (section.section_key === "clients" && section.data) {
-            setClients(section.data.items || []);
-            setClientsHeader(section.data.header);
-          }
-          if (section.section_key === "hero") setHero(section.data);
-          if (section.section_key === "navbar") setNavbar(section.data);
-          if (section.section_key === "solutions_header")
-            setSolutionsHeader(section.data);
-          if (section.section_key === "wants_header")
-            setWantsHeader(section.data);
-          if (section.section_key === "difficulties_header")
-            setDifficultiesHeader(section.data);
-          if (
-            section.section_key === "solutions" &&
-            Array.isArray(section.data)
-          ) {
-            // Map icons for solutions
-            const mappedSolutions = section.data.map((item: any) => ({
-              ...item,
-              iconComponent: getIcon(item.icon, { size: 20 }),
-            }));
-            setSolutions(mappedSolutions);
-          }
-        });
-      }
-    };
-
-    fetchPageContent();
-  }, []);
-
-  const [wants, setWants] = useState<any[]>([]);
-  const [difficulties, setDifficulties] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchInsights = async () => {
-      const { data, error } = await supabase
-        .from("homepage_insights")
-        .select("*")
-        .order("display_order", { ascending: true });
-
-      if (error) {
-        console.error("Error fetching insights:", error);
-      } else if (data) {
-        const wantsData = data
-          .filter((item: any) => item.section === "wants")
-          .map((item: any) => ({
-            icon: getIcon(item.icon_name, { size: 32, strokeWidth: 1.2 }),
-            text: item.text,
-            bg: item.bg_color,
-          }));
-
-        const difficultiesData = data
-          .filter((item: any) => item.section === "difficulties")
-          .map((item: any) => ({
-            icon: getIcon(item.icon_name, { size: 32 }),
-            text: item.text,
-            highlight: item.is_highlighted,
-          }));
-
-        setWants(wantsData);
-        setDifficulties(difficultiesData);
-      }
-    };
-
-    fetchInsights();
-  }, []);
+  const {
+    courses,
+    testimonials,
+    testimonialsHeader,
+    solutions,
+    serviceItems,
+    servicesHeader,
+    clients,
+    clientsHeader,
+    hero,
+    navbar,
+    footer,
+    solutionsHeader,
+    wantsHeader,
+    difficultiesHeader,
+    wants,
+    difficulties,
+  } = usePageData();
 
   return (
     <div ref={mainRef} className="text-[#0b2b4d] bg-white">
-      {/* 1. Header / Navbar - Extracted to Header component */}
-      <Header />
+      <Header navbar={navbar} />
 
-      {/* 2. Hero Section - Slideshow with Zoom Effect */}
-      <section className="pt-0 pb-10 container mx-auto px-4 md:px-8">
-        <div className="relative h-[600px] rounded-[32px] overflow-hidden group hero-container">
-          {/* Slideshow Images */}
-          {(() => {
-            const [currentSlide, setCurrentSlide] = React.useState(0);
-            const heroImages = hero?.images || [
-              "https://lh3.googleusercontent.com/aida-public/AB6AXuCMURFziLh10NsWXUt3sXvUYRGfh_KHSFU73tSwFcIvuQVNnjTHINIPoDWk9ofMQ8fp6baSiIKloW36RFirhd-RCQyk-qoblC3fASM1tJ24HbxhU8fqMQEIvchHUVNUV5FqHG2IjAhTjAaji5dp5cXJ1Nr00xriHPGr9v5YVwp20okgv_GsW2nmoB-b_V7FNia7I20iNtSJDqqspuRTKiMMhajHG6doETgiaQJuV6mdA5tVH5vQWCqLnltNMnnQTznBpP-RjIMMVXg",
-              "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80",
-              "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80",
-              "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
-            ];
+      <Hero hero={hero} />
 
-            React.useEffect(() => {
-              const interval = setInterval(() => {
-                setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-              }, 3000); // Change slide every 3 seconds
-
-              return () => clearInterval(interval);
-            }, [heroImages.length]);
-
-            return (
-              <>
-                {heroImages.map((image: string, index: number) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ${
-                      index === currentSlide ? 'opacity-100 z-[1]' : 'opacity-0 z-0'
-                    }`}
-                  >
-                    <img
-                      src={image}
-                      alt={`Hero slide ${index + 1}`}
-                      className="w-full h-full object-cover animate-zoom-in"
-                    />
-                    
-                    {/* Gradient Overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b2b4d]/90 via-[#0b2b4d]/40 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0b2b4d]/80 via-transparent to-transparent"></div>
-                  </div>
-                ))}
-
-                {/* Hide Slide Indicators per user request
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
-                  {heroImages.map((_: string, index: number) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentSlide(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        index === currentSlide 
-                          ? 'bg-white w-8' 
-                          : 'bg-white/40 hover:bg-white/60'
-                      }`}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))}
-                </div>
-                */}
-              </>
-            );
-          })()}
-
-          <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-16 max-w-4xl hero-content text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6 drop-shadow-lg tracking-tight">
-              {hero?.title || (
-                <>
-                  Tiếng Anh giao tiếp <br /> chuyên ngành xây dựng
-                </>
-              )}
-            </h1>
-            {/* <p className="text-white/90 text-lg md:text-xl font-medium max-w-2xl mb-8 leading-relaxed">
-              {hero?.subtitle}
-            </p> */}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Section: "Bạn là..." (Who are you) - Replaced with new Carousel */}
       <ServiceCarousel
         items={serviceItems}
         subtitle={servicesHeader?.subtitle}
@@ -329,318 +47,32 @@ const LearnWithCapClone = () => {
         description={servicesHeader?.description}
       />
 
-      <section className="bg-[#f4faff] py-16 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="reveal-piano">
-            <div className="mb-8 items-start text-left">
-              <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">
-                {wantsHeader?.badge || "BẠN MUỐN"}
-              </span>
-              <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">
-                {wantsHeader?.title || "Mong muốn của bạn"}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {Array.isArray(wants) &&
-                wants.map((item, idx) => (
-                  <div key={idx} className="piano-item">
-                    <FeatureCard {...item} />
-                  </div>
-                ))}
-            </div>
-          </div>
+      <Insights
+        wants={wants}
+        difficulties={difficulties}
+        wantsHeader={wantsHeader}
+        difficultiesHeader={difficultiesHeader}
+      />
 
-          <div className="reveal-piano mt-20">
-            <div className="mb-8 items-start text-left">
-              <span className="bg-[#58b2e3] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider">
-                {difficultiesHeader?.badge || "BẠN ĐANG"}
-              </span>
-              <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">
-                {difficultiesHeader?.title || "Gặp những khó khăn"}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {Array.isArray(difficulties) &&
-                difficulties.map((item, idx) => (
-                  <div key={idx} className="piano-item">
-                    <FeatureCard
-                      {...item}
-                      bg="bg-[#0b2b4d]"
-                      textColor="text-white"
-                      iconColor="text-white"
-                    />
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <Solutions
+        solutions={solutions}
+        solutionsHeader={solutionsHeader}
+      />
 
-      {/* 5. Section: Giải Pháp (Solution) */}
-      {/* 5. Section: Giải Pháp (Solution) */}
-      <section id="solutions" className="bg-[#002A4C] text-white pt-16 pb-8">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16 items-center">
-            {/* Left: Title Block */}
-            <div className="flex flex-col gap-6 items-start text-left">
-              <span className="inline-block bg-[#59B4E9]/10 text-[#59B4E9] border border-[#59B4E9]/20 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide uppercase">
-                {solutionsHeader?.badge || "GIẢI PHÁP"}
-              </span>
-              <h2
-                className="text-3xl md:text-5xl font-bold leading-tight"
-                dangerouslySetInnerHTML={{
-                  __html:
-                    solutionsHeader?.title ||
-                    'Giải pháp của CAP <br /> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#59B4E9] to-white">dành cho bạn</span>',
-                }}
-              />
-              <p className="text-lg text-gray-400 max-w-lg leading-relaxed">
-                {solutionsHeader?.description ||
-                  "Chúng tôi cung cấp lộ trình học tập được cá nhân hóa, giúp bạn làm chủ tiếng Anh và tự tin trong môi trường làm việc quốc tế."}
-              </p>
-            </div>
+      <Courses courses={courses} />
 
-            {/* Right: Image Block */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 w-full max-w-2xl">
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#671D9D]/20 to-transparent z-10 mix-blend-overlay pointer-events-none"></div>
-                <img
-                  src={
-                    solutionsHeader?.image ||
-                    "https://course.learnwithcap.com/wp-content/uploads/2025/10/danist-soh-8Gg2Ne_uTcM-unsplash-scaled-1.webp"
-                  }
-                  alt="Team collaboration"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
-          </div>
+      <Clients
+        clients={clients}
+        clientsHeader={clientsHeader}
+      />
 
-          {/* Bottom Section: Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 reveal-piano">
-            {Array.isArray(solutions) &&
-              solutions.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="piano-item p-6 rounded-2xl bg-[#0a3253] border border-white/10 hover:border-white/20 transition-colors duration-300 h-full flex flex-col items-start text-left group"
-                >
-                  <div className="flex-shrink-0 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors overflow-hidden text-[#59B4E9]">
-                      {item.iconComponent}
-                    </div>
-                  </div>
-                  <p className="text-base text-gray-200 flex-grow leading-relaxed font-light">
-                    {item.text}
-                  </p>
-                </div>
-              ))}
-          </div>
-        </div>
-      </section>
+      <Testimonials
+        testimonials={testimonials}
+        testimonialsHeader={testimonialsHeader}
+      />
 
-      {/* 6, 7, 8. Courses Loop */}
-      {Array.isArray(courses) &&
-        courses.map((course, idx) => (
-          <section
-            key={idx}
-            className={`${
-              idx === 1
-                ? "bg-[#001e3d]"
-                : idx === 2
-                ? "bg-[#0f2d4a]"
-                : "bg-[#0b2b4d]"
-            } py-20 text-white`}
-          >
-            <div className="container mx-auto px-4 md:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                <div className="section-header reveal-staggered">
-                  <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">
-                    KHÓA HỌC
-                  </span>
-                  <h2 className="text-4xl font-bold mb-2 whitespace-pre-line">
-                    {course.type}
-                  </h2>
-
-                  <div className="flex gap-12 mt-6 mb-8 border-b border-white/10 pb-6">
-                    <div>
-                      <span className="text-3xl font-bold block">
-                        {course.stats?.left}
-                      </span>
-                      <span className="text-xs text-white/60 uppercase">
-                        {course.stats?.leftLabel}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-3xl font-bold block">
-                        {course.stats?.right}
-                      </span>
-                      <span className="text-xs text-white/60 uppercase">
-                        {course.stats?.rightLabel}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 mb-8">
-                    <button className="px-6 py-2 bg-white text-[#0b2b4d] font-bold rounded text-sm hover:bg-gray-100 transition">
-                      {course.cta1_label || "Tư Vấn Ngay"}
-                    </button>
-                    <Link
-                      href="/course-detail"
-                      className="px-6 py-2 border border-white text-white font-bold rounded text-sm hover:bg-white/10 transition block"
-                    >
-                      {course.cta2_label || "Xem Chi Tiết"}
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="text-sm text-white/80 space-y-4">
-                  <p dangerouslySetInnerHTML={{ __html: course.desc1 }} />
-                  <p dangerouslySetInnerHTML={{ __html: course.desc2 }} />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-12 reveal-piano">
-                {Array.isArray(course.modules) &&
-                  course.modules.map((mod: any, mIdx: number) => (
-                    <div key={mIdx} className="group cursor-pointer piano-item">
-                      <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden relative mb-3">
-                        <img
-                          src={mod.img}
-                          alt={mod.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </div>
-                      <p className="text-xs font-bold uppercase text-white/60 text-center">
-                        {mod.title}
-                      </p>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          </section>
-        ))}
-
-      {/* 9. Section: Khách hàng (Clients) - Updated with Horizontal Scroll */}
-      {/* 9. Section: Khách hàng (Clients) - Updated with Horizontal Scroll */}
-      <section className="bg-[#001e3d] h-screen flex flex-col justify-center text-white overflow-hidden">
-        <div className="w-full h-full flex flex-col justify-center pl-4 md:pl-16">
-          <div className="flex flex-col md:flex-row gap-8 items-start h-full">
-            <div className="md:w-[25%] flex-shrink-0 section-header z-10 pt-10">
-              <span className="bg-[#3da9fc] text-white text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">
-                {clientsHeader?.badge || "CASE STUDIES"}
-              </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight split-heading">
-                {clientsHeader?.title || "Khách hàng của CAP"}
-              </h2>
-              <div className="mt-8 flex gap-4">
-                <button
-                  onClick={scrollPrev}
-                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all"
-                >
-                  <ArrowLeft size={20} />
-                </button>
-                <button
-                  onClick={scrollNext}
-                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-[#0b2b4d] transition-all"
-                >
-                  <ArrowRight size={20} />
-                </button>
-              </div>
-            </div>
-
-            {/* CHANGED: removed flex-col for mobile to ensure scroll behavior on all screens */}
-            <div
-              ref={clientCarouselRef}
-              className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide flex-nowrap snap-x snap-mandatory reveal-scale-staggered items-center h-full"
-            >
-              {Array.isArray(clients) &&
-                clients.map((client, idx) => (
-                  <div
-                    key={idx}
-                    className="min-w-[300px] md:w-[50%] h-full bg-cover bg-center overflow-hidden relative flex-shrink-0 snap-start"
-                    style={{ backgroundImage: `url('${client.img}')` }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b2b4d]/90 via-[#0b2b4d]/20 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 p-6 text-white">
-                      <div className="w-12 h-12 bg-white rounded mb-4 flex items-center justify-center text-black font-bold text-xs">
-                        {client.logo}
-                      </div>
-                      <h3 className="font-bold text-xl mb-2">{client.name}</h3>
-                      <p className="font-bold text-lg mb-4 text-[#3da9fc]">
-                        {client.sub}
-                      </p>
-                      <p className="text-xs line-clamp-4 opacity-80">
-                        {client.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. Section: Testimonials - Updated to scroll on mobile */}
-      <section className="bg-white py-20 border-b border-gray-100">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-12 section-header">
-            <h2 className="text-3xl font-bold text-[#0b2b4d] mb-2">
-              {testimonialsHeader?.title || "Lắng nghe học viên nói về CAP"}
-            </h2>
-            <div className="flex justify-center gap-16 mt-6">
-              {(
-                testimonialsHeader?.stats || [
-                  { value: "4+", label: "Năm Kinh Nghiệm" },
-                  { value: "18k+", label: "Học Viên Đã Học" },
-                ]
-              ).map((stat: any, sIdx: number) => (
-                <div key={sIdx}>
-                  <span className="text-4xl font-bold text-[#3da9fc]">
-                    {stat.value}
-                  </span>
-                  <p className="text-xs uppercase font-bold text-gray-500 mt-1">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CHANGED: Horizontal scroll on mobile, Grid on desktop */}
-          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible scrollbar-hide pb-4 snap-x reveal-staggered">
-            {Array.isArray(testimonials) &&
-              testimonials.map((item, i) => (
-                <div
-                  key={i}
-                  className={`min-w-[300px] md:min-w-0 flex-shrink-0 md:flex-shrink bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm snap-center ${
-                    i === 2 ? "md:row-span-2" : ""
-                  }`}
-                >
-                  <p className="text-xs text-gray-600 mb-4 leading-relaxed">
-                    "{item.text}"
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-8 h-8 rounded-full bg-gray-300 bg-cover"
-                      style={{ backgroundImage: `url('${item.img}')` }}
-                    ></div>
-                    <div>
-                      <p className="text-xs font-bold text-[#0b2b4d]">
-                        {item.handle}
-                      </p>
-                      <p className="text-[10px] text-gray-400">{item.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 11. Footer */}
-      {/* 11. Footer - Ported from cap FE */}
       <ScrollToTop />
-      <Footer />
+      <Footer footerData={footer} />
     </div>
   );
 };

@@ -20,7 +20,7 @@ export default function CourseDetailPage() {
                             <span className="bg-[#3da9fc] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                 CHƯƠNG TRÌNH
                             </span>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                            <h1 className="text-[40px] font-bold leading-tight">
                                 Trực tiếp tại <br /> Doanh Nghiệp
                             </h1>
                             <p className="text-white/80 text-lg leading-relaxed max-w-xl">

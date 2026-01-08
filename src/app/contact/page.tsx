@@ -32,7 +32,7 @@ export default function ContactPage() {
                     <div className="container mx-auto px-4 md:px-8">
                         <div className="text-center max-w-2xl mx-auto mb-16 hero-content">
                             <span className="text-[#3da9fc] font-bold tracking-wider text-xs uppercase bg-[#3da9fc]/10 px-3 py-1 rounded-full">Liên Hệ</span>
-                            <h1 className="text-3xl md:text-5xl font-bold text-[#0b2b4d] mt-4 mb-4">Chúng tôi luôn sẵn sàng hỗ trợ bạn</h1>
+                            <h1 className="text-[40px] font-bold text-[#0b2b4d] mt-4 mb-4">Chúng tôi luôn sẵn sàng hỗ trợ bạn</h1>
                             <p className="text-gray-500">
                                 Để lại thông tin hoặc liên hệ trực tiếp với chúng tôi qua các kênh dưới đây. Đội ngũ tư vấn sẽ phản hồi trong thời gian sớm nhất.
                             </p>

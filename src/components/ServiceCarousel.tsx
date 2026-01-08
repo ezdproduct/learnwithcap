@@ -19,7 +19,7 @@ interface ServiceCarouselProps {
 
 const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     items,
-    subtitle = "BẠN LÀ",
+    subtitle = "BẠN LÀ NHIỀU HƠN",
     titlePrefix = "Cá nhân",
     titleSuffix = "Doanh nghiệp",
     description = "Hoạt động trong lĩnh vực"
@@ -76,19 +76,19 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     };
 
     return (
-        <section className="bg-white py-12 overflow-hidden flex flex-col justify-center min-h-[700px]">
+        <section className="bg-white py-12 overflow-hidden">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
-                <div className="section-header mb-6">
-                    <div className="mb-2">
-                        <span className="bg-[#58b2f6] text-white text-[10px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-wider">
+                <div className="section-header mb-5">
+                    <div className="mb-5">
+                        <span className="bg-[#58b2f6] text-white text-[10px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
                             {subtitle}
                         </span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-[#0b2b4d] mb-2">
-                        {titlePrefix} <span className="text-gray-200 font-light mx-2">|</span> {titleSuffix}
+                    <h2 className="text-[40px] font-bold text-[#0b2b4d] mb-1 leading-snug">
+                        {titlePrefix} <span className="text-[#0b2b4d] font-light mx-1.5">|</span> {titleSuffix}
                     </h2>
-                    <p className="text-gray-400 text-lg font-medium">{description}</p>
+                    <h2 className="text-[28px] font-normal text-[#0b2b4d] leading-snug mb-8">{description}</h2>
                 </div>
 
                 {/* Carousel Container */}

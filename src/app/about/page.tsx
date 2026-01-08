@@ -43,7 +43,7 @@ export default function AboutPage() {
                 </div>
                 <div className="container mx-auto px-4 md:px-8 relative z-10 hero-content">
                     <span className="text-[#3da9fc] font-bold tracking-wider text-sm uppercase mb-2 block">Về Chúng Tôi</span>
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6">CAP English Training</h1>
+                    <h1 className="text-[40px] font-bold mb-6">CAP English Training</h1>
                     <p className="text-white/80 text-lg max-w-3xl leading-relaxed">
                         Đơn vị tiên phong trong đào tạo tiếng Anh chuyên ngành Xây dựng - Kiến trúc.
                     </p>

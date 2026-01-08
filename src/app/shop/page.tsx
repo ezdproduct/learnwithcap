@@ -34,7 +34,7 @@ export default function ShopPage() {
             <Header />
 
             <div className="bg-[#0b2b4d] py-16 text-white text-center">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">Các Khóa Học Của Chúng Tôi</h1>
+                <h1 className="text-[40px] font-bold mb-4">Các Khóa Học Của Chúng Tôi</h1>
                 {/* <p className="text-white/80 max-w-2xl mx-auto px-4">
                     Nâng cao năng lực chuyên môn và kỹ năng giao tiếp với các khóa học được thiết kế chuyên biệt cho ngành xây dựng.
                 </p> */}

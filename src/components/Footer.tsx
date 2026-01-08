@@ -2,26 +2,12 @@
 
 import Link from "next/link";
 import { Facebook, Youtube, Send, Mail, Phone, Instagram } from "lucide-react";
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 
-const Footer = () => {
-    const [footerData, setFooterData] = useState<any>(null);
+interface FooterProps {
+    footerData?: any;
+}
 
-    useEffect(() => {
-        const fetchFooterData = async () => {
-            const { data, error } = await supabase
-                .from('homepage_footer')
-                .select('*')
-                .single();
-
-            if (data) {
-                setFooterData(data);
-            }
-        };
-        fetchFooterData();
-    }, []);
-
+const Footer: React.FC<FooterProps> = ({ footerData }) => {
     const settings = footerData;
     const columns = footerData?.links || [];
 
@@ -43,17 +29,17 @@ const Footer = () => {
                         </p>
                         <div className="flex gap-4 mt-2">
                             {settings?.facebook_url && (
-                                <a href={settings.facebook_url} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#671D9D] hover:text-white transition-all">
+                                <a href={settings.facebook_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#3da9fc] hover:text-white transition-all">
                                     <Facebook className="w-5 h-5" />
                                 </a>
                             )}
                             {settings?.youtube_url && (
-                                <a href={settings.youtube_url} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#671D9D] hover:text-white transition-all">
+                                <a href={settings.youtube_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#3da9fc] hover:text-white transition-all">
                                     <Youtube className="w-5 h-5" />
                                 </a>
                             )}
                             {settings?.instagram_url && (
-                                <a href={settings.instagram_url} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#671D9D] hover:text-white transition-all">
+                                <a href={settings.instagram_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#3da9fc] hover:text-white transition-all">
                                     <Instagram className="w-5 h-5" />
                                 </a>
                             )}
