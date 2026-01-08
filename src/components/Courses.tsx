@@ -30,7 +30,7 @@ const Courses = ({ courses }: CoursesProps) => {
             {courses.map((course, idx) => (
                 <section
                     key={idx}
-                    className={`${idx === 1 ? "bg-[#001e3d]" : idx === 2 ? "bg-[#0f2d4a]" : "bg-[#0b2b4d]"
+                    className={`${idx === 0 ? "bg-[#0b2b4d]" : idx % 2 !== 0 ? "bg-[#001e3d]" : "bg-[#0f2d4a]"
                         } py-20 text-white`}
                 >
                     <div className="container mx-auto px-4 md:px-8">

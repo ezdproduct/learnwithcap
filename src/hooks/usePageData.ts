@@ -10,6 +10,9 @@ import {
     MOCK_COURSES,
     MOCK_CLIENTS,
     MOCK_TESTIMONIALS,
+    MOCK_TEAM,
+    MOCK_VISION_MISSION,
+    MOCK_RESOURCES,
 } from "@/lib/mock-data";
 
 export const usePageData = () => {
@@ -29,6 +32,9 @@ export const usePageData = () => {
     const [difficultiesHeader, setDifficultiesHeader] = useState<any>(null);
     const [wants, setWants] = useState<any[]>(MOCK_WANTS);
     const [difficulties, setDifficulties] = useState<any[]>(MOCK_DIFFICULTIES);
+    const [team, setTeam] = useState<any[]>(MOCK_TEAM);
+    const [visionMission, setVisionMission] = useState<any>(MOCK_VISION_MISSION);
+    const [resources, setResources] = useState<any[]>(MOCK_RESOURCES);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -58,7 +64,16 @@ export const usePageData = () => {
                             setClientsHeader(section.data.header);
                         }
                         if (section.section_key === "hero" && section.data) setHero(section.data);
-                        if (section.section_key === "navbar" && section.data) setNavbar(section.data);
+                        if (section.section_key === "navbar" && section.data) {
+                            const navbarData = section.data;
+                            // Enforce the specific links requested: Khóa Học - Tài Nguyên - Về Chúng Tôi
+                            navbarData.links = [
+                                { label: "Khóa Học", href: "/shop" },
+                                { label: "Tài Nguyên", href: "/resources" },
+                                { label: "Về Chúng Tôi", href: "/about" }
+                            ];
+                            setNavbar(navbarData);
+                        }
                         if (section.section_key === "solutions_header") setSolutionsHeader(section.data);
                         if (section.section_key === "wants_header") setWantsHeader(section.data);
                         if (section.section_key === "difficulties_header") setDifficultiesHeader(section.data);
@@ -128,6 +143,9 @@ export const usePageData = () => {
         difficultiesHeader,
         wants,
         difficulties,
+        team,
+        visionMission,
+        resources,
         loading
     };
 };

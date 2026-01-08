@@ -94,6 +94,38 @@ export const MOCK_COURSES = [
             { title: "Survey", img: "https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=400&q=80" },
             { title: "Renovation", img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" },
         ]
+    },
+    {
+        type: "Online Group",
+        stats: { left: "3", leftLabel: "Modules", right: "36", rightLabel: "Bài học" },
+        desc1: "Khóa học tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất được <span class='text-[#3da9fc] font-bold'>thiết kế cho nhóm nhỏ</span>, giúp tối ưu chi phí nhưng vẫn đảm bảo hiệu quả tương tác cao.",
+        desc2: "Học viên sẽ được tham gia vào cộng đồng học tập năng động, cùng thảo luận và giải quyết các tình huống thực tế trong công việc, dưới sự hướng dẫn sát sao của giảng viên.",
+        modules: [
+            { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
+            { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
+            { title: "Module 03", img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80" },
+            { title: "Material", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" },
+            { title: "Contract", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80" },
+            { title: "Design", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" },
+            { title: "Survey", img: "https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=400&q=80" },
+            { title: "Renovation", img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" },
+        ]
+    },
+    {
+        type: "Self-Paced Learning",
+        stats: { left: "5", leftLabel: "Modules", right: "50", rightLabel: "Video" },
+        desc1: "Khóa học video quay sẵn dành cho người bận rộn, cho phép <span class='text-[#3da9fc] font-bold'>học mọi lúc mọi nơi</span> theo tốc độ riêng của bản thân.",
+        desc2: "Hệ thống bài giảng được biên soạn công phu, kết hợp bài tập trắc nghiệm và hỗ trợ giải đáp thắc mắc online, giúp học viên tự tin làm chủ kiến thức.",
+        modules: [
+            { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
+            { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
+            { title: "Module 03", img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80" },
+            { title: "Material", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" },
+            { title: "Contract", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80" },
+            { title: "Design", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" },
+            { title: "Survey", img: "https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=400&q=80" },
+            { title: "Renovation", img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" },
+        ]
     }
 ];
 
@@ -110,4 +142,83 @@ export const MOCK_TESTIMONIALS = [
     { text: "Lộ trình học linh hoạt, phù hợp với người đi làm bận rộn như tôi. Kết quả đạt được ngoài mong đợi.", handle: "Anh Hùng", role: "Architect", img: "https://i.pravatar.cc/150?u=3" },
     { text: "Môi trường học tập cởi mở, khuyến khích học viên nói và phát triển kỹ năng phản xạ.", handle: "Anh Dũng", role: "Structural Engineer", img: "https://i.pravatar.cc/150?u=4" },
     { text: "Các bài tập tình huống sát với thực tế giúp tôi tự tin hơn khi trao đổi email với đối tác nước ngoài.", handle: "Chị Mai", role: "QS Engineer", "img": "https://i.pravatar.cc/150?u=5" },
+];
+
+export const MOCK_TEAM = [
+    {
+        name: "Trần Uy",
+        englishName: "Ron",
+        img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80",
+        points: [
+            "More than 10 years experience in Real Estate development",
+            "English training Cambridge University certificate for English Language Teaching",
+            "7 years of Construction and Communicative English training and tutoring"
+        ]
+    },
+    {
+        name: "Khánh Vươn",
+        englishName: "Mia",
+        img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80", // Using a meeting/office like image
+        points: [
+            "More than 10 years experience in Construction Industry with first-hand experience in English speaking setting",
+            "BA in English language",
+            "TESOL certificate"
+        ]
+    },
+    {
+        name: "Ngân Hà",
+        englishName: "Amy",
+        img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80",
+        points: [
+            "More than 8 years experience in Real Estate and Construction field",
+            "Launching English for Construction course since 2018",
+            "BA in English Translation & Interpretation"
+        ]
+    }
+];
+
+export const MOCK_VISION_MISSION = {
+    vision: {
+        title: "Tầm Nhìn",
+        content: "Với mục tiêu cung cấp giải pháp học tiếng Anh hiệu quả, từ xây dựng nền tảng đến phát triển sự tự tin trong giao tiếp công việc và cuộc sống, CAP sẽ luôn đồng hành cùng bạn trên hành trình chinh phục tiếng Anh trong lĩnh vực xây dựng, kiến trúc và nội thất."
+    },
+    mission: {
+        title: "Sứ Mệnh",
+        content: "Với mục tiêu cung cấp giải pháp học tiếng Anh hiệu quả, từ xây dựng nền tảng đến phát triển sự tự tin trong giao tiếp công việc và cuộc sống, CAP sẽ luôn đồng hành cùng bạn trên hành trình chinh phục tiếng Anh trong lĩnh vực xây dựng, kiến trúc và nội thất."
+    }
+};
+
+export const MOCK_RESOURCES = [
+    {
+        id: 1,
+        type: "article",
+        title: "Thu Hút Khách Hàng Với Mẫu Thiết Kế Nội Thất Siêu Thị Đẹp",
+        image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80",
+        readTime: "6 min read",
+        link: "#"
+    },
+    {
+        id: 2,
+        type: "article",
+        title: "Những Lưu Ý Khi Thiết Kế Nội Thất Siêu Thị",
+        image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80",
+        readTime: "7 min read",
+        link: "#"
+    },
+    {
+        id: 3,
+        type: "article",
+        title: "Thiết Kế Quầy Bar Đẹp Và Hiện Đại",
+        image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80",
+        readTime: "7 min read",
+        link: "#"
+    },
+    {
+        id: 4,
+        type: "article",
+        title: "Chọn Mua Lò Nướng Thịt Cho Nhà Hàng",
+        image: "https://images.unsplash.com/photo-1544025162-d76690b67f11?w=800&q=80",
+        readTime: "4 min read",
+        link: "#"
+    }
 ];
