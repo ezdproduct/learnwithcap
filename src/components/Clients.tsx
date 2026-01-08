@@ -39,7 +39,7 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
     };
 
     return (
-        <section className="bg-[#001e3d] h-screen flex items-center text-white overflow-hidden">
+        <section className="bg-[#002a4c] h-screen flex items-center text-white overflow-hidden">
             <div className="w-full h-full flex flex-col md:flex-row">
                 {/* Left Section - Text Content */}
                 <div className="md:w-[40%] lg:w-[35%] flex flex-col justify-center px-8 md:px-12 lg:px-16 py-12 md:py-0">
@@ -47,7 +47,7 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
                         {clientsHeader?.badge || "CASE STUDIES"}
                     </span>
                     <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-12">
-                        {clientsHeader?.title || "Khách hàng của CAP"}
+                        {clientsHeader?.title || "Khách hàng tiêu biểu của CAP"}
                     </h2>
                     <div className="flex gap-4">
                         <button
@@ -79,19 +79,19 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
                             style={{ backgroundImage: `url('${client.img}')` }}
                         >
                             {/* Dark overlay gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#001e3d]/95 via-[#001e3d]/40 to-transparent"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#002a4c]/95 via-[#002a4c]/40 to-transparent"></div>
 
                             {/* Logo badge at top-left */}
                             <div className="absolute top-8 left-8 md:top-12 md:left-12">
                                 <div className="bg-white px-4 py-2 rounded shadow-lg">
-                                    <span className="text-[#001e3d] font-bold text-sm uppercase tracking-wide">
+                                    <span className="text-[#002a4c] font-bold text-sm uppercase tracking-wide">
                                         {client.logo}
                                     </span>
                                 </div>
                             </div>
 
-                            {/* Content at bottom */}
-                            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+                            {/* Content positioned at 40% height */}
+                            <div className="absolute top-[40%] left-0 right-0 p-8 md:p-12 lg:p-16">
                                 <h3 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-3 text-white">
                                     {client.name}
                                 </h3>
@@ -99,7 +99,7 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
                                     {client.sub}
                                 </p>
                                 <div
-                                    className="text-sm md:text-base leading-relaxed max-w-3xl text-white/90 client-description"
+                                    className="text-sm md:text-base leading-relaxed max-w-xl text-white/90 client-description"
                                     dangerouslySetInnerHTML={{ __html: client.desc }}
                                 />
                             </div>

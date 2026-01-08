@@ -98,7 +98,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     };
 
     return (
-        <section className="bg-white pt-12 pb-0 overflow-hidden">
+        <section className="bg-white pt-20 pb-0 overflow-hidden">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
                 <div className="section-header mb-5">

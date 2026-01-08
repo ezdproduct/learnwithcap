@@ -130,10 +130,10 @@ export const MOCK_COURSES = [
 ];
 
 export const MOCK_CLIENTS = [
-    { name: "Coteccons", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80", sub: "Tập đoàn xây dựng hàng đầu", desc: "Đã đào tạo hơn 500 kỹ sư tại các dự án trọng điểm trên toàn quốc.", logo: "CTD" },
-    { name: "Hoa Binh Corp", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80", sub: "Nhà thầu uy tín", desc: "Nâng cao năng lực giao tiếp quốc tế cho đội ngũ quản lý từ năm 2020.", logo: "HBC" },
-    { name: "Central Cons", img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80", sub: "Xây dựng chất lượng", desc: "Đối tác chiến lược trong đào tạo ngoại ngữ chuyên ngành.", logo: "Central" },
-    { name: "Delta Corp", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80", sub: "Phát triển bền vững", desc: "Chương trình đào tạo được thiết kế riêng cho từng bộ phận.", logo: "Delta" },
+    { name: "Coteccons", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80", sub: "Tập đoàn xây dựng hàng đầu", desc: "Đã đào tạo hơn 500 kỹ sư tại các dự án trọng điểm trên toàn quốc. Chương trình được thiết kế đặc thù để tối ưu khả năng giao tiếp kỹ thuật và quản lý công trường, giúp đội ngũ tự tin làm việc với các đối tác chiến lược quốc tế một cách chuyên nghiệp nhất.", logo: "CTD" },
+    { name: "Hoa Binh Corp", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80", sub: "Nhà thầu uy tín", desc: "Nâng cao năng lực giao tiếp quốc tế cho đội ngũ quản lý từ năm 2020. Mục tiêu trọng tâm là trang bị vốn từ vựng chuyên sâu và kỹ năng thuyết trình dự án bằng tiếng Anh, đáp ứng các tiêu chuẩn khắt khe của thị trường xây dựng toàn cầu hiện nay.", logo: "HBC" },
+    { name: "Central Cons", img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80", sub: "Xây dựng chất lượng", desc: "Đối tác chiến lược trong đào tạo ngoại ngữ chuyên ngành. Chúng tôi cam kết mang lại lộ trình học tập bài bản, tập trung vào các tình huống thực tế tại văn phòng và công trường, giúp học viên làm chủ ngôn ngữ trong thời gian ngắn nhất.", logo: "Central" },
+    { name: "Delta Corp", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80", sub: "Phát triển bền vững", desc: "Chương trình đào tạo được thiết kế riêng cho từng bộ phận. Từ kỹ sư hiện trường đến quản lý dự án đều được trang bị những kỹ năng cần thiết để vận hành dự án hiệu quả trong môi trường đa quốc gia, đảm bảo sự tiến bộ rõ rệt sau mỗi khóa học.", logo: "Delta" },
 ];
 
 export const MOCK_TESTIMONIALS = [
