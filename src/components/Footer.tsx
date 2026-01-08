@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
     const columns = footerData?.links || [];
 
     return (
-        <footer className="bg-[#002A4C] text-white pt-16 pb-8 border-t border-[#002A4C]">
+        <footer className="bg-[#002a4c] text-white pt-16 pb-8 border-t border-[#002a4c]">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {/* Brand Column */}
@@ -114,7 +114,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                     </div>
                 </div>
 
-                <div className="footer-bottom border-t border-white/10 pt-8 text-center bg-[#002A4C]">
+                <div className="footer-bottom border-t border-white/10 pt-8 text-center bg-[#002a4c]">
                     <p className="text-gray-400 font-light text-sm">
                         © {new Date().getFullYear()} {settings?.copyright_text || "CAP English Training. All rights reserved."}
                     </p>
