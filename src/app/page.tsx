@@ -1,17 +1,19 @@
 "use client";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import ScrollToTop from "@/components/ScrollToTop";
-import ServiceCarousel from "@/components/ServiceCarousel";
 import Hero from "@/components/Hero";
 import Insights from "@/components/Insights";
 import Solutions from "@/components/Solutions";
 import Courses from "@/components/Courses";
-import Clients from "@/components/Clients";
-import Testimonials from "@/components/Testimonials";
-import CTASection from "@/components/CTASection";
 import { usePageData } from "@/hooks/usePageData";
+import {
+  LazyServiceCarousel,
+  LazyClients,
+  LazyTestimonials,
+  LazyCTASection,
+  LazyScrollToTop,
+} from "@/lib/lazy-components";
 
 const LearnWithCapClone = () => {
   const mainRef = useRef(null);
@@ -40,7 +42,7 @@ const LearnWithCapClone = () => {
 
       <Hero hero={hero} />
 
-      <ServiceCarousel
+      <LazyServiceCarousel
         items={serviceItems}
         subtitle={servicesHeader?.subtitle}
         titlePrefix={servicesHeader?.titlePrefix}
@@ -62,19 +64,19 @@ const LearnWithCapClone = () => {
 
       <Courses courses={courses} />
 
-      <Clients
+      <LazyClients
         clients={clients}
         clientsHeader={clientsHeader}
       />
 
-      <Testimonials
+      <LazyTestimonials
         testimonials={testimonials}
         testimonialsHeader={testimonialsHeader}
       />
 
-      <CTASection />
+      <LazyCTASection />
 
-      <ScrollToTop />
+      <LazyScrollToTop />
       <Footer footerData={footer} />
     </div>
   );

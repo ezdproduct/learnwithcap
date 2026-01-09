@@ -8,6 +8,8 @@ const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-be-vietnam-pro",
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 export const metadata: Metadata = {
@@ -15,7 +17,13 @@ export const metadata: Metadata = {
   description: "Khóa học Tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất. Nâng cao kỹ năng giao tiếp, từ vựng và tư duy ngoại ngữ.",
   icons: {
     icon: 'https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png',
-  }
+  },
+  metadataBase: new URL('https://learnwithcap.com'),
+  openGraph: {
+    title: "Tiếng Anh Giao Tiếp Chuyên Ngành Xây Dựng - CAP",
+    description: "Khóa học Tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -25,6 +33,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className={`${beVietnamPro.className} antialiased bg-white`}>
         {children}
         <Toaster position="top-center" />

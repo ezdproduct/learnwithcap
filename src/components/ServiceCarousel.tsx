@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ServiceCard from './ServiceCard';
 
@@ -28,7 +28,8 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     const isScrollingRef = useRef(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const handleScroll = () => {
+    // Debounced scroll handler for better performance
+    const handleScroll = useCallback(() => {
         if (!scrollRef.current || isScrollingRef.current) return;
         const container = scrollRef.current;
         const { scrollLeft } = container;
@@ -51,7 +52,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
         if (cappedIndex !== currentIndex) {
             setCurrentIndex(cappedIndex);
         }
-    };
+    }, [currentIndex, items.length]);
 
     // Add useEffect to handle initial state and resize
     useEffect(() => {
@@ -61,9 +62,9 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
             clearTimeout(timer);
             window.removeEventListener('resize', handleScroll);
         };
-    }, [items.length]);
+    }, [handleScroll]);
 
-    const scroll = (direction: 'left' | 'right') => {
+    const scroll = useCallback((direction: 'left' | 'right') => {
         if (!scrollRef.current) return;
         const container = scrollRef.current;
 
@@ -95,10 +96,10 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
         setTimeout(() => {
             isScrollingRef.current = false;
         }, 600);
-    };
+    }, [currentIndex, items.length]);
 
     return (
-        <section className="bg-white pt-20 pb-0 overflow-hidden">
+        <section className="bg-white pt-6 pb-0 overflow-hidden">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
                 <div className="section-header mb-5">

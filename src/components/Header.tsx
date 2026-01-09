@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
+import NextImage from 'next/image';
 import { Menu } from 'lucide-react';
 
 interface HeaderProps {
@@ -9,14 +10,17 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ navbar }) => {
     return (
-        <header className="w-full bg-white transition-all duration-300 py-[15px] px-[0px] md:px-[75px]">
+        <header className="absolute top-0 left-0 right-0 z-50 w-full bg-white/70 backdrop-blur-md transition-all duration-300 py-[10px] px-[0px] md:px-[75px]">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
                 <div className="flex items-center space-x-2 cursor-pointer">
                     <Link href="/">
-                        <img
+                        <NextImage
                             src={navbar?.logo_url || "https://learnwithcap.com/wp-content/uploads/2025/06/cap-logo-1.png"}
                             alt="CAP Logo"
+                            width={160}
+                            height={40}
                             className="h-10 w-auto object-contain"
+                            priority
                         />
                     </Link>
                 </div>
