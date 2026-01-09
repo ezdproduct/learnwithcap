@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ navbar }) => {
     return (
-        <header className="absolute top-0 left-0 right-0 z-50 w-full bg-white/70 backdrop-blur-md transition-all duration-300 py-[10px] px-[0px] md:px-[75px]">
+        <header className="absolute top-0 left-0 right-0 z-50 w-full bg-white transition-all duration-300 py-[10px] px-[0px] md:px-[75px]">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
                 <div className="flex items-center space-x-2 cursor-pointer">
                     <Link href="/">
@@ -25,20 +25,38 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
                     </Link>
                 </div>
 
-                <nav className="hidden md:flex items-center space-x-1 bg-gray-100 p-1 rounded-full group">
+                <nav className="hidden md:flex items-center space-x-1 bg-gray-100 p-1 rounded-full group/nav">
                     {(navbar?.links || [
                         { label: "Khóa Học", href: "/shop" },
                         { label: "Tài Nguyên", href: "/resources" },
                         { label: "Về Chúng Tôi", href: "/about" }
-                    ]).map((link: any, lIdx: number) => (
-                        <Link
-                            key={lIdx}
-                            href={link.href.startsWith('#') ? `/${link.href}` : link.href}
-                            className="rounded-full px-4 py-1.5 text-[15px] font-medium transition-colors text-[#0b2b4d] group-hover:text-gray-400 hover:!text-[#0b2b4d]"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
+                    ]).map((link: any, lIdx: number) => {
+                        const isKhowaHoc = link.label === "Khóa Học";
+                        return (
+                            <div key={lIdx} className="relative group/item">
+                                <Link
+                                    href={link.href.startsWith('#') ? `/${link.href}` : link.href}
+                                    className="rounded-full px-4 py-1.5 text-[15px] font-medium transition-colors text-[#0b2b4d] group-hover/nav:text-gray-400 hover:!text-[#0b2b4d] block"
+                                >
+                                    {link.label}
+                                </Link>
+                                
+                                {isKhowaHoc && (
+                                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible transition-all duration-300 z-[60] py-2 border border-gray-100 overflow-hidden">
+                                        <Link href="/courses/enterprise" className="block px-5 py-3 text-[15px] font-medium text-[#0b2b4d] hover:bg-gray-50 transition-colors">
+                                            Trực tiếp tại Doanh Nghiệp
+                                        </Link>
+                                        <Link href="/courses/online-1-1" className="block px-5 py-3 text-[15px] font-medium text-[#0b2b4d] hover:bg-gray-50 transition-colors">
+                                            Online 1:1
+                                        </Link>
+                                        <Link href="/courses/e-learning" className="block px-5 py-3 text-[15px] font-medium text-[#0b2b4d] hover:bg-gray-50 transition-colors">
+                                            E-Learning
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                 </nav>
 
                 <div className="flex items-center space-x-4">
