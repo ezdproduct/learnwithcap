@@ -162,7 +162,7 @@ export const MOCK_RESOURCES = [
         type: "article",
         title: "Thu Hút Khách Hàng Với Mẫu Thiết Kế Nội Thất Siêu Thị Đẹp",
         image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80",
-        readTime: "6 min read",
+        read_time: "6 min read",
         link: "#"
     },
     {
@@ -170,7 +170,7 @@ export const MOCK_RESOURCES = [
         type: "article",
         title: "Những Lưu Ý Khi Thiết Kế Nội Thất Siêu Thị",
         image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80",
-        readTime: "7 min read",
+        read_time: "7 min read",
         link: "#"
     },
     {
@@ -178,15 +178,15 @@ export const MOCK_RESOURCES = [
         type: "article",
         title: "Thiết Kế Quầy Bar Đẹp Và Hiện Đại",
         image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80",
-        readTime: "7 min read",
+        read_time: "7 min read",
         link: "#"
     },
     {
         id: 4,
         type: "article",
-        title: "Chọn Mua Lò Nướng Thịt Cho Nhà Hàng",
-        image: "https://images.unsplash.com/photo-1544025162-d76690b67f11?w=800&q=80",
-        readTime: "4 min read",
+        title: "Phong Cách Thiết Kế Nội Thất Tối Giản",
+        image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=800&q=80",
+        read_time: "5 min read",
         link: "#"
     }
 ];

@@ -117,6 +117,7 @@ export interface ResourceData {
     image: string;
     read_time: string;
     link: string;
+    description?: string;
     display_order: number;
 }
 
