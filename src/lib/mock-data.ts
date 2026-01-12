@@ -115,7 +115,7 @@ export const MOCK_TESTIMONIALS = [
 export const MOCK_TEAM = [
     {
         name: "Trần Uy",
-        englishName: "Ron",
+        english_name: "Ron",
         img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80",
         points: [
             "More than 10 years experience in Real Estate development",
@@ -125,7 +125,7 @@ export const MOCK_TEAM = [
     },
     {
         name: "Khánh Vươn",
-        englishName: "Mia",
+        english_name: "Mia",
         img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80", // Using a meeting/office like image
         points: [
             "More than 10 years experience in Construction Industry with first-hand experience in English speaking setting",
@@ -135,7 +135,7 @@ export const MOCK_TEAM = [
     },
     {
         name: "Ngân Hà",
-        englishName: "Amy",
+        english_name: "Amy",
         img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80",
         points: [
             "More than 8 years experience in Real Estate and Construction field",

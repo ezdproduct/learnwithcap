@@ -1,12 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface TeamMember {
-    name: string;
-    englishName: string;
-    img: string;
-    points: string[];
-}
+import { TeamMember } from '@/lib/types';
 
 interface TeamSectionProps {
     team: TeamMember[];
@@ -45,7 +40,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ team }) => {
                                         {member.name}
                                     </h3>
                                     <p className="text-[#59B4E9] font-medium text-sm">
-                                        {member.englishName}
+                                        {member.english_name}
                                     </p>
                                 </div>
 
