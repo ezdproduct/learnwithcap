@@ -57,9 +57,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
             {/* Title Content - Positioned Bottom Left */}
             <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 z-10">
-                <h3 className="text-white text-xl md:text-2xl font-extrabold leading-[1.2] tracking-tight group-hover:translate-x-2 transition-transform duration-500 ease-out">
+                <h4 className="text-white leading-[1.2] tracking-tight group-hover:translate-x-2 transition-transform duration-500 ease-out">
                     {title}
-                </h3>
+                </h4>
             </div>
 
             {/* Subtle Inner Glow on Hover */}

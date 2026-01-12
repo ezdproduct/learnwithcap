@@ -1,6 +1,8 @@
+"use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { MOCK_HERO } from "@/lib/mock-data";
+import AnimatedHeading from "@/components/ui/AnimatedHeading";
 
 interface HeroProps {
     hero: {
@@ -22,8 +24,8 @@ const Hero = ({ hero }: HeroProps) => {
     }, [heroImages.length]);
 
     return (
-        <section className="h-screen w-full bg-white pt-[84px] pb-4 px-4 md:pb-8 md:px-8 overflow-hidden">
-            <div className="relative h-full w-full rounded-[32px] overflow-hidden group hero-container">
+        <section className="h-[80vh] md:h-screen w-full bg-white pt-[84px] pb-4 px-4 md:pb-8 md:px-8 overflow-hidden">
+            <div className="relative h-full w-full rounded-[24px] md:rounded-[32px] overflow-hidden group hero-container">
                 {heroImages.map((image: string, index: number) => (
                     <div
                         key={index}
@@ -39,14 +41,20 @@ const Hero = ({ hero }: HeroProps) => {
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                             className="object-cover animate-zoom-in"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0b2b4d]/90 via-[#0b2b4d]/40 to-transparent"></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#0b2b4d]/80 via-transparent to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#002A4C]/90 via-[#002A4C]/40 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#002A4C]/80 via-transparent to-transparent"></div>
                     </div>
                 ))}
-                <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-16 max-w-4xl hero-content text-left">
-                    <h1 className="text-[40px] font-extrabold leading-tight text-white mb-6 drop-shadow-lg tracking-tight whitespace-pre-line">
-                        {title}
-                    </h1>
+                <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-16 max-w-4xl hero-content text-left">
+                    <div className="font-extrabold leading-tight text-white mb-6 drop-shadow-lg tracking-tight whitespace-pre-line">
+                        <AnimatedHeading
+                            text={title}
+                            tag="h1"
+                            fillColor="#ffffff"
+                            ghostColor="rgba(255, 255, 255, 0.2)"
+                            className="text-white"
+                        />
+                    </div>
                 </div>
             </div>
         </section>

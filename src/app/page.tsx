@@ -7,8 +7,8 @@ import Insights from "@/components/Insights";
 import Solutions from "@/components/Solutions";
 import Courses from "@/components/Courses";
 import { usePageData } from "@/hooks/usePageData";
+import ServiceCarousel from "@/components/ServiceCarousel";
 import {
-  LazyServiceCarousel,
   LazyClients,
   LazyTestimonials,
   LazyCTASection,
@@ -21,9 +21,10 @@ const LearnWithCapClone = () => {
     courses,
     testimonials,
     testimonialsHeader,
-    solutions,
     serviceItems,
     servicesHeader,
+
+    solutions,
     clients,
     clientsHeader,
     hero,
@@ -34,6 +35,7 @@ const LearnWithCapClone = () => {
     difficultiesHeader,
     wants,
     difficulties,
+    ctaSection,
   } = usePageData();
 
   return (
@@ -42,13 +44,15 @@ const LearnWithCapClone = () => {
 
       <Hero hero={hero} />
 
-      <LazyServiceCarousel
-        items={serviceItems}
+      <ServiceCarousel 
+        items={serviceItems} 
         subtitle={servicesHeader?.subtitle}
         titlePrefix={servicesHeader?.titlePrefix}
         titleSuffix={servicesHeader?.titleSuffix}
         description={servicesHeader?.description}
       />
+
+
 
       <Insights
         wants={wants}
@@ -74,7 +78,12 @@ const LearnWithCapClone = () => {
         testimonialsHeader={testimonialsHeader}
       />
 
-      <LazyCTASection />
+      <LazyCTASection
+        title={ctaSection?.title}
+        buttonText={ctaSection?.buttonText}
+        buttonLink={ctaSection?.buttonLink}
+        videoUrl={ctaSection?.videoUrl}
+      />
 
       <LazyScrollToTop />
       <Footer footerData={footer} />

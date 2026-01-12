@@ -120,12 +120,66 @@ export interface ResourceData {
     display_order: number;
 }
 
+export interface NavbarLink {
+    label: string;
+    href: string;
+    dropdown?: NavbarLink[];
+}
+
 export interface NavbarData {
     logo_url?: string;
-    links: Array<{
-        label: string;
-        href: string;
-    }>;
+    login_label?: string;
+    cta_label?: string;
+    links: NavbarLink[];
+}
+
+// Course Detail Page Types
+export interface CoursePageFeature {
+    title: string;
+    desc: string;
+    icon: string;
+}
+
+export interface CoursePageStructureItem {
+    title: string;
+    tag: string;
+    features: string[];
+}
+
+export interface CoursePageData {
+    slug: string;
+    title: string;
+    badge?: string;
+    description: string;
+    stats: {
+        left: string;
+        leftLabel: string;
+        right: string;
+        rightLabel: string;
+    };
+    hero_image: string;
+    features: {
+        image: string;
+        quote: string;
+        items: CoursePageFeature[];
+    };
+    structure: {
+        title: string;
+        items: CoursePageStructureItem[];
+    };
+    evaluation?: {
+        title: string;
+        desc: string;
+        image: string;
+        highlight?: string;
+        subHighlight?: string;
+        methods: string[];
+    };
+    cta_banner?: {
+        title: string;
+        desc: string;
+        buttonText: string;
+    };
 }
 
 export interface SectionHeader {

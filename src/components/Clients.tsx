@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import AnimatedHeading from "@/components/ui/AnimatedHeading";
 
 interface ClientsProps {
     clients: any[];
@@ -59,12 +60,18 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
             <div className="w-full h-full flex flex-col md:flex-row">
                 {/* Left Section - Text Content */}
                 <div className="md:w-[40%] lg:w-[35%] flex flex-col justify-center px-8 md:px-12 lg:px-16 py-12 md:py-0">
-                    <span className="bg-[#59B4E9] text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase mb-6 inline-block w-fit">
+                    <span className="bg-[#59B4E9] text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase mb-2 inline-block w-fit">
                         {clientsHeader?.badge || "CASE STUDIES"}
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-8 md:mb-12">
-                        {clientsHeader?.title || "Khách hàng tiêu biểu của CAP"}
-                    </h2>
+                    <div className="font-bold leading-tight mb-8 md:mb-12">
+                        <AnimatedHeading
+                            text={clientsHeader?.title || "Khách hàng tiêu biểu của CAP"}
+                            tag="h2"
+                            className="text-sub-h2 text-white"
+                            fillColor="#ffffff"
+                            ghostColor="rgba(255, 255, 255, 0.2)"
+                        />
+                    </div>
                     <div className="flex gap-4">
                         <button
                             onClick={scrollPrev}

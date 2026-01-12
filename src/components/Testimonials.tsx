@@ -1,4 +1,6 @@
 import React from "react";
+import AnimatedHeading from '@/components/ui/AnimatedHeading';
+import Counter from '@/components/ui/Counter';
 
 interface TestimonialsProps {
     testimonials: any[];
@@ -7,19 +9,25 @@ interface TestimonialsProps {
 
 const Testimonials = ({ testimonials, testimonialsHeader }: TestimonialsProps) => {
     return (
-        <section className="bg-white py-20 border-b border-gray-100">
+        <section className="bg-white py-20 border-b border-gray-100 min-h-screen flex flex-col justify-center">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="text-center mb-12 section-header">
-                    <h2 className="text-3xl font-bold text-[#0b2b4d] mb-2">
-                        {testimonialsHeader?.title || "Lắng nghe học viên nói về CAP"}
-                    </h2>
+                    <div className="mb-4">
+                        <AnimatedHeading
+                            text={testimonialsHeader?.title || "Lắng nghe học viên nói về CAP"}
+                            tag="h2"
+                            className="font-bold text-[#002A4C]"
+                            fillColor="#002A4C"
+                            ghostColor="rgba(0, 42, 76, 0.2)"
+                        />
+                    </div>
                     <div className="flex justify-center gap-16 mt-6">
                         {(testimonialsHeader?.stats || [
                             { value: "4+", label: "Năm Kinh Nghiệm" },
                             { value: "18k+", label: "Học Viên Đã Học" },
                         ]).map((stat: any, sIdx: number) => (
                             <div key={sIdx}>
-                                <span className="text-4xl font-bold text-[#7c3aed]">{stat.value}</span>
+                                <Counter value={stat.value} className="text-4xl font-bold text-[#7c3aed]" />
                                 <p className="text-xs uppercase font-bold text-gray-500 mt-1">
                                     {stat.label}
                                 </p>

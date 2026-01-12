@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ServiceCard from './ServiceCard';
+import AnimatedHeading from '@/components/ui/AnimatedHeading';
 
 interface ServiceItem {
     title: string;
@@ -19,7 +20,7 @@ interface ServiceCarouselProps {
 
 const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     items,
-    subtitle = "BẠN LÀ NHIỀU HƠN",
+    subtitle = "Bạn là",
     titlePrefix = "Cá nhân",
     titleSuffix = "Doanh nghiệp",
     description = "Hoạt động trong lĩnh vực"
@@ -99,19 +100,23 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
     }, [currentIndex, items.length]);
 
     return (
-        <section className="bg-white pt-6 pb-0 overflow-hidden">
+        <section className="bg-white py-4 min-h-screen flex flex-col justify-center overflow-hidden">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
-                <div className="section-header mb-5">
-                    <div className="mb-5">
-                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
+                <div className="section-header mb-4">
+                    <div className="mb-2.5">
+                        <span className="bg-[#59B4E9] text-white text-badge px-3 py-1.5 rounded-[8px]">
                             {subtitle}
                         </span>
                     </div>
-                    <h2 className="text-[40px] font-bold text-[#0b2b4d] mb-1 leading-snug">
-                        {titlePrefix} <span className="text-[#0b2b4d] font-light mx-1.5">|</span> {titleSuffix}
-                    </h2>
-                    <h2 className="text-[28px] font-normal text-[#0b2b4d] leading-snug mb-8">{description}</h2>
+                    <div className="mb-1 leading-tight">
+                        <AnimatedHeading
+                            text={`${titlePrefix} | ${titleSuffix}`}
+                            tag="h2"
+                            className="font-bold text-[#002A4C] text-sub-h2"
+                        />
+                    </div>
+                    <h3 className="font-normal text-[#002A4C] leading-tight mb-4 mt-1">{description}</h3>
                 </div>
 
                 {/* Carousel Container */}
@@ -137,18 +142,29 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                     </div>
 
                     {/* Numeric Pagination */}
-                    <div className="mt-2 flex items-center justify-between">
+                    <div className="mt-4 flex items-center justify-between">
+                        {/* Tracking Counter */}
+                        <div className="flex items-center gap-3">
+                            <span className="text-xl font-bold text-[#7E4FD3]">
+                                {(currentIndex + 1).toString()}
+                            </span>
+                            <div className="w-8 h-[1.5px] bg-[#7E4FD3]"></div>
+                            <span className="text-xl font-bold text-[#7E4FD3]">
+                                {items.length.toString()}
+                            </span>
+                        </div>
+
                         {/* Navigation */}
-                        <div className="flex gap-4 ml-auto">
+                        <div className="flex gap-4">
                             <button
                                 onClick={() => scroll('left')}
-                                className="w-12 h-12 rounded-full border border-[#7c3aed] flex items-center justify-center text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300"
+                                className="w-12 h-12 rounded-full border border-[#7E4FD3] flex items-center justify-center text-[#7E4FD3] hover:bg-[#7E4FD3] hover:text-white transition-all duration-300"
                             >
                                 <ArrowLeft size={24} strokeWidth={1.5} />
                             </button>
                             <button
                                 onClick={() => scroll('right')}
-                                className="w-12 h-12 rounded-full border border-[#7c3aed] flex items-center justify-center text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300"
+                                className="w-12 h-12 rounded-full border border-[#7E4FD3] flex items-center justify-center text-[#7E4FD3] hover:bg-[#7E4FD3] hover:text-white transition-all duration-300"
                             >
                                 <ArrowRight size={24} strokeWidth={1.5} />
                             </button>

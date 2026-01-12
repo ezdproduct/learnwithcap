@@ -22,7 +22,15 @@ import {
     processPageSections,
     processInsights,
 } from "@/lib/api";
-import { DEFAULT_NAVBAR_LINKS } from "@/lib/constants";
+import { 
+    NavbarData, 
+    FooterSettings as FooterData, 
+    HeroData, 
+    VisionMissionData,
+    InsightItem,
+    TeamMember,
+    ResourceData
+} from "@/lib/types";
 
 export const usePageData = () => {
     // State initialized with empty values - mock data only used as fallback
@@ -34,17 +42,18 @@ export const usePageData = () => {
     const [servicesHeader, setServicesHeader] = useState<any>(null);
     const [clients, setClients] = useState<any[]>([]);
     const [clientsHeader, setClientsHeader] = useState<any>(null);
-    const [hero, setHero] = useState<any>(null);
-    const [navbar, setNavbar] = useState<any>(null);
-    const [footer, setFooter] = useState<any>(null);
+    const [hero, setHero] = useState<HeroData | null>(null);
+    const [navbar, setNavbar] = useState<NavbarData | null>(null);
+    const [footer, setFooter] = useState<FooterData | null>(null);
     const [solutionsHeader, setSolutionsHeader] = useState<any>(null);
     const [wantsHeader, setWantsHeader] = useState<any>(null);
     const [difficultiesHeader, setDifficultiesHeader] = useState<any>(null);
-    const [wants, setWants] = useState<any[]>([]);
-    const [difficulties, setDifficulties] = useState<any[]>([]);
-    const [team, setTeam] = useState<any[]>([]);
-    const [visionMission, setVisionMission] = useState<any>(null);
-    const [resources, setResources] = useState<any[]>([]);
+    const [wants, setWants] = useState<InsightItem[]>([]);
+    const [difficulties, setDifficulties] = useState<InsightItem[]>([]);
+    const [team, setTeam] = useState<TeamMember[]>([]);
+    const [visionMission, setVisionMission] = useState<VisionMissionData | null>(null);
+    const [ctaSection, setCtaSection] = useState<any>(null);
+    const [resources, setResources] = useState<ResourceData[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -84,12 +93,11 @@ export const usePageData = () => {
                     setWantsHeader(processed.wantsHeader);
                     setDifficultiesHeader(processed.difficultiesHeader);
                     setSolutions(processed.solutions || MOCK_SOLUTIONS);
+                    setCtaSection(processed.ctaSection);
 
-                    // Process navbar with enforced links
+                    // Process navbar
                     if (processed.navbar) {
-                        const navbarData = processed.navbar;
-                        navbarData.links = DEFAULT_NAVBAR_LINKS;
-                        setNavbar(navbarData);
+                        setNavbar(processed.navbar);
                     }
                 } else {
                     // Fallback to all mock data if sectionsData is null
@@ -161,6 +169,7 @@ export const usePageData = () => {
         team,
         visionMission,
         resources,
+        ctaSection,
         loading
     };
 };

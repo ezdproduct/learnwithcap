@@ -1,5 +1,5 @@
 import React from "react";
-import { Home } from "lucide-react";
+import { Headset } from "lucide-react";
 
 interface CTASectionProps {
     title?: string;
@@ -28,7 +28,7 @@ const CTASection = ({
             </video>
 
             {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-[#3d5a80]/85"></div>
+            <div className="absolute inset-0 bg-[#002A4C]/85"></div>
 
             {/* Content */}
             <div className="relative z-10 h-full flex items-center">
@@ -39,9 +39,9 @@ const CTASection = ({
                         </p>
                         <a
                             href={buttonLink}
-                            className="inline-flex items-center gap-2 bg-white text-[#3d5a80] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl"
+                            className="inline-flex items-center gap-2 bg-white text-[#0b2b4d] px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
-                            <Home size={20} />
+                            <Headset size={20} />
                             <span>{buttonText}</span>
                         </a>
                     </div>

@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
     const columns = footerData?.links || [];
 
     return (
-        <footer className="bg-[#002a4c] text-white pt-16 pb-8 border-t border-[#002a4c]">
+        <footer className="bg-[#002A4C] text-white pt-16 pb-8 border-t border-[#002A4C]">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {/* Brand Column */}
@@ -50,7 +50,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                     {Array.isArray(columns) && columns.length > 0 ? (
                         columns.map((section: any, idx: number) => (
                             <div key={idx} className="footer-col flex flex-col gap-4">
-                                <h4 className="font-bold text-white text-lg capitalize">{section.section_id?.replace('_', ' ')}</h4>
+                                <h4 className="font-bold text-white capitalize">{section.section_id?.replace('_', ' ')}</h4>
                                 <ul className="flex flex-col gap-3">
                                     {Array.isArray(section.items) && section.items.map((item: any, itemIdx: number) => (
                                         <li key={itemIdx}>
@@ -70,7 +70,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                         // Fallback static columns if no data
                         <>
                             <div className="footer-col flex flex-col gap-4">
-                                <h4 className="font-bold text-white text-lg">HỮU ÍCH</h4>
+                                <h4 className="font-bold text-white">HỮU ÍCH</h4>
                                 <ul className="flex flex-col gap-3">
                                     <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors font-light">Về Chúng Tôi</Link></li>
                                     <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors font-light">Liên Hệ</Link></li>
@@ -78,7 +78,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                                 </ul>
                             </div>
                             <div className="footer-col flex flex-col gap-4">
-                                <h4 className="font-bold text-white text-lg">LIÊN KẾT</h4>
+                                <h4 className="font-bold text-white">LIÊN KẾT</h4>
                                 <ul className="flex flex-col gap-3">
                                     <li><Link href="/shop" className="text-gray-300 hover:text-white transition-colors font-light">Khóa học</Link></li>
                                     <li><Link href="/#solutions" className="text-gray-300 hover:text-white transition-colors font-light">Giải pháp</Link></li>
@@ -89,15 +89,15 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
 
                     {/* Newsletter Column */}
                     <div className="flex flex-col gap-4">
-                        <h4 className="font-bold text-white text-lg uppercase tracking-wider">{settings?.newsletter_title || "LIÊN HỆ TƯ VẤN"}</h4>
+                        <h4 className="font-bold text-white uppercase tracking-wider">{settings?.newsletter_title || "LIÊN HỆ TƯ VẤN"}</h4>
                         <p className="text-gray-300 font-light text-sm mb-2">{settings?.newsletter_description || "Đăng ký để nhận tư vấn khóa học phù hợp và ưu đãi mới nhất từ CAP."}</p>
-                        <div className="flex bg-[#001e38] rounded-lg overflow-hidden p-1">
+                        <div className="flex bg-[#001E3D] rounded-lg overflow-hidden p-1">
                             <input
                                 type="email"
                                 placeholder={settings?.newsletter_placeholder || "Vui lòng nhập email"}
                                 className="bg-transparent text-white text-sm w-full px-3 py-2 focus:outline-none placeholder-gray-400"
                             />
-                            <button type="button" className="p-2 bg-[#59B4E9] text-white rounded hover:bg-blue-400 transition-colors">
+                            <button type="button" className="p-2 bg-[#59B4E9] text-white rounded hover:bg-[#3690F8] transition-colors">
                                 <Send className="w-5 h-5" />
                             </button>
                         </div>
@@ -114,7 +114,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                     </div>
                 </div>
 
-                <div className="footer-bottom border-t border-white/10 pt-8 text-center bg-[#002a4c]">
+                <div className="footer-bottom border-t border-white/10 pt-8 text-center bg-[#002A4C]">
                     <p className="text-gray-400 font-light text-sm">
                         © {new Date().getFullYear()} {settings?.copyright_text || "CAP English Training. All rights reserved."}
                     </p>

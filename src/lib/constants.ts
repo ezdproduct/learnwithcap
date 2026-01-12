@@ -1,13 +1,14 @@
 // Database table names
 export const TABLES = {
-    PAGE_SECTIONS: 'LD_page_sections',
-    HOMEPAGE_FOOTER: 'LD_homepage_footer',
-    HOMEPAGE_INSIGHTS: 'LD_homepage_insights',
-    MAIN_HP_FOOTER_ITEMS: 'LD_main_hp_footer_items',
-    MAIN_HP_FOOTER: 'LD_main_hp_footer',
-    TEAM: 'LD_team',
-    VISION_MISSION: 'LD_vision_mission',
-    RESOURCES: 'LD_resources',
+    PAGE_SECTIONS: 'ld_page_sections',
+    HOMEPAGE_FOOTER: 'ld_homepage_footer',
+    HOMEPAGE_INSIGHTS: 'ld_homepage_insights',
+    MAIN_HP_FOOTER_ITEMS: 'ld_main_hp_footer_items',
+    MAIN_HP_FOOTER: 'ld_main_hp_footer',
+    TEAM: 'ld_team',
+    VISION_MISSION: 'ld_vision_mission',
+    RESOURCES: 'ld_resources',
+    COURSE_PAGES: 'ld_course_pages'
 } as const;
 
 // Section keys
@@ -22,6 +23,7 @@ export const SECTION_KEYS = {
     WANTS_HEADER: 'wants_header',
     DIFFICULTIES_HEADER: 'difficulties_header',
     SOLUTIONS: 'solutions',
+    CTA_SECTION: 'cta_section',
 } as const;
 
 // Insight sections

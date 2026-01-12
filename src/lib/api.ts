@@ -4,7 +4,8 @@ import {
     InsightItem,
     TeamMember,
     ResourceData,
-    FooterSettings
+    FooterSettings,
+    CoursePageData
 } from './types';
 import { TABLES, SECTION_KEYS, INSIGHT_SECTIONS } from './constants';
 
@@ -17,7 +18,9 @@ export async function fetchPageSections() {
         .select('*');
 
     if (error) {
-        console.error('Error fetching page sections:', error);
+        // Log detailed error information. JSON.stringify helps if the error object is not a standard Error instance.
+        // If the error object is truly empty {}, it might indicate a network issue or a suppressed error from Supabase client.
+        console.warn('Error fetching page sections:', JSON.stringify(error, null, 2));
         return null;
     }
 
@@ -34,7 +37,7 @@ export async function fetchFooterData() {
         .single();
 
     if (error) {
-        console.error('Error fetching footer:', error);
+        console.warn('Error fetching footer:', JSON.stringify(error, null, 2));
         return null;
     }
 
@@ -51,7 +54,7 @@ export async function fetchInsights() {
         .order('display_order', { ascending: true });
 
     if (error) {
-        console.error('Error fetching insights:', error);
+        console.warn('Error fetching insights:', JSON.stringify(error, null, 2));
         return null;
     }
 
@@ -69,7 +72,7 @@ export async function fetchTeam() {
         .order('display_order', { ascending: true });
 
     if (error) {
-        console.error('Error fetching team:', error);
+        console.warn('Error fetching team:', JSON.stringify(error, null, 2));
         return null;
     }
 
@@ -88,7 +91,7 @@ export async function fetchVisionMission() {
         .single();
 
     if (error) {
-        console.error('Error fetching vision/mission:', error);
+        console.warn('Error fetching vision/mission:', JSON.stringify(error, null, 2));
         return null;
     }
 
@@ -117,7 +120,7 @@ export async function fetchResources() {
         .order('display_order', { ascending: true });
 
     if (error) {
-        console.error('Error fetching resources:', error);
+        console.warn('Error fetching resources:', JSON.stringify(error, null, 2));
         return null;
     }
 
@@ -125,12 +128,35 @@ export async function fetchResources() {
 }
 
 /**
+ * Fetch detailed content for a specific course page by slug
+ */
+export const fetchCoursePageData = async (slug: string): Promise<CoursePageData | null> => {
+    try {
+        const { data, error } = await supabase
+            .from(TABLES.COURSE_PAGES)
+            .select('*')
+            .eq('slug', slug)
+            .single();
+
+        if (error) {
+            console.error(`Error fetching course page data for ${slug}:`, error);
+            return null;
+        }
+
+        return data as CoursePageData;
+    } catch (err) {
+        console.error(`Unexpected error fetching course page data for ${slug}:`, err);
+        return null;
+    }
+};
+
+/**
  * Process page sections data into structured format
  */
 export function processPageSections(sections: PageSection[] | null) {
     if (!sections) return {};
 
-    const processed: Record<string, any> = {};
+    const processed: Record<string, PageSection['data']> = {};
 
     sections.forEach((section) => {
         switch (section.section_key) {
@@ -179,6 +205,11 @@ export function processPageSections(sections: PageSection[] | null) {
             case SECTION_KEYS.SOLUTIONS:
                 if (section.data?.length > 0) {
                     processed.solutions = section.data;
+                }
+                break;
+            case SECTION_KEYS.CTA_SECTION:
+                if (section.data) {
+                    processed.ctaSection = section.data;
                 }
                 break;
         }

@@ -1,13 +1,8 @@
 import React from "react";
 import FeatureCard from "@/components/ui/FeatureCard";
 import { getIcon } from "@/components/ui/IconHelper";
-
-interface InsightItem {
-    icon: string | React.ReactNode;
-    text: string;
-    bg?: string;
-    highlight?: boolean;
-}
+import { InsightItem } from "@/lib/types";
+import AnimatedHeading from "@/components/ui/AnimatedHeading";
 
 interface InsightsProps {
     wants: InsightItem[];
@@ -47,20 +42,24 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
         <section className="bg-gradient-to-b from-white to-[#f0f9ff] pt-6 pb-12 overflow-hidden">
             <div className="container mx-auto px-4 md:px-8">
                 <div ref={wantsRef} className="reveal-piano">
-                    <div className="mb-8 items-start text-left">
-                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
+                    <div className="mb-8 flex flex-col items-start text-left">
+                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em] mb-2 inline-block">
                             {wantsHeader?.badge || "BẠN MUỐN"}
                         </span>
-                        <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">
-                            {wantsHeader?.title || "Mong muốn của bạn"}
-                        </h2>
+                        <AnimatedHeading
+                            text={wantsHeader?.title || "Mong muốn của bạn"}
+                            tag="h2"
+                            fillColor="#002A4C"
+                            ghostColor="rgba(0, 42, 76, 0.2)"
+                            className="font-bold text-[#002A4C] text-sub-h2"
+                        />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         {wants.map((item, idx) => (
                             <div key={idx} className="piano-item">
                                 <FeatureCard
                                     {...item}
-                                    icon={typeof item.icon === 'string' ? getIcon(item.icon, { size: 32, strokeWidth: 1.2 }) : item.icon}
+                                    icon={getIcon(item.icon_name, { size: 32, strokeWidth: 1.2 })}
                                 />
                             </div>
                         ))}
@@ -68,17 +67,21 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
                 </div>
 
                 <div ref={diffRef} className="reveal-piano mt-10">
-                    <div className="mb-8 items-start text-left">
-                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em]">
+                    <div className="mb-8 flex flex-col items-start text-left">
+                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em] mb-2">
                             {difficultiesHeader?.badge || "BẠN ĐANG"}
                         </span>
-                        <h2 className="text-4xl font-bold text-[#0b2b4d] mt-4">
-                            {difficultiesHeader?.title || "Gặp những khó khăn"}
-                        </h2>
+                        <AnimatedHeading
+                            text={difficultiesHeader?.title || "Gặp những khó khăn"}
+                            tag="h2"
+                            fillColor="#002A4C"
+                            ghostColor="rgba(0, 42, 76, 0.2)"
+                            className="font-bold text-[#002A4C] text-sub-h2"
+                        />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         {difficulties.map((item, idx) => {
-                            // Gradient colors from lighter blue to dark navy
+                            // Gradient colors from lighter blue to dark navy (Old Palette)
                             const gradientColors = [
                                 "bg-[#5c7ca0]",
                                 "bg-[#4c6c8f]",
@@ -93,7 +96,7 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
                                 <div key={idx} className="piano-item">
                                     <FeatureCard
                                         {...item}
-                                        icon={typeof item.icon === 'string' ? getIcon(item.icon, { size: 32 }) : item.icon}
+                                        icon={getIcon(item.icon_name, { size: 32 })}
                                         bg={bgColor}
                                         textColor="text-white"
                                         iconColor="text-white"

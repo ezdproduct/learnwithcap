@@ -1,11 +1,10 @@
-import { getIcon } from "@/components/ui/IconHelper";
+
 
 export const MOCK_HERO = {
     title: "Tiếng Anh giao tiếp \n chuyên ngành xây dựng",
     images: [
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuCMURFziLh10NsWXUt3sXvUYRGfh_KHSFU73tSwFcIvuQVNnjTHINIPoDWk9ofMQ8fp6baSiIKloW36RFirhd-RCQyk-qoblC3fASM1tJ24HbxhU8fqMQEIvchHUVNUV5FqHG2IjAhTjAaji5dp5cXJ1Nr00xriHPGr9v5YVwp20okgv_GsW2nmoB-b_V7FNia7I20iNtSJDqqspuRTKiMMhajHG6doETgiaQJuV6mdA5tVH5vQWCqLnltNMnnQTznBpP-RjIMMVXg",
-        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80",
         "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80",
+        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80",
         "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
     ]
 };
@@ -23,10 +22,10 @@ export const MOCK_SERVICES = [
 ];
 
 export const MOCK_WANTS = [
-    { icon: "ArrowDownCircle", text: "Giao tiếp tự tin bằng tiếng Anh trong công việc", bg: "bg-[#edf6ff]" },
+    { icon: "CircleArrowDown", text: "Giao tiếp tự tin bằng tiếng Anh trong công việc", bg: "bg-[#edf6ff]" },
     { icon: "Package", text: "Nghe hiểu và thảo luận bằng tiếng Anh trong cuộc họp", bg: "bg-[#c6e1ff]" },
-    { icon: "ArrowDownCircle", text: "Soạn thảo Email, báo cáo, văn bản bằng tiếng Anh hiệu quả", bg: "bg-[#9ecaff]" },
-    { icon: "Loader", text: "Trình bày năng lực bằng tiếng Anh trong công việc, phỏng vấn", bg: "bg-[#5b85aa]" },
+    { icon: "CircleArrowDown", text: "Soạn thảo Email, báo cáo, văn bản bằng tiếng Anh hiệu quả", bg: "bg-[#9ecaff]" },
+    { icon: "Briefcase", text: "Trình bày năng lực bằng tiếng Anh trong công việc, phỏng vấn", bg: "bg-[#5b85aa]" },
 ];
 
 export const MOCK_DIFFICULTIES = [
@@ -35,7 +34,7 @@ export const MOCK_DIFFICULTIES = [
     { icon: "Mic", text: "Mặc dù có vốn từ vựng tiếng Anh chuyên ngành nhưng vẫn gặp khó khăn về nghe hiểu và giao tiếp", highlight: false },
     { icon: "CheckCircle", text: "Lệ thuộc vào các công cụ hỗ trợ và mất nhiều thời gian khi soạn thảo Email và văn bản tiếng Anh", highlight: false },
     { icon: "ArrowLeft", text: "Bỏ lỡ cơ hội thăng tiến trong sự nghiệp vì không đáp ứng được yêu cầu về ngoại ngữ", highlight: false },
-    { icon: "RefreshCw", text: "Có thể giao tiếp tiếng Anh cơ bản, nhưng vẫn cần cải thiện kỹ năng thuyết trình thương thảo", highlight: false },
+    { icon: "RefreshCcw", text: "Có thể giao tiếp tiếng Anh cơ bản, nhưng vẫn cần cải thiện kỹ năng thuyết trình thương thảo", highlight: false },
 ];
 
 export const MOCK_SOLUTIONS = [
@@ -66,8 +65,8 @@ export const MOCK_COURSES = [
     {
         type: "Online 1:1",
         stats: { left: "3", leftLabel: "Modules", right: "36", rightLabel: "Bài học" },
-        desc1: "Khóa học tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất được <span class='text-[#59B4E9] font-bold'>thiết kế riêng cho cá nhân</span>, nhằm nâng cao kỹ năng giao tiếp thông qua việc bổ sung từ vựng chuyên ngành và mẫu câu giao tiếp thông dụng trong tình huống công việc thực tế.",
-        desc2: "Với lộ trình học tập bài bản, học viên sẽ được đánh giá năng lực đầu vào, <span class='text-[#59B4E9] font-bold'>xây dựng tư duy đúng về việc học ngoại ngữ</span>, được <span class='text-[#59B4E9] font-bold'>\"bắt đúng bệnh\"</span> và <span class='text-[#59B4E9] font-bold'>tư vấn phương pháp tự học phù hợp với từng cá nhân</span>. Sau khoảng thời gian 6-9 tháng, học viên có thể bắt đầu tự tin giao tiếp và sử dụng tiếng Anh hiệu quả trong công việc.",
+        desc1: "Khóa học Tiếng Anh Giao Tiếp Chuyên Ngành Xây Dựng, Kiến Trúc và Nội Thất áp dụng <span class='text-[#59B4E9] font-bold'>hình thức học 1 kèm 1 trực tuyến</span>, đảm bảo học viên nhận được sự hỗ trợ và thời gian tương tác tối đa với giáo viên, đồng thời linh hoạt về thời gian và địa điểm học tập.",
+        desc2: "Khóa học phù hợp với những học viên cần nâng cao trình độ ngoại ngữ trong thời gian ngắn, với mức độ tập trung cao. Dưới sự đồng hành sát sao của giáo viên, học viên sẽ được đánh giá năng lực đầu vào để “bắt đúng bệnh”, và xây dựng lộ trình học tập phù hợp.",
         modules: [
             { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
             { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
@@ -80,42 +79,11 @@ export const MOCK_COURSES = [
         ]
     },
     {
-        type: "Online 1:1",
-        stats: { left: "3", leftLabel: "Modules", right: "36", rightLabel: "Bài học" },
-        desc1: "Khóa học tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất được <span class='text-[#59B4E9] font-bold'>thiết kế riêng cho cá nhân</span>, nhằm nâng cao kỹ năng giao tiếp thông qua việc bổ sung từ vựng chuyên ngành và mẫu câu giao tiếp thông dụng trong tình huống công việc thực tế.",
-        desc2: "Với lộ trình học tập bài bản, học viên sẽ được đánh giá năng lực đầu vào, <span class='text-[#59B4E9] font-bold'>xây dựng tư duy đúng về việc học ngoại ngữ</span>, được <span class='text-[#59B4E9] font-bold'>\"bắt đúng bệnh\"</span> và <span class='text-[#59B4E9] font-bold'>tư vấn phương pháp tự học phù hợp với từng cá nhân</span>. Sau khoảng thời gian 6-9 tháng, học viên có thể bắt đầu tự tin giao tiếp và sử dụng tiếng Anh hiệu quả trong công việc.",
-        modules: [
-            { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
-            { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
-            { title: "Module 03", img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80" },
-            { title: "Material", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" },
-            { title: "Contract", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80" },
-            { title: "Design", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" },
-            { title: "Survey", img: "https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=400&q=80" },
-            { title: "Renovation", img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" },
-        ]
-    },
-    {
-        type: "Online Group",
-        stats: { left: "3", leftLabel: "Modules", right: "36", rightLabel: "Bài học" },
-        desc1: "Khóa học tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất được <span class='text-[#59B4E9] font-bold'>thiết kế cho nhóm nhỏ</span>, giúp tối ưu chi phí nhưng vẫn đảm bảo hiệu quả tương tác cao.",
-        desc2: "Học viên sẽ được tham gia vào cộng đồng học tập năng động, cùng thảo luận và giải quyết các tình huống thực tế trong công việc, dưới sự hướng dẫn sát sao của giảng viên.",
-        modules: [
-            { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
-            { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
-            { title: "Module 03", img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80" },
-            { title: "Material", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" },
-            { title: "Contract", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80" },
-            { title: "Design", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" },
-            { title: "Survey", img: "https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=400&q=80" },
-            { title: "Renovation", img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" },
-        ]
-    },
-    {
-        type: "Self-Paced Learning",
-        stats: { left: "5", leftLabel: "Modules", right: "50", rightLabel: "Video" },
-        desc1: "Khóa học video quay sẵn dành cho người bận rộn, cho phép <span class='text-[#59B4E9] font-bold'>học mọi lúc mọi nơi</span> theo tốc độ riêng của bản thân.",
-        desc2: "Hệ thống bài giảng được biên soạn công phu, kết hợp bài tập trắc nghiệm và hỗ trợ giải đáp thắc mắc online, giúp học viên tự tin làm chủ kiến thức.",
+        type: "E-Learning",
+        stats: { left: "15", leftLabel: "Phút", right: "Mỗi", rightLabel: "Ngày" },
+        desc1: "Chỉ với <span class='text-[#59B4E9] font-bold'>15 phút học và luyện tập mỗi ngày</span>, khóa học E-learning tiếng Anh giao tiếp chuyên ngành Xây dựng, Kiến trúc và Nội thất sẽ giúp học viên tiếp thu kiến thức dễ dàng mà không cảm thấy quá tải.",
+        desc2: "Bên cạnh lộ trình, thời gian và địa điểm học linh hoạt, học viên còn được lựa chọn chủ đề và gói học phù hợp theo nhu cầu cá nhân. Thông qua hệ thống video bài học tương tác thú vị, bài kiểm tra ngắn cuối mỗi buổi học.",
+
         modules: [
             { title: "Module 01", img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" },
             { title: "Module 02", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" },
@@ -130,10 +98,10 @@ export const MOCK_COURSES = [
 ];
 
 export const MOCK_CLIENTS = [
-    { name: "Coteccons", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80", sub: "Tập đoàn xây dựng hàng đầu", desc: "Đã đào tạo hơn 500 kỹ sư tại các dự án trọng điểm trên toàn quốc. Chương trình được thiết kế đặc thù để tối ưu khả năng giao tiếp kỹ thuật và quản lý công trường, giúp đội ngũ tự tin làm việc với các đối tác chiến lược quốc tế một cách chuyên nghiệp nhất.", logo: "CTD" },
-    { name: "Hoa Binh Corp", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80", sub: "Nhà thầu uy tín", desc: "Nâng cao năng lực giao tiếp quốc tế cho đội ngũ quản lý từ năm 2020. Mục tiêu trọng tâm là trang bị vốn từ vựng chuyên sâu và kỹ năng thuyết trình dự án bằng tiếng Anh, đáp ứng các tiêu chuẩn khắt khe của thị trường xây dựng toàn cầu hiện nay.", logo: "HBC" },
-    { name: "Central Cons", img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80", sub: "Xây dựng chất lượng", desc: "Đối tác chiến lược trong đào tạo ngoại ngữ chuyên ngành. Chúng tôi cam kết mang lại lộ trình học tập bài bản, tập trung vào các tình huống thực tế tại văn phòng và công trường, giúp học viên làm chủ ngôn ngữ trong thời gian ngắn nhất.", logo: "Central" },
-    { name: "Delta Corp", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80", sub: "Phát triển bền vững", desc: "Chương trình đào tạo được thiết kế riêng cho từng bộ phận. Từ kỹ sư hiện trường đến quản lý dự án đều được trang bị những kỹ năng cần thiết để vận hành dự án hiệu quả trong môi trường đa quốc gia, đảm bảo sự tiến bộ rõ rệt sau mỗi khóa học.", logo: "Delta" },
+    { name: "Boho Décor", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80", sub: "Thiết kế & Thi công Nội thất", desc: "Bắt đầu từ nhu cầu cá nhân của một nhóm các kỹ sư giám sát, CAP đã đồng hành cùng các bạn học viên trong việc nâng cao khả năng giao tiếp tiếng Anh chuyên ngành Hoàn thiện nội thất. Nhờ sự tin tưởng của học viên và hỗ trợ từ Quý công ty, chương trình tiếp tục được triển khai cho các nhóm BOHO khác.", logo: "Boho" },
+    { name: "DKO Architecture", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80", sub: "Thiết kế Kiến trúc và Nội thất", desc: "Đồng hành cùng đội ngũ Kiến trúc sư tại DKO trong việc phát triển kỹ năng thuyết trình ý tưởng thiết kế và bảo vệ phương án với chủ đầu tư nước ngoài. Chương trình tập trung vào từ vựng chuyên ngành kiến trúc và kỹ năng presentation.", logo: "DKO" },
+    { name: "Unity Architects", img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80", sub: "Thiết kế & Thi công Văn phòng", desc: "Hợp tác đào tạo tiếng Anh chuyên ngành cho đội ngũ quản lý dự án và thi công tại Unity Architects. Khóa học giúp nâng cao hiệu quả làm việc với các đối tác cung ứng vật liệu và khách hàng quốc tế.", logo: "Unity" },
+    { name: "Coteccons", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80", sub: "Tập đoàn xây dựng", desc: "Đã đào tạo hơn 500 kỹ sư tại các dự án trọng điểm trên toàn quốc. Chương trình được thiết kế đặc thù để tối ưu khả năng giao tiếp kỹ thuật và quản lý công trường.", logo: "CTD" },
 ];
 
 export const MOCK_TESTIMONIALS = [
