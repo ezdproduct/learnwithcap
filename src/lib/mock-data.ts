@@ -1,5 +1,5 @@
 
-import { InsightItem } from "@/lib/types";
+import { InsightItem, TeamMember, ResourceData } from "@/lib/types";
 
 export const MOCK_HERO = {
     title: "Tiếng Anh giao tiếp \n chuyên ngành xây dựng",
@@ -113,8 +113,9 @@ export const MOCK_TESTIMONIALS = [
     { text: "Các bài tập tình huống sát với thực tế giúp tôi tự tin hơn khi trao đổi email với đối tác nước ngoài.", handle: "Chị Mai", role: "QS Engineer", "img": "https://i.pravatar.cc/150?u=5" },
 ];
 
-export const MOCK_TEAM = [
+export const MOCK_TEAM: TeamMember[] = [
     {
+        id: 1,
         name: "Trần Uy",
         english_name: "Ron",
         img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80",
@@ -122,9 +123,11 @@ export const MOCK_TEAM = [
             "More than 10 years experience in Real Estate development",
             "English training Cambridge University certificate for English Language Teaching",
             "7 years of Construction and Communicative English training and tutoring"
-        ]
+        ],
+        display_order: 1
     },
     {
+        id: 2,
         name: "Khánh Vươn",
         english_name: "Mia",
         img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80", // Using a meeting/office like image
@@ -132,9 +135,11 @@ export const MOCK_TEAM = [
             "More than 10 years experience in Construction Industry with first-hand experience in English speaking setting",
             "BA in English language",
             "TESOL certificate"
-        ]
+        ],
+        display_order: 2
     },
     {
+        id: 3,
         name: "Ngân Hà",
         english_name: "Amy",
         img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80",
@@ -142,7 +147,8 @@ export const MOCK_TEAM = [
             "More than 8 years experience in Real Estate and Construction field",
             "Launching English for Construction course since 2018",
             "BA in English Translation & Interpretation"
-        ]
+        ],
+        display_order: 3
     }
 ];
 
@@ -157,14 +163,15 @@ export const MOCK_VISION_MISSION = {
     }
 };
 
-export const MOCK_RESOURCES = [
+export const MOCK_RESOURCES: ResourceData[] = [
     {
         id: 1,
         type: "article",
         title: "Thu Hút Khách Hàng Với Mẫu Thiết Kế Nội Thất Siêu Thị Đẹp",
         image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80",
         read_time: "6 min read",
-        link: "#"
+        link: "#",
+        display_order: 1
     },
     {
         id: 2,
@@ -172,7 +179,8 @@ export const MOCK_RESOURCES = [
         title: "Những Lưu Ý Khi Thiết Kế Nội Thất Siêu Thị",
         image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80",
         read_time: "7 min read",
-        link: "#"
+        link: "#",
+        display_order: 2
     },
     {
         id: 3,
@@ -180,7 +188,8 @@ export const MOCK_RESOURCES = [
         title: "Thiết Kế Quầy Bar Đẹp Và Hiện Đại",
         image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80",
         read_time: "7 min read",
-        link: "#"
+        link: "#",
+        display_order: 3
     },
     {
         id: 4,
@@ -188,6 +197,7 @@ export const MOCK_RESOURCES = [
         title: "Phong Cách Thiết Kế Nội Thất Tối Giản",
         image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=800&q=80",
         read_time: "5 min read",
-        link: "#"
+        link: "#",
+        display_order: 4
     }
 ];

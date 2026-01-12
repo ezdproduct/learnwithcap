@@ -227,20 +227,10 @@ export function processInsights(insights: InsightItem[] | null) {
     }
 
     const wants = insights
-        .filter(item => item.section === INSIGHT_SECTIONS.WANTS)
-        .map(item => ({
-            icon: item.icon_name,
-            text: item.text,
-            bg: item.bg_color,
-        }));
+        .filter(item => item.section === INSIGHT_SECTIONS.WANTS);
 
     const difficulties = insights
-        .filter(item => item.section === INSIGHT_SECTIONS.DIFFICULTIES)
-        .map(item => ({
-            icon: item.icon_name,
-            text: item.text,
-            highlight: item.is_highlighted,
-        }));
+        .filter(item => item.section === INSIGHT_SECTIONS.DIFFICULTIES);
 
     return {
         wants: wants.length > 0 ? wants : null,
