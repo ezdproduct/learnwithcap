@@ -59,6 +59,7 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
                             <div key={idx} className="piano-item">
                                 <FeatureCard
                                     {...item}
+                                    bg={item.bg_color}
                                     icon={getIcon(item.icon_name, { size: 32, strokeWidth: 1.2 })}
                                 />
                             </div>

@@ -1,4 +1,5 @@
 
+import { InsightItem } from "@/lib/types";
 
 export const MOCK_HERO = {
     title: "Tiếng Anh giao tiếp \n chuyên ngành xây dựng",
@@ -21,20 +22,20 @@ export const MOCK_SERVICES = [
     { title: "Kỹ sư QS", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80", href: "/course-detail" },
 ];
 
-export const MOCK_WANTS = [
-    { icon: "CircleArrowDown", text: "Giao tiếp tự tin bằng tiếng Anh trong công việc", bg: "bg-[#edf6ff]" },
-    { icon: "Package", text: "Nghe hiểu và thảo luận bằng tiếng Anh trong cuộc họp", bg: "bg-[#c6e1ff]" },
-    { icon: "CircleArrowDown", text: "Soạn thảo Email, báo cáo, văn bản bằng tiếng Anh hiệu quả", bg: "bg-[#9ecaff]" },
-    { icon: "Briefcase", text: "Trình bày năng lực bằng tiếng Anh trong công việc, phỏng vấn", bg: "bg-[#5b85aa]" },
+export const MOCK_WANTS: InsightItem[] = [
+    { id: 1, section: 'wants', icon_name: "CircleArrowDown", text: "Giao tiếp tự tin bằng tiếng Anh trong công việc", bg_color: "bg-[#edf6ff]", display_order: 1 },
+    { id: 2, section: 'wants', icon_name: "Package", text: "Nghe hiểu và thảo luận bằng tiếng Anh trong cuộc họp", bg_color: "bg-[#c6e1ff]", display_order: 2 },
+    { id: 3, section: 'wants', icon_name: "CircleArrowDown", text: "Soạn thảo Email, báo cáo, văn bản bằng tiếng Anh hiệu quả", bg_color: "bg-[#9ecaff]", display_order: 3 },
+    { id: 4, section: 'wants', icon_name: "Briefcase", text: "Trình bày năng lực bằng tiếng Anh trong công việc, phỏng vấn", bg_color: "bg-[#5b85aa]", display_order: 4 },
 ];
 
-export const MOCK_DIFFICULTIES = [
-    { icon: "Globe", text: "Không thể nghe, hiểu và trao đổi tiếng Anh trong các tình huống cuộc họp, phối hợp công trường", highlight: false },
-    { icon: "Frown", text: "Lúng túng khi giao tiếp tiếng Anh với đồng nghiệp và đối tác nước ngoài vì vốn từ và kỹ năng hạn chế ...", highlight: false },
-    { icon: "Mic", text: "Mặc dù có vốn từ vựng tiếng Anh chuyên ngành nhưng vẫn gặp khó khăn về nghe hiểu và giao tiếp", highlight: false },
-    { icon: "CheckCircle", text: "Lệ thuộc vào các công cụ hỗ trợ và mất nhiều thời gian khi soạn thảo Email và văn bản tiếng Anh", highlight: false },
-    { icon: "ArrowLeft", text: "Bỏ lỡ cơ hội thăng tiến trong sự nghiệp vì không đáp ứng được yêu cầu về ngoại ngữ", highlight: false },
-    { icon: "RefreshCcw", text: "Có thể giao tiếp tiếng Anh cơ bản, nhưng vẫn cần cải thiện kỹ năng thuyết trình thương thảo", highlight: false },
+export const MOCK_DIFFICULTIES: InsightItem[] = [
+    { id: 5, section: 'difficulties', icon_name: "Globe", text: "Không thể nghe, hiểu và trao đổi tiếng Anh trong các tình huống cuộc họp, phối hợp công trường", is_highlighted: false, display_order: 1 },
+    { id: 6, section: 'difficulties', icon_name: "Frown", text: "Lúng túng khi giao tiếp tiếng Anh với đồng nghiệp và đối tác nước ngoài vì vốn từ và kỹ năng hạn chế ...", is_highlighted: false, display_order: 2 },
+    { id: 7, section: 'difficulties', icon_name: "Mic", text: "Mặc dù có vốn từ vựng tiếng Anh chuyên ngành nhưng vẫn gặp khó khăn về nghe hiểu và giao tiếp", is_highlighted: false, display_order: 3 },
+    { id: 8, section: 'difficulties', icon_name: "CheckCircle", text: "Lệ thuộc vào các công cụ hỗ trợ và mất nhiều thời gian khi soạn thảo Email và văn bản tiếng Anh", is_highlighted: false, display_order: 4 },
+    { id: 9, section: 'difficulties', icon_name: "ArrowLeft", text: "Bỏ lỡ cơ hội thăng tiến trong sự nghiệp vì không đáp ứng được yêu cầu về ngoại ngữ", is_highlighted: false, display_order: 5 },
+    { id: 10, section: 'difficulties', icon_name: "RefreshCcw", text: "Có thể giao tiếp tiếng Anh cơ bản, nhưng vẫn cần cải thiện kỹ năng thuyết trình thương thảo", is_highlighted: false, display_order: 6 },
 ];
 
 export const MOCK_SOLUTIONS = [
