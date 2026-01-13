@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ServiceCard from './ServiceCard';
+import SectionBadge from '@/components/ui/SectionBadge';
 import AnimatedHeading from '@/components/ui/AnimatedHeading';
 
 interface ServiceItem {
@@ -105,9 +106,9 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
                 {/* Header */}
                 <div className="section-header mb-4">
                     <div className="mb-2.5">
-                        <span className="bg-[#59B4E9] text-white text-badge px-3 py-1.5 rounded-[8px]">
+                        <SectionBadge>
                             {subtitle}
-                        </span>
+                        </SectionBadge>
                     </div>
                     <div className="mb-1 leading-tight">
                         <AnimatedHeading

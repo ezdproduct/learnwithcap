@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import SectionBadge from "@/components/ui/SectionBadge";
 import AnimatedHeading from "@/components/ui/AnimatedHeading";
 
 interface ClientsProps {
@@ -60,9 +61,9 @@ const Clients = ({ clients, clientsHeader }: ClientsProps) => {
             <div className="w-full h-full flex flex-col md:flex-row">
                 {/* Left Section - Text Content */}
                 <div className="md:w-[40%] lg:w-[35%] flex flex-col justify-center px-8 md:px-12 lg:px-16 py-12 md:py-0">
-                    <span className="bg-[#59B4E9] text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase mb-2 inline-block w-fit">
+                    <SectionBadge>
                         {clientsHeader?.badge || "CASE STUDIES"}
-                    </span>
+                    </SectionBadge>
                     <div className="font-bold leading-tight mb-8 md:mb-12">
                         <AnimatedHeading
                             text={clientsHeader?.title || "Khách hàng tiêu biểu của CAP"}

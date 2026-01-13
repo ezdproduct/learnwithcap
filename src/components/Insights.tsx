@@ -2,6 +2,7 @@ import React from "react";
 import FeatureCard from "@/components/ui/FeatureCard";
 import { getIcon } from "@/components/ui/IconHelper";
 import { InsightItem } from "@/lib/types";
+import SectionBadge from "@/components/ui/SectionBadge";
 import AnimatedHeading from "@/components/ui/AnimatedHeading";
 
 interface InsightsProps {
@@ -43,9 +44,9 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
             <div className="container mx-auto px-4 md:px-8">
                 <div ref={wantsRef} className="reveal-piano">
                     <div className="mb-8 flex flex-col items-start text-left">
-                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em] mb-2 inline-block">
+                        <SectionBadge>
                             {wantsHeader?.badge || "BẠN MUỐN"}
-                        </span>
+                        </SectionBadge>
                         <AnimatedHeading
                             text={wantsHeader?.title || "Mong muốn của bạn"}
                             tag="h2"
@@ -69,9 +70,9 @@ const Insights = ({ wants, difficulties, wantsHeader, difficultiesHeader }: Insi
 
                 <div ref={diffRef} className="reveal-piano mt-10">
                     <div className="mb-8 flex flex-col items-start text-left">
-                        <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em] mb-2">
+                        <SectionBadge>
                             {difficultiesHeader?.badge || "BẠN ĐANG"}
-                        </span>
+                        </SectionBadge>
                         <AnimatedHeading
                             text={difficultiesHeader?.title || "Gặp những khó khăn"}
                             tag="h2"

@@ -4,6 +4,34 @@
   --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
   --breakpoint-3xl: 3840px;
 
+  /* Text Sizes (Reduced by 20% from original) */
+  --text-xs: 0.6rem;
+  /* ~9.6px */
+  --text-sm: 0.7rem;
+  /* ~11.2px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 0.9rem;
+  /* ~14.4px */
+  --text-xl: 1rem;
+  /* 16px */
+  --text-2xl: 1.2rem;
+  /* 19.2px */
+  --text-3xl: 1.5rem;
+  /* 24px */
+  --text-4xl: 1.8rem;
+  /* 28.8px */
+  --text-5xl: 2.4rem;
+  /* 38.4px */
+  --text-6xl: 3rem;
+  /* 48px */
+  --text-7xl: 3.6rem;
+  /* 57.6px */
+  --text-8xl: 4.8rem;
+  /* 76.8px */
+  --text-9xl: 6.4rem;
+  /* 102.4px */
+
   /* Brand Colors */
   --brand-navy: #002a4c;
   --brand-sky: #59b4e9;
@@ -35,99 +63,99 @@ body::-webkit-scrollbar {
 
 /* H1 - Main Titles */
 h1 {
-  font-size: 36px;
+  font-size: 29px;
 }
 
 @media (min-width: 768px) {
   h1 {
-    font-size: 44px;
+    font-size: 35px;
   }
 }
 
 @media (min-width: 1024px) {
   h1 {
-    font-size: 45px;
+    font-size: 36px;
   }
 }
 
 @media (min-width: 1536px) {
   h1 {
-    font-size: 64px;
+    font-size: 51px;
   }
 }
 
 /* H2 - Section Headings */
 h2 {
-  font-size: 32px;
+  font-size: 26px;
 }
 
 @media (min-width: 768px) {
   h2 {
-    font-size: 36px;
+    font-size: 29px;
   }
 }
 
 @media (min-width: 1024px) {
   h2 {
-    font-size: 40px;
-  }
-}
-
-@media (min-width: 1536px) {
-  h2 {
-    font-size: 48px;
-  }
-}
-
-.text-sub-h2 {
-  font-size: 24px;
-}
-
-@media (min-width: 768px) {
-  .text-sub-h2 {
-    font-size: 28px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .text-sub-h2 {
     font-size: 32px;
   }
 }
 
 @media (min-width: 1536px) {
+  h2 {
+    font-size: 38px;
+  }
+}
+
+.text-sub-h2 {
+  font-size: 19px;
+}
+
+@media (min-width: 768px) {
   .text-sub-h2 {
-    font-size: 40px;
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-sub-h2 {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .text-sub-h2 {
+    font-size: 32px;
   }
 }
 
 /* H3 - Card Titles / Sub-headings */
 h3 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
 }
 
 @media (min-width: 768px) {
   h3 {
-    font-size: 24px;
+    font-size: 19px;
   }
 }
 
 @media (min-width: 1024px) {
   h3 {
-    font-size: 28px;
+    font-size: 22px;
   }
 }
 
 @media (min-width: 1536px) {
   h3 {
-    font-size: 32px;
+    font-size: 26px;
   }
 }
 
 /* H4 - Compact Headings / Module Titles */
 h4 {
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -135,43 +163,43 @@ h4 {
 
 @media (min-width: 1024px) {
   h4 {
-    font-size: 16px;
+    font-size: 13px;
   }
 }
 
 /* H5 - Small Highlights */
 h5 {
-  font-size: 12px;
+  font-size: 10px;
   text-transform: uppercase;
   font-weight: 700;
 }
 
 @media (min-width: 1024px) {
   h5 {
-    font-size: 14px;
+    font-size: 11px;
   }
 }
 
 /* H6 - Smallest Heading */
 h6 {
-  font-size: 16px;
+  font-size: 13px;
 }
 
 @media (min-width: 768px) {
   h6 {
-    font-size: 17px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1024px) {
   h6 {
-    font-size: 18px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1536px) {
   h6 {
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
@@ -183,7 +211,7 @@ p,
 
 /* Subtitles / Badges (used purely for small uppercase labels above headings) */
 .text-badge {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -191,13 +219,13 @@ p,
 
 /* Captions / Small Text (used for metadata or footer details) */
 .text-caption {
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 400;
 }
 
 /* Lead / Intro Text (used for description paragraphs under main titles) */
 .text-lead {
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.6;
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import SectionBadge from "@/components/ui/SectionBadge";
 import AnimatedHeading from "@/components/ui/AnimatedHeading";
 import Counter from "@/components/ui/Counter";
 
@@ -33,14 +34,14 @@ const Courses = ({ courses }: CoursesProps) => {
                 <section
                     key={idx}
                     className={`${idx === 0 ? "bg-[#002A4C]" : idx % 2 !== 0 ? "bg-[#001e3d]" : "bg-[#002A4C]"
-                        } py-20 text-white`}
+                        } py-10 text-white`}
                 >
                     <div className="container mx-auto px-5 md:px-8">
                         <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-16 items-start">
                             <div className="section-header reveal-staggered">
-                                <span className="bg-[#59B4E9] text-white text-[12px] font-bold px-3 py-1.5 rounded-[8px] uppercase tracking-[0.1em] mb-2.5 inline-block">
+                                <SectionBadge className="mb-2.5">
                                     KHÓA HỌC
-                                </span>
+                                </SectionBadge>
                                 <div className="font-bold mb-2 whitespace-pre-line">
                                     <AnimatedHeading
                                         text={course.type}
