@@ -14,7 +14,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
     return (
         <footer className="bg-[#002A4C] text-white pt-16 pb-8 border-t border-[#002A4C]">
             <div className="container mx-auto px-4 md:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                     {/* Brand Column */}
                     <div className="flex flex-col items-start gap-4 space-y-6">
                         <Link href="/" className="flex items-center gap-2">
@@ -80,7 +80,7 @@ const Footer: React.FC<FooterProps> = ({ footerData }) => {
                             <div className="footer-col flex flex-col gap-4">
                                 <h4 className="font-bold text-white">LIÊN KẾT</h4>
                                 <ul className="flex flex-col gap-3">
-                                    <li><Link href="/shop" className="text-gray-300 hover:text-white transition-colors font-light">Khóa học</Link></li>
+                                    <li><Link href="/online-1-1" className="text-gray-300 hover:text-white transition-colors font-light">Khóa học</Link></li>
                                     <li><Link href="/#solutions" className="text-gray-300 hover:text-white transition-colors font-light">Giải pháp</Link></li>
                                 </ul>
                             </div>

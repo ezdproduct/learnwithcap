@@ -105,7 +105,7 @@ const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
                 <div className="section-header mb-4">
-                    <div className="mb-2.5">
+                    <div>
                         <SectionBadge>
                             {subtitle}
                         </SectionBadge>

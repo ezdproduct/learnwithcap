@@ -44,8 +44,8 @@ const LearnWithCapClone = () => {
 
       <Hero hero={hero} />
 
-      <ServiceCarousel 
-        items={serviceItems} 
+      <ServiceCarousel
+        items={serviceItems}
         subtitle={servicesHeader?.subtitle}
         titlePrefix={servicesHeader?.titlePrefix}
         titleSuffix={servicesHeader?.titleSuffix}

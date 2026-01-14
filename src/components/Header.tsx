@@ -17,7 +17,15 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
     const toggleDropdown = (index: number) => setOpenDropdownIndex(openDropdownIndex === index ? null : index);
 
     const links = navbar?.links || [
-        { label: "Khóa Học", href: "/shop" },
+        {
+            label: "Khóa Học",
+            href: "#",
+            dropdown: [
+                { label: "Trực tiếp tại Doanh Nghiệp", href: "/course-detail" },
+                { label: "Online 1:1", href: "/online-1-1" },
+                { label: "E-Learning", href: "/e-learning" }
+            ]
+        },
         { label: "Tài Nguyên", href: "/resources" },
         { label: "Về Chúng Tôi", href: "/about" }
     ];
@@ -47,18 +55,18 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
                                 <div key={lIdx} className="relative group/item">
                                     <Link
                                         href={link.href.startsWith('#') ? `/${link.href}` : link.href}
-                                        className="rounded-full px-4 py-1.5 text-[15px] font-medium transition-colors text-[#002A4C] group-hover/nav:text-gray-400 hover:!text-[#002A4C] block"
+                                        className="rounded-full px-6 py-2 text-[15px] font-medium transition-all text-[#002A4C] group-hover/nav:text-gray-400 hover:!text-[#002A4C] hover:bg-white group-hover/item:bg-white group-hover/item:!text-[#002A4C] group-hover/item:shadow-sm block"
                                     >
                                         {link.label}
                                     </Link>
-                                    
+
                                     {hasDropdown && (
-                                        <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible transition-all duration-300 z-[60] py-2 border border-gray-100 overflow-hidden">
+                                        <div className="absolute top-full left-0 mt-1 w-80 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible translate-y-2 group-hover/item:translate-y-0 transition-all duration-300 z-[60] py-3 border border-gray-50 overflow-hidden">
                                             {link.dropdown?.map((dropLink: NavbarLink, dIdx: number) => (
-                                                <Link 
+                                                <Link
                                                     key={dIdx}
-                                                    href={dropLink.href} 
-                                                    className="block px-5 py-3 text-[15px] font-medium text-[#002A4C] hover:bg-gray-50 transition-colors"
+                                                    href={dropLink.href}
+                                                    className="block px-6 py-3.5 text-[15px] font-medium text-[#002A4C] hover:bg-gray-50 hover:text-[#7E4FD3] transition-colors"
                                                 >
                                                     {dropLink.label}
                                                 </Link>
@@ -72,8 +80,8 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
 
                     <div className="flex items-center space-x-4">
                         <div className="hidden md:block">
-                            <Link 
-                                href="/login" 
+                            <Link
+                                href="/login"
                                 className="bg-[#002A4C] hover:bg-purple-600 text-white rounded-full transition-all text-[15px] px-8 py-2.5 font-bold shadow-lg shadow-[#002A4C]/20 hover:shadow-purple-600/40 transform hover:-translate-y-0.5"
                             >
                                 {navbar?.cta_label || "ĐĂNG NHẬP"}
@@ -81,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <button 
+                        <button
                             className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg z-50"
                             onClick={toggleMobileMenu}
                         >
@@ -99,8 +107,8 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
                         return (
                             <div key={i} className="border-b border-gray-100 pb-4">
                                 <div className="flex justify-between items-center">
-                                    <Link 
-                                        href={link.href} 
+                                    <Link
+                                        href={link.href}
                                         className="text-xl font-bold text-[#002A4C]"
                                         onClick={() => !hasDropdown && setIsMobileMenuOpen(false)}
                                     >
@@ -112,13 +120,13 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
                                         </button>
                                     )}
                                 </div>
-                                
+
                                 {hasDropdown && openDropdownIndex === i && (
                                     <div className="mt-4 pl-4 flex flex-col space-y-3 bg-gray-50 p-4 rounded-xl">
                                         {link.dropdown?.map((dropLink: NavbarLink, dIdx: number) => (
-                                            <Link 
+                                            <Link
                                                 key={dIdx}
-                                                href={dropLink.href} 
+                                                href={dropLink.href}
                                                 className="text-gray-600 font-medium hover:text-[#002A4C]"
                                                 onClick={() => setIsMobileMenuOpen(false)}
                                             >
@@ -130,9 +138,9 @@ const Header: React.FC<HeaderProps> = ({ navbar }) => {
                             </div>
                         );
                     })}
-                    
-                    <Link 
-                        href="/login" 
+
+                    <Link
+                        href="/login"
                         className="bg-[#002A4C] hover:bg-purple-600 text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg"
                     >
                         {navbar?.cta_label || "ĐĂNG NHẬP"}

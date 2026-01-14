@@ -37,7 +37,7 @@ const Courses = ({ courses }: CoursesProps) => {
                         } py-10 text-white`}
                 >
                     <div className="container mx-auto px-5 md:px-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-16 items-start">
+                        <div className="grid grid-cols-1 md:grid-cols-[3fr_7fr] gap-16 items-start">
                             <div className="section-header reveal-staggered">
                                 <SectionBadge className="mb-2.5">
                                     KHÓA HỌC

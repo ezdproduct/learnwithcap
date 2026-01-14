@@ -34,8 +34,8 @@ const Solutions = ({ solutions, solutionsHeader }: SolutionsProps) => {
     return (
         <section id="solutions" className="bg-[#002A4C] text-white py-10">
             <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
-                    <div className="lg:col-span-2 flex flex-col items-start text-left">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
+                    <div className="md:col-span-2 flex flex-col items-start text-left">
                         <SectionBadge className="mb-2.5">
                             {solutionsHeader?.badge || "GIẢI PHÁP"}
                         </SectionBadge>
@@ -53,7 +53,7 @@ const Solutions = ({ solutions, solutionsHeader }: SolutionsProps) => {
                                 "Chúng tôi cung cấp lộ trình học tập được cá nhân hóa, giúp bạn làm chủ tiếng Anh và tự tin trong môi trường làm việc quốc tế."}
                         </p>
                     </div>
-                    <div className="lg:col-span-3 flex justify-center lg:justify-end">
+                    <div className="md:col-span-3 flex justify-center md:justify-end">
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 w-full aspect-[2/1]">
                             <div className="absolute inset-0 bg-gradient-to-tr from-[#7E4FD3]/20 to-transparent z-10 mix-blend-overlay pointer-events-none"></div>
                             <img
@@ -68,7 +68,7 @@ const Solutions = ({ solutions, solutionsHeader }: SolutionsProps) => {
                     </div>
                 </div>
 
-                <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 reveal-piano">
+                <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 reveal-piano">
                     {solutions.map((item, idx) => (
                         <div
                             key={idx}
