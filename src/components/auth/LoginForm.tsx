@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import {
     Card,
     CardContent,
@@ -20,7 +19,6 @@ import { useAuthStore } from "@/store/auth";
 // Removed: import { fetchCurrentUser } from "@/lib/auth-api";
 
 export default function LoginForm() {
-    const router = useRouter();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -62,7 +60,7 @@ export default function LoginForm() {
                     const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'https://admin-cap.vercel.app';
                     window.location.href = `${adminUrl}/?key=${data.token}`;
                 } else {
-                    router.push("/profile");
+                    window.location.href = "https://course.learnwithcap.com/my-account/";
                 }
             }
         } catch (error: any) {

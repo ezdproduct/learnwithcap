@@ -1,42 +1,29 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { TABLES } from '@/lib/constants';
+import { usePageData } from '@/hooks/usePageData';
 
 export default function ContactPage() {
-    const [contactInfo, setContactInfo] = useState<any>(null);
+    const { navbar, footer: contactInfo, contactHero } = usePageData();
 
-    useEffect(() => {
-        const fetchContactInfo = async () => {
-            // Reusing the same table as Footer to ensure consistency
-            const { data, error } = await supabase
-                .from(TABLES.HOMEPAGE_FOOTER)
-                .select('*')
-                .single();
-
-            if (data) {
-                setContactInfo(data);
-            }
-        };
-        fetchContactInfo();
-    }, []);
-
+    const heroBadge = contactHero?.badge || "Liên Hệ";
+    const heroTitle = contactHero?.title || "Chúng tôi luôn sẵn sàng hỗ trợ bạn";
+    const heroDesc = contactHero?.description || "Để lại thông tin hoặc liên hệ trực tiếp với chúng tôi qua các kênh dưới đây. Đội ngũ tư vấn sẽ phản hồi trong thời gian sớm nhất.";
 
     return (
         <div className="bg-white min-h-screen flex flex-col">
-            <Header />
+            <Header navbar={navbar} />
 
             <div className="flex-grow">
                 <div className="bg-[#f0f4f8] py-12 md:py-20">
                     <div className="container mx-auto px-4 md:px-8">
                         <div className="text-center max-w-2xl mx-auto mb-16 hero-content">
-                            <span className="text-[#59B4E9] font-bold tracking-wider text-xs uppercase bg-[#59B4E9]/10 px-3 py-1 rounded-full">Liên Hệ</span>
-                            <h1 className="text-[40px] font-bold text-[#0b2b4d] mt-4 mb-4">Chúng tôi luôn sẵn sàng hỗ trợ bạn</h1>
+                            <span className="text-[#59B4E9] font-bold tracking-wider text-xs uppercase bg-[#59B4E9]/10 px-3 py-1 rounded-full">{heroBadge}</span>
+                            <h1 className="text-[40px] font-bold text-[#0b2b4d] mt-4 mb-4">{heroTitle}</h1>
                             <p className="text-gray-500">
-                                Để lại thông tin hoặc liên hệ trực tiếp với chúng tôi qua các kênh dưới đây. Đội ngũ tư vấn sẽ phản hồi trong thời gian sớm nhất.
+                                {heroDesc}
                             </p>
                         </div>
 
@@ -104,8 +91,8 @@ export default function ContactPage() {
                                             <input type="tel" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-[#59B4E9] focus:ring-1 focus:ring-[#59B4E9] transition-all" placeholder="0912..." />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-[#0b2b4d]">Vấn đề quan tâm</label>
-                                            <select className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-[#59B4E9] focus:ring-1 focus:ring-[#59B4E9] transition-all text-gray-600">
+                                            <label htmlFor="concern-topic" className="text-sm font-bold text-[#0b2b4d]">Vấn đề quan tâm</label>
+                                            <select id="concern-topic" title="Vấn đề quan tâm" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-[#59B4E9] focus:ring-1 focus:ring-[#59B4E9] transition-all text-gray-600">
                                                 <option>Tư vấn khóa học</option>
                                                 <option>Hợp tác doanh nghiệp</option>
                                                 <option>Hỗ trợ kỹ thuật</option>
@@ -130,7 +117,7 @@ export default function ContactPage() {
                 </div>
             </div>
 
-            <Footer />
+            <Footer footerData={contactInfo} />
         </div>
     );
 }

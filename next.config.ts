@@ -36,6 +36,42 @@ const nextConfig: NextConfig = {
 
   // Remove X-Powered-By header
   poweredByHeader: false,
+
+  // Redirect legacy static pages to the new dynamic paths
+  async redirects() {
+    return [
+      {
+        source: "/online-1-1",
+        destination: "/courses/online-1-1",
+        permanent: true,
+      },
+      {
+        source: "/e-learning",
+        destination: "/courses/e-learning",
+        permanent: true,
+      },
+      {
+        source: "/course-detail",
+        destination: "/courses/enterprise",
+        permanent: true,
+      },
+      {
+        source: "/learning-hub",
+        destination: "https://course.learnwithcap.com/my-account/",
+        permanent: true,
+      },
+      {
+        source: "/shop",
+        destination: "https://course.learnwithcap.com/courses/",
+        permanent: true,
+      },
+      {
+        source: "/courses",
+        destination: "https://course.learnwithcap.com/courses/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

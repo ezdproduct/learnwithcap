@@ -3,11 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
 import { Menu, User, LogOut, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/auth";
-import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { NavbarData, NavbarLink } from '@/lib/types';
 
@@ -16,8 +14,6 @@ interface HeaderProps {
 }
 
 export default function Header({ navbar }: HeaderProps) {
-  const router = useRouter();
-  const pathname = usePathname();
   const { token, user, logout } = useAuthStore();
   const isAuthenticated = !!token;
   
@@ -40,9 +36,9 @@ export default function Header({ navbar }: HeaderProps) {
             label: "Khóa Học",
             href: "#",
             dropdown: [
-                { label: "Trực tiếp tại Doanh Nghiệp", href: "/course-detail" },
-                { label: "Online 1:1", href: "/online-1-1" },
-                { label: "E-Learning", href: "/e-learning" }
+                { label: "Trực tiếp tại Doanh Nghiệp", href: "/courses/enterprise" },
+                { label: "Online 1:1", href: "/courses/online-1-1" },
+                { label: "E-Learning", href: "/courses/e-learning" }
             ]
         },
         { label: "Tài Nguyên", href: "/resources" },
@@ -55,7 +51,7 @@ export default function Header({ navbar }: HeaderProps) {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
         <Link href="/" className="flex items-center space-x-2">
           <Image
-            src="https://course.learnwithcap.com/wp-content/uploads/2025/10/cap-logo-1.webp"
+            src={navbar?.logo_url || "https://course.learnwithcap.com/wp-content/uploads/2025/10/cap-logo-1.webp"}
             alt="CAP Logo"
             width={0}
             height={0}
@@ -115,9 +111,9 @@ export default function Header({ navbar }: HeaderProps) {
                              <p className="text-sm font-bold text-gray-900">{displayName}</p>
                              <p className="text-xs font-medium text-gray-500 truncate mt-0.5">{user.email}</p>
                           </div>
-                          <Link href="/profile" className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-purple-600 transition-colors">
+                          <a href="https://course.learnwithcap.com/my-account/" className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-purple-600 transition-colors">
                              <User className="mr-2 h-4 w-4" /> Tài khoản
-                          </Link>
+                          </a>
                           <button onClick={handleLogout} className="flex w-full items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-red-500 text-left transition-colors">
                              <LogOut className="mr-2 h-4 w-4" /> Đăng xuất
                           </button>
@@ -149,7 +145,7 @@ export default function Header({ navbar }: HeaderProps) {
        <div className={`relative bg-white w-4/5 max-w-sm h-full shadow-2xl flex flex-col transition-transform duration-300 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
            <div className="p-4 border-b border-gray-100 flex justify-between items-center">
                <span className="font-bold text-gray-800">Menu</span>
-               <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-full" onClick={toggleMobileMenu}>
+               <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-full" onClick={toggleMobileMenu} aria-label="Đóng menu" title="Đóng menu">
                    <X className="h-5 w-5"/>
                </button>
            </div>
@@ -164,7 +160,7 @@ export default function Header({ navbar }: HeaderProps) {
                                  {link.label}
                              </Link>
                              {hasDropdown && (
-                                 <button onClick={() => toggleDropdown(i)} className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg">
+                                 <button onClick={() => toggleDropdown(i)} className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg" aria-label="Mở rộng menu" title="Mở rộng menu">
                                      <ChevronDown className={`w-5 h-5 transition-transform ${openDropdownIndex === i ? 'rotate-180' : ''}`} />
                                  </button>
                              )}
@@ -187,9 +183,9 @@ export default function Header({ navbar }: HeaderProps) {
               {isAuthenticated && user ? (
                  <div className="flex flex-col space-y-2">
                    <div className="font-bold text-gray-900 px-1 py-1">{displayName}&apos;s HUB</div>
-                   <Link href="/profile" className="flex items-center text-gray-700 font-medium text-sm py-3 px-2 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                   <a href="https://course.learnwithcap.com/my-account/" className="flex items-center text-gray-700 font-medium text-sm py-3 px-2 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                       <User className="mr-3 h-5 w-5" /> Tài khoản quản lý
-                   </Link>
+                   </a>
                    <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} className="flex w-full items-center font-medium text-red-500 text-sm py-3 px-2 hover:bg-red-50 rounded-xl text-left transition-colors">
                       <LogOut className="mr-3 h-5 w-5" /> Đăng xuất phiên
                    </button>
